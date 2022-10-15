@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.0.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jane Doe">
-<meta name="dcterms.date" content="2024-05-09">
+<meta name="author" content="Benoît Simon-Bouhet">
 
-<title>BiometrieS5</title>
+<title>TP de Biométrie Semestre 5</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,69 +16,6 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -90,7 +26,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./references.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -108,18 +44,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -129,7 +67,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">BiometrieS5</h1>
+      <h1 class="quarto-secondary-nav-title">TP de Biométrie<br> Semestre 5<br></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -137,12 +75,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title d-none d-lg-block">TP de Biométrie<br> Semestre 5<br></h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Auteur</div>
+      <div class="quarto-title-meta-contents">
+               <p>Benoît Simon-Bouhet </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Dernière Mise à jour</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">12 octobre 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">BiometrieS5</a> 
+      <a href="./">TP de Biométrie<br> Semestre 5<br></a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/besibo/BiometrieS5" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -154,17 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Preface</a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">Introduction</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,56 +136,160 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#objectifs" id="toc-objectifs" class="nav-link" data-scroll-target="#objectifs">Objectifs</a></li>
+  <li><a href="#pré-requis" id="toc-pré-requis" class="nav-link" data-scroll-target="#pré-requis">Pré-requis</a></li>
+  <li><a href="#organisation" id="toc-organisation" class="nav-link" data-scroll-target="#organisation">Organisation</a>
+  <ul class="collapse">
+  <li><a href="#volume-de-travail" id="toc-volume-de-travail" class="nav-link" data-scroll-target="#volume-de-travail">Volume de travail</a></li>
+  <li><a href="#modalités-denseignement" id="toc-modalités-denseignement" class="nav-link" data-scroll-target="#modalités-denseignement">Modalités d’enseignement</a></li>
+  <li><a href="#utilisation-de-slack" id="toc-utilisation-de-slack" class="nav-link" data-scroll-target="#utilisation-de-slack">Utilisation de Slack</a></li>
+  </ul></li>
+  <li><a href="#progession-conseillée" id="toc-progession-conseillée" class="nav-link" data-scroll-target="#progession-conseillée">Progession conseillée</a></li>
+  <li><a href="#évaluations" id="toc-évaluations" class="nav-link" data-scroll-target="#évaluations">Évaluation(s)</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block">BiometrieS5</h1>
+
+
+
+<section id="introduction" class="level1 unnumbered">
+<h1 class="unnumbered">Introduction</h1>
+<section id="objectifs" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="objectifs">Objectifs</h2>
+<p>Ce livre contient l’ensemble du matériel (contenus, exemples, exercices…) nécessaire à la réalisation des travaux pratiques de <strong>Biométrie</strong> de l’EC ‘<em>Outils pour l’étude et la compréhension du vivant 4</em>’ du semestre 5 de la licence Sciences de la Vie de La Rochelle Université.</p>
+<p>À la fin du semestre, vous devriez être capables de faire les choses suivantes dans le logiciel <code>RStudio</code> :</p>
+<ul>
+<li>Explorer des jeux de données en produisant des résumés statistiques de variables de différentes nature (numériques continues ou catégorielles) et en produisant des graphiques appropriés</li>
+<li>Calculer des statistiques descriptives (moyennes, médianes, quartiles, écart-types, variances, erreurs standard, intervalles de confiance, etc.) pour plusieurs sous-groupes de vos jeux de données, et les représenter sur des graphiques adaptés</li>
+<li>Choisir et formuler des hypothèses adaptées à la question scientifique posée (hypothèses bilatérales ou unilatérales)</li>
+<li>Choisir les tests statistiques permettant de répondre à une question scientifique précise selon la nature de la question posée et la nature des variables à disposition</li>
+<li>Réaliser les tests usuels de comparaison de proportions et de moyennes (<span class="math inline">\(\chi^2\)</span>, <span class="math inline">\(t\)</span> de Student à 1 ou 2 échantillons, appariés ou indépendants, etc.)</li>
+<li>Vérifier les conditions d’application des tests, et le cas échéant, réaliser des tests non paramétriques équivalents</li>
+<li>Interpréter correctement les résultats des tests pour répondre aux questions scientifiques posées — Identifier des cohortes dans une population et en étudier les caractéristiques et l’évolution temporelle — Simuler le comportement de populations théoriques simples suivant des modèles démographiques précis (mortalité exponentielle, croissance exponentielle, croissance logistique, système prédateur-proies de Lotka et Volterra, et systèmes de compétition à 2 ou 3 espèces…) — Simuler, par chaînes de Markov, les successions écologiques dans un écosystème théorique</li>
+</ul>
+</section>
+<section id="pré-requis" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="pré-requis">Pré-requis</h2>
+<p>Pour atteindre les objectifs fixés ici, et compte tenu du volume horaire restreint qui est consacré aux TP et TEA de Biométrie au S5, je suppose que vous possédez un certain nombre de pré-requis. En particulier, vous devriez avoir à ce stade une bonne connaissance de l’interface des logiciels <code>R</code> et <code>RStudio</code>, et vous devriez être capables :</p>
+<ol type="1">
+<li>de créer un <code>Rproject</code> et un script d’analyse dans <code>RStudio</code></li>
+<li>d’importer des jeux de données issus de tableurs dans <code>RStudio</code></li>
+<li>d’effectuer des manipulations de données simples (sélectionner des variables, trier des colonnes, filtrer des lignes, créer de nouvelles variables, etc.)</li>
+<li>de produire des graphiques de qualité, adaptés à la fois aux variables dont vous disposez et aux questions auxquelles vous souhaitez répondre.</li>
+</ol>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Jane Doe </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 9, 2024</p>
-    </div>
-  </div>
-    
-  </div>
-  
-
-</header>
-
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>This is a Quarto book.</p>
-<p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="callout-caption-container flex-fill">
+Si ces pré-requis ne sont pas maîtrisés
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>mettez-vous à niveau de toute urgence en lisant attentivement <a href="https://besibo.github.io/BiometrieS3/">le livre en ligne de Biométrie du semestre 3</a></li>
+<li>mettez-vous en binôme avec un·e collègue qui a suivi l’EC Immersion <code>R</code> et <code>RStudio</code> en début de semestre. Ça ne vous dispensera pas de lire le livre en ligne de Biométrie S3, mais ça vous fera certainement gagner pas mal de temps.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="organisation" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="organisation">Organisation</h2>
+<section id="volume-de-travail" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="volume-de-travail">Volume de travail</h3>
+<p>Les travaux pratiques et TEA de biométrie auront lieu entre le 17 octobre et le 02 décembre 2022 :</p>
+<ul>
+<li>Semaine 42 (du 17 au 21 octobre) : 1 séance de TP d’1h30 et 1 séance de TEA d’1h30</li>
+<li>Semaine 43 (du 24 au 28 octobre) : 1 séance de TP d’1h30 et 1 séance de TEA d’1h30</li>
+<li>Semaine 45 (du 07 au 10 novembre) : 1 séance de TP d’1h30 et 1 séance de TEA d’1h30</li>
+<li>Semaine 46 (du 14 au 18 novembre) : 1 séance de TP d’1h30 et 1 séance de TEA d’1h30</li>
+<li>Semaine 47 (du 21 au 25 novembre) : 1 séance de TP d’1h30 et 1 séance de TEA d’1h30</li>
+<li>Semaine 48 (du 28 novembre au 02 décembre) : 1 séance de TP d’1h30 et 1 séance de TEA d’1h30</li>
+</ul>
+<!-- Il manque une séance de TP et de TEA par rapport à la maquette -->
+<p><strong>Tous les TP ont lieu en salle MSI 217. Tous les TEA sont à distance.</strong></p>
+<p>Au total, chaque groupe aura donc 6 séances de TP et 6 séances de TEA, soit un total de 18 heures prévues dans vos emplois du temps. C’est peu pour atteindre les objectifs fixés et il y aura donc évidemment du travail personnel à fournir en dehors de ces séances. J’estime que vous devrez fournir à peu près une vingtaine d’heures de travail personnel en plus des séances prévues dans votre emploi du temps. Attention donc : pensez bien à prévoir du temps dans vos plannings car le travail personnel est essentiel pour progresser dans cette matière. J’insiste sur l’importance de faire l’effort dès maintenant : vous allez en effet avoir des enseignements qui reposent sur l’utilisation de ces logiciels jusqu’à la fin du S6 (y compris pendant vos stage et, très vraisemblablement, dans vos futurs masters également). C’est donc maintenant qu’il faut acquérir des automatismes, cela vous fera gagner énormément de temps ensuite.</p>
+</section>
+<section id="modalités-denseignement" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="modalités-denseignement">Modalités d’enseignement</h3>
+<p>Pour suivre cet enseignement vous pourrez utiliser les ordinateurs de l’université, mais je ne peux que vous encourager à utiliser vos propres ordinateurs, sous Windows, Linux ou MacOS. Lors de vos futurs stages et pour rédiger vos comptes-rendus de TP, vous utiliserez le plus souvent vos propres ordinateurs, autant prendre dès maintenant de bonnes habitudes en installant les logiciels dont vous aurez besoin tout au long de votre licence. Si vous n’avez pas suivi l’EC immersion et que les logiciels <code>R</code> et <code>RStudio</code> ne sont pas encore installés sur vos ordinateurs, suivez <a href="https://besibo.github.io/BiometrieS3/01-R-basics.html#sec-install">la procédure décrite ici</a>. Si vous ne possédez pas d’ordinateur, manifestez vous rapidement auprès de moi car des solutions existent (prêt par l’université, travail sur tablette via <a href="https://rstudio.cloud">RStudio cloud</a>…).</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>L’essentiel du contenu de cet enseignement peut être abordé en autonomie, à distance, grâce à ce livre en ligne, aux ressources mises à disposition sur Moodle et à votre ordinateur personnel. Cela signifie que <strong>la présence physique lors de ces séances de TP n’est pas obligatoire</strong>.</p>
+</div>
+</div>
+<p>Plus que des séances de TP classiques, considérez plutôt qu’il s’agit de <strong>permanences non-obligatoires</strong> : si vous pensez avoir besoin d’aide, si vous avez des points de blocage ou des questions sur le contenu de ce document ou sur les exercices demandés, alors venez poser vos questions lors des séances de TP. Vous ne serez d’ailleurs pas tenus de rester pendant 1h30 : si vous obtenez une réponse en 10 minutes et que vous préférez travailler ailleurs, vous serez libres de repartir !</p>
+<p>De même, si vous n’avez pas de difficulté de compréhension, que vous n’avez pas de problème avec les exercices de ce livre en ligne ni avec les quizz Moodle, votre présence n’est pas requise. Si vous souhaitez malgré tout venir en salle de TP, pas de problème, vous y serez toujours les bienvenus.</p>
+<p>Ce fonctionnement très souple a de nombreux avantages :</p>
+<ul>
+<li>vous vous organisez comme vous le souhaitez</li>
+<li>vous ne venez que lorsque vous en avez vraiment besoin</li>
+<li>celles et ceux qui se déplacent reçoivent une aide personnalisée</li>
+<li>vous travaillez sur vos ordinateurs</li>
+<li>les effectifs étant réduits, c’est aussi plus confortable pour moi !</li>
+</ul>
+<p>Toutefois, pour que cette organisation fonctionne, cela demande de la rigueur de votre part, en particulier sur la régularité du travail que vous devez fournir. Si la présence en salle de TP n’est pas requise, <strong>le travail demandé est bel et bien obligatoire</strong> ! Si vous venez en salle de TP sans avoir travaillé en amont, votre venue sera totalement inutile puisque vous n’aurez pas de question à poser et que vous passerez votre séance à lire et suivre ce livre en ligne, choses que vous pouvez très bien faire chez vous. Vous perdrez donc votre temps, celui de vos collègues, et le mien. De même, si vous attendez la 4e semaine pour vous y mettre, vous irez droit dans le mur. Je le répète, outre les heures de TP/TEA prévus dans vos emplois du temps, vous devez prévoir au moins 20 heures de travail personnel supplémentaire.</p>
+<p>Je vous laisse donc une grande liberté d’organisation. À vous d’en tirer le maximum et de faire preuve du sérieux nécessaire. Le rythme auquel vous devriez avancer est présenté dans la partie suivante intitulée “Progression conseillée”.</p>
+</section>
+<section id="utilisation-de-slack" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="utilisation-de-slack">Utilisation de Slack</h3>
+<p>Outre les séances de permanence non-obligatoires, nous échangerons aussi sur <a href="https://slack.com/intl/fr-fr/">l’application Slack</a>, qui fonctionne un peu comme un “twitter privé”. Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, <a href="https://join.slack.com/t/l3sv22-23ecoutil/shared_invite/zt-1hmldkjae-Y9VADlxH~iM5u3PPMUF9_A">cliquez sur ce lien</a> pour vous connecter à notre espace de travail commun intitulé <code>L3 SV 22-23 / EC outils</code> (ce lien expire régulièrement : faites moi signe s’il n’est plus valide).</p>
+<p>Vous verrez que 3 “chaînes” sont disponibles :</p>
+<ul>
+<li>#général : c’est là que les questions liées à l’organisation générale du cours, des TP et TEA, des évaluations, etc. doivent être posées. Si vous ne savez pas si une séance de permanence a lieu, posez la question ici.</li>
+<li>#questions-rstudio : c’est ici que toutes les questions pratiques liées à l’utilisation de <code>R</code> et <code>RStudio</code> devront êtres posées. Problèmes de syntaxe, problèmes liés à l’interface, à l’installation des packages ou à l’utilisation des fonctions, à la création des graphiques, à la manipulation des tableaux… Tout ce qui concerne directement les logiciels sera traité ici. Vous êtes libres de poser des questions, de poster des captures d’écran, des morceaux de code, des messages d’erreur. Et <strong>vous êtes bien entendus vivement encouragés à vous entraider et à répondre aux questions de vos collègues.</strong> Je n’interviendrai ici que pour répondre aux questions laissées sans réponse ou si les réponses apportées sont inexactes. Le fonctionnement est celui d’un forum de discussion instantané. Vous en tirerez le plus grand bénéfice en participant et en n’ayant pas peur de poser des questions, même si elles vous paraissent idiotes. Rappelez-vous toujours que si vous vous posez une question, d’autres se la posent aussi probablement.</li>
+<li>#questions-stats : C’est ici que vous pourrez poser vos questions liées aux méthodes statistiques ou aux choix des modèles de dynamique des populations. Tout ce qui ne concerne pas directement l’utilisation du logiciel (comme par exemple le choix d’un test ou des hypothèses nulles et alternatives, la démarche d’analyse, la signification de tel paramètre ou estimateur, le principe de telle ou telle méthode…) peut être discuté ici. Comme pour le canal #questions-rstudio, <strong>vous êtes encouragés à vous entraider et à répondre aux questions de vos collègues</strong>.</li>
+</ul>
+<p>Ainsi, quand vous travaillerez à vos TP ou TEA, que vous soyez installés chez vous ou en salle de TP, prenez l’habitude de garder Slack ouvert sur votre ordinateur. Même si vous n’avez pas de question à poser, votre participation active pour répondre à vos collègues est souhaitable et souhaitée. Je vous incite donc fortement à vous <strong>entraider</strong> : c’est très formateur pour celui qui explique, et celui qui rencontre une difficulté a plus de chances de comprendre si c’est quelqu’un d’autre qui lui explique plutôt que la personne qui a rédigé les instructions mal comprises.</p>
+<p>Ce document est fait pour vous permettre d’avancer en autonomie et vous ne devriez normalement pas avoir beaucoup besoin de moi si votre lecture est attentive. L’expérience montre en effet que la plupart du temps, il suffit de lire correctement les paragraphes précédents et/ou suivants pour obtenir la réponse à ses questions. J’essaie néanmoins de rester disponible sur Slack pendant les séances de TP et de TEA de tous les groupes. Cela veut donc dire que même si votre groupe n’est pas en TP, vos questions ont des chances d’être lues et de recevoir des réponses dès que d’autres groupes sont en TP ou TEA. Vous êtes d’ailleurs encouragés à échanger sur Slack aussi pendant vos phases de travail personnel.</p>
+</section>
+</section>
+<section id="progession-conseillée" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="progession-conseillée">Progession conseillée</h2>
+<p>Si vous avez suivi le document de prise en main de <code>R</code> et <code>RStudio</code> (lors de l’immersion ou lors d’une remise à niveau en autonomie), vous savez que pour apprendre à utiliser ces logiciels, il faut faire les choses soi-même, ne pas avoir peur des messages d’erreurs (il faut d’ailleurs apprendre à les déchiffrer pour comprendre d’où viennent les problèmes), essayer maintes fois, se tromper beaucoup, recommencer, et surtout, ne pas se décourager. J’utilise ce logiciel presque quotidiennement depuis plus de 15 ans et à chaque session de travail, je rencontre des messages d’erreur. Avec suffisamment d’habitude, on apprend à les déchiffrer, et on corrige les problèmes en quelques secondes. Ce livre est conçu pour vous faciliter la tâche, mais ne vous y trompez pas, vous rencontrerez des difficultés, et c’est normal. C’est le prix à payer pour profiter de la puissance du meilleur logiciel permettant d’analyser des données, de produire des graphiques de qualité et de réaliser toutes les statistiques dont vous aurez besoin d’ici la fin de vos études et au-delà.</p>
+<p>Pour que cet apprentissage soit le moins problématique possible, il convient de prendre les choses dans l’ordre. C’est la raison pour laquelle les chapitres de ce livre doivent être lus dans l’ordre, et les exercices d’application faits au fur et à mesure de la lecture.</p>
+<p>Idéalement, voilà les étapes que vous devriez avoir franchi chaque semaine :</p>
+<ol type="1">
+<li><p>La première semaine (42) est consacrée l’exploration statistique des jeux de données. Avant votre seconde séance de TP, vous devriez avoir compris comment calculer et interpréter des résumés statistiques de vos jeux de données. Vous devriez en particulier être capable de calculer des estimateurs de position (moyennes, médianes, quartiles…) et de dispersion (variances, écart-types, intervalles inter-quartiles…) sur des variables numériques, et ce, pour plusieurs modalités d’une variable catégorielle ou pour chaque combinaison de modalités de plusieurs variables catégorielles (par exemple, quelles sont les moyennes et variances des longueurs de becs pour chaque espèce de manchots et chaque sexe). Vous devrez être capables de distinguer la notion de dispersion de celle de précision, et vous devrez être capables de calculer l’erreur standard (ou erreur type). Vous devrez en outre être capables de produire des graphiques sur lesquels apparaissent des barres d’incertitude (erreurs standards ou intervalles de confiance).</p></li>
+<li><p>La deuxième semaine (43) est consacrée. Comparaison de proportions, données de comptage. notion de p-value. Hypothèses et décision ()</p></li>
+<li><p>La troisième semaine (45) est consacrée. Comparaison de la moyenne d’une population à une valeur théorique. Comparaison de moyennes, données appariées</p></li>
+<li><p>La quatrième semaine (46) est consacrée. Comparaison de moyennes, données indépendantes. Hypothèses uni ou bi latérales</p></li>
+<li><p>La cinquième semaine (47) est consacrée. Analyse de cohorte</p></li>
+<li><p>La sixième semaine (48) est consacrée. Systèmes dynamiques</p></li>
+</ol>
+</section>
+<section id="évaluations" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="évaluations">Évaluation(s)</h2>
+<p>L’évaluation de la partie “Biométrie” de l’EC “Outils pour l’étude et la compréhension du vivant” aura lieu dans le cadre du travail de stratégie d’échantillonnage que vous mettez en œuvre avec Pierrick Bocher. Le compte-rendu de stratégie d’échantillonnage servira donc à évaluer 3 choses :</p>
+<ul>
+<li>les grands principes de stratégie d’échantillonnage abordés par Pierrick</li>
+<li>la mise en œuvre de méthodes statistiques adaptées pour répondre aux questions scientifiques posées, telles que nous les traitons en Biométrie</li>
+<li>la maîtrise du logiciel <code>RStudio</code> pour réaliser les analyses de données pertinentes (de l’importation des données et leur mise en forme dans le logiciel, à la réalisation et l’interprétation correcte des tests statistiques appropriés, en passant par l’exploration des statistiques descriptives et la création de graphiques informatifs). Pour ce dernier volet, vous devrez rendre, en plus de votre compte-rendu, votre script d’analyse. C’est ce script qui me permettra d’évaluer votre niveau de compétence et de maîtrise de l’outil, tant sur la forme du script (lisibilité, structure, reproductibilité, etc.) que sur le fond (pertinence des analyses réalisées).</li>
+</ul>
+<p>Pour vous aider à comprendre ce qui est attendu, je vous fournis ci-dessous la grille critériée dont je me servirai pour évaluer la forme de votre script. Je ne peux que vous encourager à lire attentivement les critères d’évaluation ci-dessous et à tenter de vous les approprier. Les séances de TP et de TEA qui viennent doivent vous permettre de vous entraîner à produire des scripts de qualité.</p>
+<p><img src="images/Grille.png" class="img-fluid"></p>
+<p>Pour ce qui est du fond (pertinence des analyses statistiques réalisées et de leurs interprétations), une autre grille critériée sera fournie ici avant la fin du semestre.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -271,7 +333,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copié");
     setTimeout(function() {
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
@@ -332,8 +394,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -341,4 +403,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
