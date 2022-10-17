@@ -26,7 +26,7 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./01-EDA.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -95,7 +95,7 @@ ul.task-list{list-style: none;}
       <div>
       <div class="quarto-title-meta-heading">Dernière Mise à jour</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">12 octobre 2022</p>
+        <p class="date">16 octobre 2022</p>
       </div>
     </div>
       
@@ -123,6 +123,36 @@ ul.task-list{list-style: none;}
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-EDA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploration statistique des données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-PropTests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Principes des tests statistiques et comparaison de proportions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-OneSampleTests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comparaison de moyennes : un échantillon et deux échantillons appariés</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-TwoSampleTests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparaison de moyennes : deux échantillons indépendants</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Cohortes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analyse de cohortes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-DynamicSystems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Systèmes dynamiques</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -174,7 +204,10 @@ ul.task-list{list-style: none;}
 <li>Choisir les tests statistiques permettant de répondre à une question scientifique précise selon la nature de la question posée et la nature des variables à disposition</li>
 <li>Réaliser les tests usuels de comparaison de proportions et de moyennes (<span class="math inline">\(\chi^2\)</span>, <span class="math inline">\(t\)</span> de Student à 1 ou 2 échantillons, appariés ou indépendants, etc.)</li>
 <li>Vérifier les conditions d’application des tests, et le cas échéant, réaliser des tests non paramétriques équivalents</li>
-<li>Interpréter correctement les résultats des tests pour répondre aux questions scientifiques posées — Identifier des cohortes dans une population et en étudier les caractéristiques et l’évolution temporelle — Simuler le comportement de populations théoriques simples suivant des modèles démographiques précis (mortalité exponentielle, croissance exponentielle, croissance logistique, système prédateur-proies de Lotka et Volterra, et systèmes de compétition à 2 ou 3 espèces…) — Simuler, par chaînes de Markov, les successions écologiques dans un écosystème théorique</li>
+<li>Interpréter correctement les résultats des tests pour répondre aux questions scientifiques posées</li>
+<li>Identifier des cohortes dans une population et en étudier les caractéristiques et l’évolution temporelle</li>
+<li>Simuler le comportement de populations théoriques simples suivant des modèles démographiques précis (mortalité exponentielle, croissance exponentielle, croissance logistique, système prédateur-proies de Lotka et Volterra, et systèmes de compétition à 2 ou 3 espèces…)</li>
+<li>Simuler, par chaînes de Markov, les successions écologiques dans un écosystème théorique</li>
 </ul>
 </section>
 <section id="pré-requis" class="level2 unnumbered">
@@ -268,12 +301,12 @@ Important
 <p>Pour que cet apprentissage soit le moins problématique possible, il convient de prendre les choses dans l’ordre. C’est la raison pour laquelle les chapitres de ce livre doivent être lus dans l’ordre, et les exercices d’application faits au fur et à mesure de la lecture.</p>
 <p>Idéalement, voilà les étapes que vous devriez avoir franchi chaque semaine :</p>
 <ol type="1">
-<li><p>La première semaine (42) est consacrée l’exploration statistique des jeux de données. Avant votre seconde séance de TP, vous devriez avoir compris comment calculer et interpréter des résumés statistiques de vos jeux de données. Vous devriez en particulier être capable de calculer des estimateurs de position (moyennes, médianes, quartiles…) et de dispersion (variances, écart-types, intervalles inter-quartiles…) sur des variables numériques, et ce, pour plusieurs modalités d’une variable catégorielle ou pour chaque combinaison de modalités de plusieurs variables catégorielles (par exemple, quelles sont les moyennes et variances des longueurs de becs pour chaque espèce de manchots et chaque sexe). Vous devrez être capables de distinguer la notion de dispersion de celle de précision, et vous devrez être capables de calculer l’erreur standard (ou erreur type). Vous devrez en outre être capables de produire des graphiques sur lesquels apparaissent des barres d’incertitude (erreurs standards ou intervalles de confiance).</p></li>
-<li><p>La deuxième semaine (43) est consacrée. Comparaison de proportions, données de comptage. notion de p-value. Hypothèses et décision ()</p></li>
-<li><p>La troisième semaine (45) est consacrée. Comparaison de la moyenne d’une population à une valeur théorique. Comparaison de moyennes, données appariées</p></li>
-<li><p>La quatrième semaine (46) est consacrée. Comparaison de moyennes, données indépendantes. Hypothèses uni ou bi latérales</p></li>
-<li><p>La cinquième semaine (47) est consacrée. Analyse de cohorte</p></li>
-<li><p>La sixième semaine (48) est consacrée. Systèmes dynamiques</p></li>
+<li><p>La première semaine (42) est consacrée l’exploration statistique des jeux de données. Avant votre seconde séance de TP, vous devriez avoir compris comment calculer et interpréter des résumés statistiques de vos jeux de données. Vous devriez en particulier être capable de calculer des estimateurs de position (moyennes, médianes, quartiles…) et de dispersion (variances, écart-types, intervalles inter-quartiles…) sur des variables numériques, et ce, pour plusieurs modalités d’une variable catégorielle ou pour chaque combinaison de modalités de plusieurs variables catégorielles (par exemple, quelles sont les moyennes et variances des longueurs de becs pour chaque espèce de manchots et chaque sexe). Vous devrez être capables de distinguer la notion de dispersion de celle de précision, et vous devrez être capables de calculer l’erreur standard de la moyenne (ou erreur type). Vous devrez en outre être capables de produire des graphiques sur lesquels apparaissent des barres d’incertitude (erreurs standards ou intervalles de confiance).</p></li>
+<li><p>La deuxième semaine (43) est consacrée aux tests statistiques. Avant votre troisième séance de TP, vous devriez être capable de formuler des hypothèses nulles et alternatives pertinentes, et vous devriez connaître le concept de <span class="math inline">\(p-\)</span>value. Vous devriez en outre être capables, avec des données de comptages, de réaliser des tests de comparaison de proportions, et d’en interpréter correctement les résultats.</p></li>
+<li><p>La troisième semaine (45) est également consacrée aux tests d’hypothèses. Avant votre quatrième séance de TP, vous devriez être capable de comparer la moyenne d’une population à une valeur théorique, et de comparer la moyenne de 2 populations, dans le cas où vous disposez d’échantillons appariés. Dans les deux cas, vous devrez être capable de vérifier les conditions d’application des tests paramétriques, et de choisir des tests non-paramétriques équivalents si les conditions d’application ne sont pas vérifiées.</p></li>
+<li><p>La quatrième semaine (46) est consacrée aux derniers tests de comparaison de moyennes. Avant votre cinquième séance de TP, vous devrez donc être capable de comparer la moyenne de deux populations lorsque les échantillons sont indépendants. Comme pour la semaine précédente, vous devrez être capable de vérifier les conditions d’application du test paramétrique, et de réaliser le tests non paramétrique équivalent le cas échéant. Enfin, vous devrez aussi être en mesure de spécifier les hypothèses alternatives unilatérales ou bilatérales pertinentes selon la question scientifique posée. Pour chaque semaine consacrée aux tests, vous devrez aussi toujours penser à examiner les données graphiquement, et par le biais des statistiques descriptives décrites lors de la première semaine</p></li>
+<li><p>La cinquième semaine (47) est consacrée à la mise en pratique des notions vues dans le cours magistral de Population Dynamics (EC “Fonctionnement des Écosystèmes). Nous aborderons ici les analyses de cohorte. Avant votre dernière séance de TP, vous devriez être en mesure de réaliser l’analyse de cohorte d’une population étudiée pendant plusieurs années afin de produire les courbes de croissance, de survie et d’Allen d’une cohorte d’intérêt. Vous devrez en particulier importer et mettre en forme des données issues d’un suivi de terrain, produire les structures démographiques instantanées à chaque date d’échantillonnage, faire les décompositions polymodales afin de récupérer les informations utiles au sujet de la cohorte dont on souhaite assurer le suivi.</p></li>
+<li><p>La sixième semaine (48) est consacrée à la mise en pratique des notions vues dans le cours magistral de Population Dynamics (EC “Fonctionnement des Écosystèmes). Nous aborderons ici l’étude des systèmes dynamiques. Vous devrez coder différents modèles d’évolution d’une populations (mortalité exponentielle, croissance exponentielle, croissance logistique) ou de plusieurs populations ou espèces (modèle prédateurs-proies, modèle de compétition). Ces modèles généreront des données que vous devrez représenter graphiquement. Vous devrez enfin modifier la valeur de certains paramètres de ces modèles afin de comprendre leur influence sur le comportement des systèmes dynamiques étudiés.</p></li>
 </ol>
 </section>
 <section id="évaluations" class="level2 unnumbered">
@@ -388,14 +421,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return popup.innerHTML;
     });
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./01-EDA.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploration statistique des données</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

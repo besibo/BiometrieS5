@@ -5,7 +5,7 @@
 options(replace.assign = TRUE, width = 80)
 options(repos = "http://cran.r-project.org/")
 
-list.of.packages <- c("readxl", "nycflights13", "gapminder", "knitr", "tidyverse", "gridExtra", "devtools", "extrafont", "kableExtra", "skimr", "bindrcpp", "car", "DescTools", "bookdown", "datasauRus", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic")
+list.of.packages <- c("readxl", "nycflights13", "gapminder", "knitr", "tidyverse", "gridExtra", "devtools", "extrafont", "kableExtra", "skimr", "bindrcpp", "car", "DescTools", "bookdown", "datasauRus", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic", "confintr")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
@@ -29,7 +29,7 @@ knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown',
                    'quarto', 'tidyverse', 'ggplot2', 'gridExtra', 'skimr', 
                    'bindrcpp', 'tidyr', 'dplyr', 'readr', "car", "readxl",
                    "broom", "DescTools", "patchwork", "fontawesome", 
-                   "palmerpenguins", "ggmosaic"), 'packages.bib')
+                   "palmerpenguins", "confintr", "ggmosaic"), 'packages.bib')
 
 system("cat book.bib packages.bib > all.bib")
 ```
@@ -50,9 +50,9 @@ Ce livre contient l'ensemble du matériel (contenus, exemples, exercices...) né
 - Réaliser les tests usuels de comparaison de proportions et de moyennes ($\chi^2$, $t$ de Student à 1 ou 2 échantillons, appariés ou indépendants, etc.)
 - Vérifier les conditions d'application des tests, et le cas échéant, réaliser des tests non paramétriques équivalents
 - Interpréter correctement les résultats des tests pour répondre aux questions scientifiques posées
-— Identifier des cohortes dans une population et en étudier les caractéristiques et l'évolution temporelle
-— Simuler le comportement de populations théoriques simples suivant des modèles démographiques précis (mortalité exponentielle, croissance exponentielle, croissance logistique, système prédateur-proies de Lotka et Volterra, et systèmes de compétition à 2 ou 3 espèces...)
-— Simuler, par chaînes de Markov, les successions écologiques dans un écosystème théorique
+- Identifier des cohortes dans une population et en étudier les caractéristiques et l'évolution temporelle
+- Simuler le comportement de populations théoriques simples suivant des modèles démographiques précis (mortalité exponentielle, croissance exponentielle, croissance logistique, système prédateur-proies de Lotka et Volterra, et systèmes de compétition à 2 ou 3 espèces...)
+- Simuler, par chaînes de Markov, les successions écologiques dans un écosystème théorique
 
 
 ## Pré-requis {-}

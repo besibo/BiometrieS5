@@ -1,0 +1,3 @@
+# Analyse de cohortes {#sec-cohortes}
+
+Work in progress, come back in a few days...
