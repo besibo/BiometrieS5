@@ -26,7 +26,7 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./01-EDA.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -95,7 +95,7 @@ ul.task-list{list-style: none;}
       <div>
       <div class="quarto-title-meta-heading">Dernière Mise à jour</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">15 octobre 2022</p>
+        <p class="date">17 octobre 2022</p>
       </div>
     </div>
       
@@ -123,6 +123,36 @@ ul.task-list{list-style: none;}
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-EDA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploration statistique des données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-PropTests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Principes des tests statistiques et comparaison de proportions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-OneSampleTests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comparaison de moyennes : un échantillon et deux échantillons appariés</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-TwoSampleTests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparaison de moyennes : deux échantillons indépendants</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Cohortes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Analyse de cohortes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-DynamicSystems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Systèmes dynamiques</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -174,7 +204,10 @@ ul.task-list{list-style: none;}
 <li>Choisir les tests statistiques permettant de répondre à une question scientifique précise selon la nature de la question posée et la nature des variables à disposition</li>
 <li>Réaliser les tests usuels de comparaison de proportions et de moyennes (<span class="math inline">\(\chi^2\)</span>, <span class="math inline">\(t\)</span> de Student à 1 ou 2 échantillons, appariés ou indépendants, etc.)</li>
 <li>Vérifier les conditions d’application des tests, et le cas échéant, réaliser des tests non paramétriques équivalents</li>
-<li>Interpréter correctement les résultats des tests pour répondre aux questions scientifiques posées — Identifier des cohortes dans une population et en étudier les caractéristiques et l’évolution temporelle — Simuler le comportement de populations théoriques simples suivant des modèles démographiques précis (mortalité exponentielle, croissance exponentielle, croissance logistique, système prédateur-proies de Lotka et Volterra, et systèmes de compétition à 2 ou 3 espèces…) — Simuler, par chaînes de Markov, les successions écologiques dans un écosystème théorique</li>
+<li>Interpréter correctement les résultats des tests pour répondre aux questions scientifiques posées</li>
+<li>Identifier des cohortes dans une population et en étudier les caractéristiques et l’évolution temporelle</li>
+<li>Simuler le comportement de populations théoriques simples suivant des modèles démographiques précis (mortalité exponentielle, croissance exponentielle, croissance logistique, système prédateur-proies de Lotka et Volterra, et systèmes de compétition à 2 ou 3 espèces…)</li>
+<li>Simuler, par chaînes de Markov, les successions écologiques dans un écosystème théorique</li>
 </ul>
 </section>
 <section id="pré-requis" class="level2 unnumbered">
@@ -388,14 +421,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return popup.innerHTML;
     });
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./01-EDA.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploration statistique des données</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
