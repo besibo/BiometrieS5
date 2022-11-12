@@ -1038,6 +1038,7 @@ Attention : pensez à retirer les individus dont le sexe est inconnu.
 #| echo: false
 #| warning: false
 
+
 resum_peng <- penguins %>% 
   filter(!is.na(sex)) %>% 
   group_by(species, sex) %>% 

@@ -1,3 +1,3 @@
 # Principes des tests statistiques et comparaison de proportions {#sec-prop}
 
-Work in progress, come back in a few days...
+Sera traité au semestre prochain. Passez directement au @sec-cohortes.
