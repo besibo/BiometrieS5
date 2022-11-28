@@ -169,7 +169,13 @@ Puisque les individus de cette espèce peuvent atteindre une taille de 40 millim
 # Calcul de la taille maximale observée
 taille_max <- max(Nassarius$size, na.rm = TRUE)
 taille_max
+```
 
+:::{.column-margin}
+`max()` : affiche la valeur maximale contenue dans un vecteur
+:::
+
+```{r}
 # Définition des limites des classes de tailles
 limites <- 0:(taille_max + 1)
 limites
@@ -177,8 +183,6 @@ limites
 
 :::{.column-margin}
 `:` : l'opérateur "deux points" permet de créer des suites d'entiers  
-<br>
-`max()` : affiche la valeur maximale contenue dans un vecteur
 :::
 
 L'objet `limites` contient les limites des classes de tailles que nous utiliserons pour produire les structures démographiques instantanées, pour chaque date d'échantillonnage, et pas seulement pour mars 2010. C'est la raison pour nous avons utilisé `max(Nassarius$size) +1` : cette syntaxe nous assure que nos classes de tailles recouvrent bien la taille de tous les individus échantillonnés au cours des 5 années d'études. Ainsi, nous pourrons utiliser les mêmes classes de tailles pour toutes les dates.
