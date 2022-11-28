@@ -470,8 +470,15 @@ Objectif principal
 </div></div><p>Notez le message d’avertissement qui s’affiche quand vous produisez cet histogramme. Il indique que <code>R</code> a choisi pour nous le nombre de classes de tailles. Par défaut, il crée 30 classes, mais nous indique que ce n’est certainement pas le meilleur choix. Nous allons donc devoir créer nous même manuellement les classes de tailles pour (i) identifier les cohortes présentes dans la population et (ii) fixer des classes identiques que nous utiliserons pour toutes les autres dates d’échantillonnage et qui rendront les comparaisons plus aisées.</p>
 <p>Puisque les individus de cette espèce peuvent atteindre une taille de 40 millimètres environ, nous allons définir des classes de tailles tous les millimètres. On peut faire ça simplement en créant un vecteur qui contient les limites des classes de tailles que l’on souhaite :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>limites <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>(<span class="fu">max</span>(Nassarius<span class="sc">$</span>size) <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>limites</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul de la taille maximale observée</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>taille_max <span class="ot">&lt;-</span> <span class="fu">max</span>(Nassarius<span class="sc">$</span>size, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>taille_max</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 41.33</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition des limites des classes de tailles</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>limites <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>(taille_max <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>limites</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 [26] 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42</code></pre>
@@ -484,9 +491,9 @@ Objectif principal
 </div></div><p>L’objet <code>limites</code> contient les limites des classes de tailles que nous utiliserons pour produire les structures démographiques instantanées, pour chaque date d’échantillonnage, et pas seulement pour mars 2010. C’est la raison pour nous avons utilisé <code>max(Nassarius$size) +1</code> : cette syntaxe nous assure que nos classes de tailles recouvrent bien la taille de tous les individus échantillonnés au cours des 5 années d’études. Ainsi, nous pourrons utiliser les mêmes classes de tailles pour toutes les dates.</p>
 <p>Maintenant, on peut utiliser le vecteur <code>limites</code> comme argument de la fonction <code>geom_histogram()</code>. On modifie aussi les couleurs des barres de l’histogramme pour mieux visualiser les classes :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size)) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> limites, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> limites, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-histo2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -506,7 +513,7 @@ Objectif principal
 <p>Nous allons utiliser le package <code>mixdist</code>, que vous devez avoir déjà installé et chargé en mémoire. Ce package fournit plusieurs fonctions relativement simples d’utilisation et qui permettent d’ajuster des distributions Normales à une distribution observée (notre structure démographique instantanée).</p>
 <p>La fonction du package <code>mixdist</code> qui nous permettra de réaliser la décomposition polymodale est la fonction <code>mix()</code>. Son fichier d’aide nous indique que pour fonctionner correctement, il faut lui fournir plusieurs choses :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">mix</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">mix</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -525,15 +532,15 @@ Objectif principal
 <li>La liste des valeurs correspondant aux limites des classes de tailles de la structure démographique instantanée. Nous disposons déjà de cet objet puisque nous l’avons créé plus tôt : c’est le vecteur <code>limites</code></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mix_01 <span class="ot">&lt;-</span> <span class="fu">mixgroup</span>(Nas_01<span class="sc">$</span>size, <span class="at">breaks =</span> limites)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mix_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mix_01 <span class="ot">&lt;-</span> <span class="fu">mixgroup</span>(Nas_01<span class="sc">$</span>size, <span class="at">breaks =</span> limites)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mix_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "mixdata"    "data.frame"</code></pre>
 </div>
 </div>
 <p>L’objet <code>mix_01</code> que nous venons de créer est donc un <code>data.frame</code>, mais c’est aussi un objet de classe <code>mixdata</code> que nous utiliserons en guise de premier argument de la fonction <code>mix()</code>. Pour afficher son contenu, il suffit comme toujours de taper son nom :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mix_01</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mix_01</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     X count
 1    1     1
@@ -582,7 +589,7 @@ Objectif principal
 </div>
 <p>Notez que la dernière ligne de <code>mix_01</code> correspond à la catégorie [42 mm ; <span class="math inline">\(+\infty\)</span>[. Pour vérifier que nous n’avons pas fait d’erreur, on peut faire une représentation graphique de cet objet particulier avec la fonction <code>plot()</code> :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mix_01, <span class="at">xlab =</span> <span class="st">"Size (mm)"</span>, <span class="at">ylab =</span> <span class="st">"Probability"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mix_01, <span class="at">xlab =</span> <span class="st">"Size (mm)"</span>, <span class="at">ylab =</span> <span class="st">"Probability"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-mixplot" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -606,9 +613,9 @@ Objectif principal
 </ol>
 <p>Ainsi, on obtient le second <code>data.frame</code> ainsi :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>param_01 <span class="ot">&lt;-</span> <span class="fu">mixparam</span>(<span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">17</span>, <span class="dv">30</span>, <span class="dv">34</span>),</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sigma =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>param_01</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>param_01 <span class="ot">&lt;-</span> <span class="fu">mixparam</span>(<span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">17</span>, <span class="dv">30</span>, <span class="dv">34</span>),</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sigma =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>param_01</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   pi mu sigma
 1 0.2  4     1
@@ -628,12 +635,12 @@ Objectif principal
 <h3 data-number="5.7.4" class="anchored" data-anchor-id="ajustement-des-lois-normales-aux-données"><span class="header-section-number">5.7.4</span> Ajustement des lois Normales aux données</h3>
 <p>Maintenant que nous disposons des deux objets nécessaires, nous pouvons réaliser la décomposition polymodale qui consiste, grâce à la fonction <code>mix()</code>, à ajuster une distribution Normale à chaque cohorte supposée de la population échantillonnés.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>res_01 <span class="ot">&lt;-</span> <span class="fu">mix</span>(mix_01, param_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>res_01 <span class="ot">&lt;-</span> <span class="fu">mix</span>(mix_01, param_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in mix(mix_01, param_01): The optimization process terminated because
 iteration limit exceeded</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>res_01</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>res_01</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Parameters:
@@ -658,7 +665,7 @@ Constraints:
 </div></div><div class="page-columns page-full"><p>La fonction <code>mix()</code> peut produire quelques avertissements. Ignorez-les à ce stade : seuls les messages d’erreurs sont problématiques et nous y reviendrons plus tard. L’objet <code>res_01</code> contient donc les résultats de la décomposition polymodale. C’est une liste de 3 éléments dont seul le premier nous intéresse.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Il contient les valeurs ajustées pour les 3 paramètres des distributions Normales (<code>pi</code>, <code>mu</code> et <code>sigma</code>) pour chacune des 5 cohortes identifiées en mars 2010.</p><div class="no-row-height column-margin column-container"><li id="fn1" role="doc-endnote"><p><sup>1</sup>&nbsp;Il s’appelle <code>parameters</code>, sans majuscule, même si <code>R</code> affiche son nom avec une majuscule. Vous pouvez le vérifier en tapant <code>str(res_01)</code>. </p></li></div></div>
 <p>Ainsi, par exemple, pour l’échantillon de mars 2010, la première ligne du tableau <code>parameters</code> contenu dans <code>res_01</code> nous apprend les choses suivantes :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>res_01<span class="sc">$</span>parameters</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>res_01<span class="sc">$</span>parameters</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          pi        mu    sigma
 1 0.46417551  3.903201 1.085989
@@ -675,7 +682,7 @@ Constraints:
 </ul>
 <p>Les distributions Normales qui ont été ajustées peuvent être visualisées grâce à la fonction <code>plot()</code> :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-ajustement" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -719,9 +726,13 @@ De l’importance du choix des valeurs initiales
 <span class="fa-li" style="color:CornFlowerBlue"><i class="fa-solid fa-info-circle" aria-hidden="true"></i></span> Les messages d’information et les avertissements commencent en général par le mot <code>Warning</code> et sont presque toujours sans conséquence. La commande a été comprise par <code>RStudio</code> et un résultat a été produit. Dans le cas de la fonction <code>mix()</code>, les avertissements indiquent que la solution trouvée (l’ajustement des loi Normales aux cohortes observées) n’est peut-être pas optimale, mais une solution a néanmoins été obtenue.
 </li>
 <li>
-<span class="fa-li" style="color:Crimson"><i class="fa-solid fa-bomb" aria-hidden="true"></i></span> Les messages d’erreurs commencent par <code>Erreur</code> ou <code>Error</code> et indiquent que la commande n’a pas abouti. Dans le cas de la fonction <code>mix()</code>, cela peut être lié à 2 choses : 1. soit les valeurs choisies pour la fonction <code>mixparam()</code> sont trop éloignées de la position des pics réels, et la fonction <code>mix()</code> ne parvient donc pas à trouver de solution satisfaisante 2. soit le nombre de valeurs choisi pour la fonction <code>mixparam()</code> n’est pas le bon. Par exemple, s’il y a 5 cohortes qu’on ne fournit que 4 valeurs pour <code>mu</code> et <code>sigma</code>, un message d’erreur apparaîtra. De même, s’il y a 4 cohortes et qu’on fournit 5 valeurs pour <code>mu</code> et <code>sigma</code>, un message d’erreur apparaîtra. Enfin, si on ne fournit pas le même nombre de valeurs pour <code>mu</code> et pour <code>sigma</code>, un message d’erreur apparaîtra.
+<p><span class="fa-li" style="color:Crimson"><i class="fa-solid fa-bomb" aria-hidden="true"></i></span> Les messages d’erreurs commencent par <code>Erreur</code> ou <code>Error</code> et indiquent que la commande n’a pas abouti. Dans le cas de la fonction <code>mix()</code>, cela peut être lié à 2 choses :</p>
+<ol type="1">
+<li>soit les valeurs choisies pour la fonction <code>mixparam()</code> sont trop éloignées de la position des pics réels, et la fonction <code>mix()</code> ne parvient donc pas à trouver de solution satisfaisante</li>
+<li>soit le nombre de valeurs choisi pour la fonction <code>mixparam()</code> n’est pas le bon. Par exemple, s’il y a 5 cohortes qu’on ne fournit que 4 valeurs pour <code>mu</code> et <code>sigma</code>, un message d’erreur apparaîtra. De même, s’il y a 4 cohortes et qu’on fournit 5 valeurs pour <code>mu</code> et <code>sigma</code>, un message d’erreur apparaîtra. Enfin, si on ne fournit pas le même nombre de valeurs pour <code>mu</code> et pour <code>sigma</code>, un message d’erreur apparaîtra.
 </li>
-</ul>
+</ol></li></ul>
+
 <p>Dans les deux cas, vous devez</p>
 <ol type="1">
 <li>revenir à votre structure démographique instantanée et l’observer plus attentivement</li>
@@ -740,7 +751,7 @@ De l’importance du choix des valeurs initiales
 </ol>
 <div class="no-row-height column-margin column-container"><li id="fn3" role="doc-endnote"><p><sup>3</sup>&nbsp;on sait déjà que cette taille vaut 3.9 millimètres en mars 2010.</p></li></div><p>L’abondance d’une cohorte est obtenue en multipliant la valeur de <code>pi</code> de la cohorte d’intérêt par le nombre total d’individus échantillonnés en mars 2010. En effet, sur la <a href="#fig-ajustement">Figure&nbsp;<span>5.5</span></a>, la surface totale comprise entre l’axe des abscisses et la courbe verte vaut 1. Cette surface correspond au nombre total d’individus échantillonnés en mars 2010 :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Nas_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Nas_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 468</code></pre>
 </div>
@@ -790,14 +801,14 @@ De l’importance du choix des valeurs initiales
 </table>
 </div></div></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>res_01<span class="sc">$</span>parameters[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">*</span> <span class="fu">nrow</span>(Nas_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>res_01<span class="sc">$</span>parameters[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">*</span> <span class="fu">nrow</span>(Nas_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 217.2341</code></pre>
 </div>
 </div>
 <p>En arrondissant à l’entier le plus proche, on obtient :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(res_01<span class="sc">$</span>parameters[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">*</span> <span class="fu">nrow</span>(Nas_01), <span class="dv">0</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(res_01<span class="sc">$</span>parameters[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">*</span> <span class="fu">nrow</span>(Nas_01), <span class="dv">0</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 217</code></pre>
 </div>
@@ -819,10 +830,10 @@ De l’importance du choix des valeurs initiales
 </ol>
 <p>Nous pouvons utiliser la fonction <code>tribble()</code> pour le faire :</p>
 <div class="cell column-page-right">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>date,        <span class="sc">~</span>size,                  <span class="sc">~</span>abundance,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2010-03-01"</span>, res_01<span class="sc">$</span>parameters[<span class="dv">1</span>,<span class="dv">2</span>], res_01<span class="sc">$</span>parameters[<span class="dv">1</span>,<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">nrow</span>(Nas_01)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>date,        <span class="sc">~</span>size,                  <span class="sc">~</span>abundance,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2010-03-01"</span>, res_01<span class="sc">$</span>parameters[<span class="dv">1</span>,<span class="dv">2</span>], res_01<span class="sc">$</span>parameters[<span class="dv">1</span>,<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">nrow</span>(Nas_01)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -840,17 +851,17 @@ Attention !
 <div class="callout-body-container callout-body">
 <p>Une erreur fréquente est de saisir les données obtenues à chaque date d’échantillonnage dans un tableau différent à chaque fois. Ça n’est pas ce qu’il faut faire ! Il faut au contraire compléter le tableau <code>cohorte</code> en ajoutant une nouvelle ligne au tableau existant de la façon suivante :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>date,        <span class="sc">~</span>size,                  <span class="sc">~</span>abundance,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2010-03-01"</span>, res_01<span class="sc">$</span>parameters[<span class="dv">1</span>,<span class="dv">2</span>], res_01<span class="sc">$</span>parameters[<span class="dv">1</span>,<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">nrow</span>(Nas_01),</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2010-09-01"</span>, ...                   , ...</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>date,        <span class="sc">~</span>size,                  <span class="sc">~</span>abundance,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2010-03-01"</span>, res_01<span class="sc">$</span>parameters[<span class="dv">1</span>,<span class="dv">2</span>], res_01<span class="sc">$</span>parameters[<span class="dv">1</span>,<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">nrow</span>(Nas_01),</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2010-09-01"</span>, ...                   , ...</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 <p>Nous devons spécifier une dernière chose afin de produire les graphiques : à ce stade, la colonne <code>date</code> du nouveau tableau <code>cohort</code> est considéré comme une variable de type <code>character</code> (type <code>&lt;chr&gt;</code>) :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>cohort</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>cohort</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   date        size abundance
@@ -860,12 +871,12 @@ Attention !
 </div>
 <p>Il nous faut donc la transformer pour que <code>R</code> la reconnaisse comme étant une variable temporelle afin que les données apparaissent dans l’ordre chronologique (et non alphabétique) sur l’axe des abscisses de nos graphiques. Voilà comment procéder :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On charge le package lubridate pour travailler avec des dates</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ce package fait partie du tidyverse</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Si vous l'avez installé, lubridate est disponible sur votre ordinateur</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>cohort <span class="ot">&lt;-</span> cohort <span class="sc">%&gt;%</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">date</span>(date))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On charge le package lubridate pour travailler avec des dates</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ce package fait partie du tidyverse</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Si vous l'avez installé, lubridate est disponible sur votre ordinateur</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>cohort <span class="ot">&lt;-</span> cohort <span class="sc">%&gt;%</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">date</span>(date))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -873,7 +884,7 @@ Attention !
 <br> <code>date()</code> : transforme des variables de type <code>&lt;chr&gt;</code> (caractères) en variable de type <code>&lt;date&gt;</code> (dates).</p>
 </div></div><p>On vérifie que la variable <code>date</code> possède maintenant le type <code>&lt;date&gt;</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>cohort</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cohort</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   date        size abundance
@@ -887,14 +898,14 @@ Attention !
 <h2 data-number="5.10" class="anchored" data-anchor-id="courbe-de-croissance"><span class="header-section-number">5.10</span> Courbe de croissance</h2>
 <p>On place les dates d’échantillonnage sur l’axe des abscisses, et la taille moyennes des individus de la cohorte d’intérêt sur l’axe des ordonnées :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> size, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date d'échantillonnage"</span>,</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Longueur moyenne de la coquille (mm)"</span>,</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe de croissance"</span>) <span class="sc">+</span></span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> size, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date d'échantillonnage"</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Longueur moyenne de la coquille (mm)"</span>,</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe de croissance"</span>) <span class="sc">+</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -917,14 +928,14 @@ Attention !
 <h2 data-number="5.11" class="anchored" data-anchor-id="courbe-de-survie"><span class="header-section-number">5.11</span> Courbe de survie</h2>
 <p>Pour produire la courbe de survie, on procède de la même façon, mais on place les dates d’échantillonnage sur l’axe des abscisses, et l’abondance de la cohorte d’intérêt sur l’axe des ordonnées :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date d'échantillonnage"</span>,</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abondance de la cohorte"</span>,</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe de survie"</span>) <span class="sc">+</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date d'échantillonnage"</span>,</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abondance de la cohorte"</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe de survie"</span>) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-survie" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -939,14 +950,14 @@ Attention !
 <h2 data-number="5.12" class="anchored" data-anchor-id="courbe-dallen"><span class="header-section-number">5.12</span> Courbe d’Allen</h2>
 <p>Pour produire la courbe de survie, on place la taille moyenne des individus de la cohorte sur l’axe des abscisses, et l’abondance de la cohorte d’intérêt sur l’axe des ordonnées :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Longueur moyenne de la coquille (mm)"</span>,</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abondance de la cohorte"</span>,</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe d'Allen"</span>) <span class="sc">+</span></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Longueur moyenne de la coquille (mm)"</span>,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abondance de la cohorte"</span>,</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe d'Allen"</span>) <span class="sc">+</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-allen" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -961,10 +972,10 @@ Attention !
 <h2 data-number="5.13" class="anchored" data-anchor-id="relation-allométrique"><span class="header-section-number">5.13</span> Relation allométrique</h2>
 <p>L’un des objectifs de ce travail était de produire une courbe d’Allen pour étudier les <strong>variations de biomasses</strong>. Pour y parvenir, nous devons faire une courbe d’Allen sur laquelle figure la masse moyenne des individus de la cohorte d’intérêt (en grammes), plutôt que la taille moyenne des individus de cette cohorte (en millimètres). Pour passer des tailles en millimètres aux masses en grammes, il nous suffit d’appliquer la relation allométrique fournie dans la <a href="#sec-pres"><span>Section&nbsp;5.2</span></a>, et d’ajouter une nouvelle colonne à notre tableau grâce à la fonction <code>mutate()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="ot">&lt;-</span> cohort <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> <span class="fl">0.0013</span> <span class="sc">*</span> size <span class="sc">^</span> <span class="fl">2.3</span>)</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>cohort_2</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="ot">&lt;-</span> cohort <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> <span class="fl">0.0013</span> <span class="sc">*</span> size <span class="sc">^</span> <span class="fl">2.3</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>cohort_2</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
   date        size abundance weight
@@ -974,14 +985,14 @@ Attention !
 </div>
 <p>Il n’y a plus qu’à utiliser cette nouvelle variable sur l’axe des abscisses d’une courbe d’Allen :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Masse moyenne des individus (g)"</span>,</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abondance de la cohorte"</span>,</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe d'Allen"</span>) <span class="sc">+</span></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Masse moyenne des individus (g)"</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abondance de la cohorte"</span>,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe d'Allen"</span>) <span class="sc">+</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-biomasse" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
