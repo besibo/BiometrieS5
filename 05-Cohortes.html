@@ -476,6 +476,11 @@ Objectif principal
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 41.33</code></pre>
 </div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><code>max()</code> : affiche la valeur maximale contenue dans un vecteur</p>
+</div></div><div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition des limites des classes de tailles</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>limites <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>(taille_max <span class="sc">+</span> <span class="dv">1</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>limites</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -486,8 +491,7 @@ Objectif principal
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><code>:</code> : l’opérateur “deux points” permet de créer des suites d’entiers<br>
-<br> <code>max()</code> : affiche la valeur maximale contenue dans un vecteur</p>
+<p><code>:</code> : l’opérateur “deux points” permet de créer des suites d’entiers</p>
 </div></div><p>L’objet <code>limites</code> contient les limites des classes de tailles que nous utiliserons pour produire les structures démographiques instantanées, pour chaque date d’échantillonnage, et pas seulement pour mars 2010. C’est la raison pour nous avons utilisé <code>max(Nassarius$size) +1</code> : cette syntaxe nous assure que nos classes de tailles recouvrent bien la taille de tous les individus échantillonnés au cours des 5 années d’études. Ainsi, nous pourrons utiliser les mêmes classes de tailles pour toutes les dates.</p>
 <p>Maintenant, on peut utiliser le vecteur <code>limites</code> comme argument de la fonction <code>geom_histogram()</code>. On modifie aussi les couleurs des barres de l’histogramme pour mieux visualiser les classes :</p>
 <div class="cell page-columns page-full">
