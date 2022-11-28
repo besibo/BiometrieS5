@@ -956,8 +956,8 @@ div.csl-indent {
  NA's   :2         NA's   :2                                 </code></pre>
 </div>
 </div>
-<p>Ici, on obtient un résumé pour chaque colonne du tableau. Les colonnes numériques sont traitées comme les vecteurs numériques (on obtient alors les minimas et maximas, les quartiles, les moyennes et médianes) et les colonnes contenant des variables catégorielles sont traitées comme des facteurs (et on obtient alors le nombre d’observation pour chaque modalité).</p>
-<p>On constate ici au passage que la variable <code>year</code> est considérée ici comme une variable numérique, alors qu’elle devrait plutôt être considérée comme un facteur, ce qui nous permettrait de savoir combien d’individus ont été échantillonnés chaque année :</p>
+<p>Ici, on obtient un résumé pour chaque colonne du tableau. Les colonnes numériques sont traitées comme les vecteurs numériques (on obtient alors les minimas et maximas, les quartiles, les moyennes et médianes) et les colonnes contenant des variables catégorielles sont traitées comme des facteurs (et on obtient alors le nombre d’observations pour chaque modalité).</p>
+<p>On constate au passage que la variable <code>year</code> est considérée ici comme une variable numérique, alors qu’elle devrait plutôt être considérée comme un facteur, ce qui nous permettrait de savoir combien d’individus ont été échantillonnés chaque année :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">factor</span>(year)) <span class="sc">%&gt;%</span> </span>
@@ -1922,7 +1922,7 @@ the `.groups` argument.
 <span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Températures (ºC)"</span>, <span class="at">y =</span> <span class="st">"Fréquence"</span>) <span class="sc">+</span></span>
 <span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>Warning: Removed 1 rows containing non-finite values (`stat_bin()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="01-EDA_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
@@ -1949,7 +1949,7 @@ the `.groups` argument.
 <span id="cb111-8"><a href="#cb111-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mois"</span>, <span class="at">y =</span> <span class="st">"Températures (ºC)"</span>) <span class="sc">+</span></span>
 <span id="cb111-9"><a href="#cb111-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<pre><code>Warning: Removed 1 rows containing missing values (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="01-EDA_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid" width="672"></p>
@@ -1969,7 +1969,7 @@ the `.groups` argument.
 <span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mois"</span>, <span class="at">y =</span> <span class="st">"Températures (ºC)"</span>) <span class="sc">+</span></span>
 <span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 rows containing non-finite values (stat_boxplot).</code></pre>
+<pre><code>Warning: Removed 1 rows containing non-finite values (`stat_boxplot()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="01-EDA_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid" width="672"></p>
@@ -2080,7 +2080,7 @@ the `.groups` argument.
 <span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mois"</span>, <span class="at">y =</span> <span class="st">"Températures (ºC)"</span>) <span class="sc">+</span></span>
 <span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 rows containing non-finite values (stat_boxplot).</code></pre>
+<pre><code>Warning: Removed 1 rows containing non-finite values (`stat_boxplot()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="01-EDA_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid" width="672"></p>
