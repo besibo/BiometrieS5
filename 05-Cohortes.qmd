@@ -166,7 +166,12 @@ Notez le message d'avertissement qui s'affiche quand vous produisez cet histogra
 Puisque les individus de cette espèce peuvent atteindre une taille de 40 millimètres environ, nous allons définir des classes de tailles tous les millimètres. On peut faire ça simplement en créant un vecteur qui contient les limites des classes de tailles que l'on souhaite :
 
 ```{r}
-limites <- 0:(max(Nassarius$size) + 1)
+# Calcul de la taille maximale observée
+taille_max <- max(Nassarius$size, na.rm = TRUE)
+taille_max
+
+# Définition des limites des classes de tailles
+limites <- 0:(taille_max + 1)
 limites
 ```
 
