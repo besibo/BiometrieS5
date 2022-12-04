@@ -350,7 +350,7 @@ Lorsque vous utiliserez la fonction `mix()`, il se peut que des messages d'erreu
 <li><span class="fa-li" style="color:Crimson" class="fa-fade">{{< fa bomb >}}</span> Les messages d'erreurs commencent par `Erreur` ou `Error` et indiquent que la commande n'a pas abouti. Dans le cas de la fonction `mix()`, cela peut être lié à 2 choses :
 
   1. soit les valeurs choisies pour la fonction `mixparam()` sont trop éloignées de la position des pics réels, et la fonction `mix()` ne parvient donc pas à trouver de solution satisfaisante
-  2. soit le nombre de valeurs choisi pour la fonction `mixparam()` n'est pas le bon. Par exemple, s'il y a 5 cohortes qu'on ne fournit que 4 valeurs pour `mu` et `sigma`, un message d'erreur apparaîtra. De même, s'il y a 4 cohortes et qu'on fournit 5 valeurs pour `mu` et `sigma`, un message d'erreur apparaîtra. Enfin, si on ne fournit pas le même nombre de valeurs pour `mu` et pour `sigma`, un message d'erreur apparaîtra.  </li>
+  2. soit le nombre de valeurs choisies pour la fonction `mixparam()` n'est pas le bon. Par exemple, s'il y a 5 cohortes et qu'on ne fournit que 4 valeurs pour `mu` et `sigma`, un message d'erreur apparaîtra. De même, s'il y a 4 cohortes et qu'on fournit 5 valeurs pour `mu` et `sigma`, un message d'erreur apparaîtra. Enfin, si on ne fournit pas le même nombre de valeurs pour `mu` et pour `sigma`, un message d'erreur apparaîtra.  </li>
 </ul>
 
 Dans les deux cas, vous devez 
