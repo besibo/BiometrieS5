@@ -180,6 +180,6 @@ Vous êtes autorisé à partager, copier, distribuer et communiquer ce matériel
 </li>
 <li><span class="fa-li">{{< fa brands creative-commons-nd size=xl >}}</span> **Pas de modifications** : dans le cas où vous effectuez un remix, que vous transformez, ou créez à partir du matériel composant l'ouvrage original, vous n'êtes pas autorisé à distribuer ou mettre à disposition l'ouvrage modifié.
 </li>
-<li><span class="fa-li">{{< fa solid unlock-keyhole size=xl >}}</span> **Pas de restrictions complémentaires** : vous n'êtes pas autorisé à appliquer des conditions légales ou des mesures techniques qui restreindraient légalement autrui à utiliser cet ouvrage dans les conditions décrites par la licence.
+<li><span class="fa-li">{{< fa unlock-alt size=xl >}}</span> **Pas de restrictions complémentaires** : vous n'êtes pas autorisé à appliquer des conditions légales ou des mesures techniques qui restreindraient légalement autrui à utiliser cet ouvrage dans les conditions décrites par la licence.
 </li>
 </ul>
