@@ -201,13 +201,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-Cohortes.html" class="sidebar-item-text sidebar-link">
+  <a href="./04-Cohortes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Analyse de cohortes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-DynamicSystems.html" class="sidebar-item-text sidebar-link">
+  <a href="./05-DynamicSystems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systèmes dynamiques</span></span></a>
   </div>
 </li>
@@ -261,8 +261,8 @@ div.csl-indent {
 <p>Pour ce nouveau chapitre, je vous conseille de travailler dans un nouveau script que vous placerez dans votre répertoire de travail, et dans une nouvelle session de travail (Menu <code>Session &gt; Restart R</code>). Inutile en revanche de créer un nouveau <code>Rproject</code> : vos pouvez tout à fait avoir plusieurs script dans le même répertoire de travail et pour un même <code>Rproject</code>. Comme toujours, consultez <a href="https://besibo.github.io/BiometrieS3/01-R-basics.html#sec-code">le livre en ligne du semestre 3</a> si vous ne savez plus comment faire.</p>
 <p>Si vous êtes dans une nouvelle session de travail (ou que vous avez quitté puis relancé <code>RStudio</code>), vous devrez penser à recharger en mémoire les packages utiles. Dans ce chapitre, vous aurez besoin d’utiliser les mêmes packages que précédemment :</p>
 <ul>
-<li>le <code>tidyverse</code> <span class="citation" data-cites="R-tidyverse">(<a href="references.html#ref-R-tidyverse" role="doc-biblioref">Wickham 2022</a>)</span>, qui comprend notamment le package <code>readr</code> <span class="citation" data-cites="R-readr">(<a href="references.html#ref-R-readr" role="doc-biblioref">Wickham, Hester, et Bryan 2022</a>)</span>, pour importer facilement des fichiers <code>.csv</code> au format <code>tibble</code>, le package <code>dplyr</code> <span class="citation" data-cites="R-dplyr">(<a href="references.html#ref-R-dplyr" role="doc-biblioref">Wickham et al. 2023</a>)</span>, pour manipuler des tableaux, et le package <code>ggplot2</code> <span class="citation" data-cites="R-ggplot2">(<a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al. 2022</a>)</span> pour les représentations graphiques. <!-- - `readxl` [@R-readxl], pour importer facilement des fichiers Excel au format `tibble`. --></li>
-<li><code>skimr</code> <span class="citation" data-cites="R-skimr">(<a href="references.html#ref-R-skimr" role="doc-biblioref">Waring et al. 2022</a>)</span>, qui permet de calculer des résumés de données très informatifs. <!-- - `car` [@R-car], qui permet d'effectuer le test de comparaison des variances de Levene. --> <!-- - les packages `palmerpenguins` [@R-palmerpenguins] et `nycflights13` [@R-nycflights13], pour accéder à plusieurs jeux de données que nous utiliserons en guise d'exemples ou pour les exercices (`penguins`, `flights`, `weather`...). --></li>
+<li>le <code>tidyverse</code> <span class="citation" data-cites="R-tidyverse">(<a href="#ref-R-tidyverse" role="doc-biblioref">Wickham 2023</a>)</span>, qui comprend notamment le package <code>readr</code> <span class="citation" data-cites="R-readr">(<a href="#ref-R-readr" role="doc-biblioref">Wickham, Hester, et Bryan 2023</a>)</span>, pour importer facilement des fichiers <code>.csv</code> au format <code>tibble</code>, le package <code>dplyr</code> <span class="citation" data-cites="R-dplyr">(<a href="#ref-R-dplyr" role="doc-biblioref">Wickham, François, et al. 2023</a>)</span>, pour manipuler des tableaux, et le package <code>ggplot2</code> <span class="citation" data-cites="R-ggplot2">(<a href="#ref-R-ggplot2" role="doc-biblioref">Wickham, Chang, et al. 2023</a>)</span> pour les représentations graphiques. <!-- - `readxl` [@R-readxl], pour importer facilement des fichiers Excel au format `tibble`. --></li>
+<li><code>skimr</code> <span class="citation" data-cites="R-skimr">(<a href="#ref-R-skimr" role="doc-biblioref">Waring et al. 2022</a>)</span>, qui permet de calculer des résumés de données très informatifs. <!-- - `car` [@R-car], qui permet d'effectuer le test de comparaison des variances de Levene. --> <!-- - les packages `palmerpenguins` [@R-palmerpenguins] et `nycflights13` [@R-nycflights13], pour accéder à plusieurs jeux de données que nous utiliserons en guise d'exemples ou pour les exercices (`penguins`, `flights`, `weather`...). --></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -299,7 +299,7 @@ div.csl-indent {
 </figure>
 </div>
 <p>Chez de nombreuses espèces, les mâles ont plus de chances d’attirer des femelles s’ils produisent des niveaux de testostérone élevés. Est-ce que la forte production de testostérone de certains mâles a un coût, notamment en terme d’immunocompétence ? Autrement dit, est-ce que produire beaucoup de testostérone au moment de la reproduction (ce qui fournit un avantage sélectif) se traduit par une immunité plus faible par la suite, et donc une plus forte susceptibilité de contracter des maladies (ce qui constitue donc un désavantage sélectif) ? Ce type de question est central pour comprendre comment l’allocation des ressources affecte à la fois la survie et la fécondité des individus.</p>
-<p>Pour étudier cette question, une équipe de chercheurs <span class="citation" data-cites="Hasselquist1999">(<a href="references.html#ref-Hasselquist1999" role="doc-biblioref">Hasselquist et al. 1999</a>)</span> a mis en place le dispositif expérimental suivant. Les niveaux de testostérone de 13 carouges à épaulettes mâles ont été artificiellement augmentés par l’implantation chirurgicale d’un microtube perméable contenant de la testostérone. L’immunocompétence a été mesurée pour chaque oiseau avant et après l’opération chirurgicale. La variable mesurée est la production d’anticorps suite à l’exposition des oiseaux avec un antigène non pathogène mais censé déclencher une réponse immunitaire. Les taux de production d’anticorps sont exprimés en logarithmes de densité optique par minute <span class="math inline">\(\left(\ln\frac{mOD}{min}\right)\)</span>. Si la production de testostérone influence l’immunocompétence, on s’attend à observer des différence de production d’anticorps avant et après l’intervention chirurgicale.</p>
+<p>Pour étudier cette question, une équipe de chercheurs <span class="citation" data-cites="Hasselquist1999">(<a href="#ref-Hasselquist1999" role="doc-biblioref">Hasselquist et al. 1999</a>)</span> a mis en place le dispositif expérimental suivant. Les niveaux de testostérone de 13 carouges à épaulettes mâles ont été artificiellement augmentés par l’implantation chirurgicale d’un microtube perméable contenant de la testostérone. L’immunocompétence a été mesurée pour chaque oiseau avant et après l’opération chirurgicale. La variable mesurée est la production d’anticorps suite à l’exposition des oiseaux avec un antigène non pathogène mais censé déclencher une réponse immunitaire. Les taux de production d’anticorps sont exprimés en logarithmes de densité optique par minute <span class="math inline">\(\left(\ln\frac{mOD}{min}\right)\)</span>. Si la production de testostérone influence l’immunocompétence, on s’attend à observer des différence de production d’anticorps avant et après l’intervention chirurgicale.</p>
 </section>
 <section id="importation-et-mise-en-forme-des-données" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="importation-et-mise-en-forme-des-données"><span class="header-section-number">2.3</span> Importation et mise en forme des données</h2>
@@ -635,8 +635,8 @@ Attention
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Dans un test sur données appariées, on s’intéresse à <strong>la moyenne des différences</strong> entre les données des 2 séries. Cette moyenne est alors comparée à la valeur théorique <span class="math inline">\(\mu\)</span> = 0. Ce test est donc équivalent au test vu dans le <a href="01-OneSampleTests.html"><span>Chapitre&nbsp;1</span></a> sur la comparaison de la moyenne d’une population à une valeur théorique.</p>
-<p>Notez également que <strong>la moyenne des différences</strong> n’est pas équivalente à <strong>la différence des moyennes</strong>. La différence des moyennes est une grandeur qui nous sera utile dans le chapitre suivant (<a href="03-TwoSampleTests.html"><span>Chapitre&nbsp;3</span></a>) sur la comparaison de la moyenne de deux populations lorsque les données sont indépendantes.</p>
+<p>Dans un test sur données appariées, on s’intéresse à <strong>la moyenne des différences</strong> entre les données des 2 séries. Cette moyenne est alors comparée à la valeur théorique <span class="math inline">\(\mu\)</span> = 0. Ce test est donc équivalent au test vu dans le <a href="#sec-moy1"><span class="quarto-unresolved-ref">sec-moy1</span></a> sur la comparaison de la moyenne d’une population à une valeur théorique.</p>
+<p>Notez également que <strong>la moyenne des différences</strong> n’est pas équivalente à <strong>la différence des moyennes</strong>. La différence des moyennes est une grandeur qui nous sera utile dans le chapitre suivant (<a href="#sec-moy3"><span class="quarto-unresolved-ref">sec-moy3</span></a>) sur la comparaison de la moyenne de deux populations lorsque les données sont indépendantes.</p>
 </div>
 </div>
 </section>
@@ -882,11 +882,11 @@ sample estimates:
 </section>
 <section id="exercice-dapplication" class="level2" data-number="2.8">
 <h2 data-number="2.8" class="anchored" data-anchor-id="exercice-dapplication"><span class="header-section-number">2.8</span> Exercice d’application</h2>
-<p>Les autruches vivent dans des environnements chauds et elles sont donc fréquemment exposées au soleil durant de longues périodes. Dans des environnements similaires, les mammifères ont des mécanismes physiologiques leur permettant de réduire la température de leur cerveau par rapport à celle de leur corps. Une équipe de chercheurs <span class="citation" data-cites="Fuller2003">(<a href="references.html#ref-Fuller2003" role="doc-biblioref">Fuller et al. 2003</a>)</span> a testé si les autruches pouvaient faire de même. La température du corps et du cerveau de 37 autruches a été enregistrée par une journée chaude typique. Les résultats, exprimés en degrés Celsius, figurent dans <a href="data/Autruches.csv">le fichier <code>Autruches.csv</code></a>.</p>
+<p>Les autruches vivent dans des environnements chauds et elles sont donc fréquemment exposées au soleil durant de longues périodes. Dans des environnements similaires, les mammifères ont des mécanismes physiologiques leur permettant de réduire la température de leur cerveau par rapport à celle de leur corps. Une équipe de chercheurs <span class="citation" data-cites="Fuller2003">(<a href="#ref-Fuller2003" role="doc-biblioref">Fuller et al. 2003</a>)</span> a testé si les autruches pouvaient faire de même. La température du corps et du cerveau de 37 autruches a été enregistrée par une journée chaude typique. Les résultats, exprimés en degrés Celsius, figurent dans <a href="data/Autruches.csv">le fichier <code>Autruches.csv</code></a>.</p>
 <p>Importez ces données et faites-en l’analyse pour savoir s’il existe une différence de température moyenne entre le corps et le cerveau des autruches. Vos observations chez les autruches sont-elles conformes à ce qui est observé chez les mammifères dans un environnement similaire ? Comme toujours, vous commencerez par faire une analyse descriptive des données, sous forme numérique et graphique, avant de vous lancer dans les tests d’hypothèses.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Fuller2003" class="csl-entry" role="listitem">
 Fuller, Andrea, Peter R. Kamerman, Shane K. Maloney, Graham Mitchell, et Duncan Mitchell. 2003. <span>«&nbsp;Variability in brain and arterial blood temperatures in free-ranging ostriches in their natural habitat&nbsp;»</span>. <em>Journal of Experimental Biology</em> 206 (7): 1171‑81. <a href="https://doi.org/10.1242/jeb.00230">https://doi.org/10.1242/jeb.00230</a>.
 </div>
@@ -897,16 +897,16 @@ Hasselquist, Dennis, James A. Marsh, Paul W. Sherman, et John C. Wingfield. 1999
 Waring, Elin, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, et Shannon Ellis. 2022. <em>skimr: Compact and Flexible Summaries of Data</em>. <a href="https://CRAN.R-project.org/package=skimr">https://CRAN.R-project.org/package=skimr</a>.
 </div>
 <div id="ref-R-tidyverse" class="csl-entry" role="listitem">
-Wickham, Hadley. 2022. <em>tidyverse: Easily Install and Load the Tidyverse</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
+Wickham, Hadley. 2023. <em>tidyverse: Easily Install and Load the Tidyverse</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
 </div>
 <div id="ref-R-ggplot2" class="csl-entry" role="listitem">
-Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, et Dewey Dunnington. 2022. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, et Dewey Dunnington. 2023. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
 </div>
 <div id="ref-R-dplyr" class="csl-entry" role="listitem">
 Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, et Davis Vaughan. 2023. <em>dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
 </div>
 <div id="ref-R-readr" class="csl-entry" role="listitem">
-Wickham, Hadley, Jim Hester, et Jennifer Bryan. 2022. <em>readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.
+Wickham, Hadley, Jim Hester, et Jennifer Bryan. 2023. <em>readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.
 </div>
 </div>
 </section>

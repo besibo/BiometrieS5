@@ -39,16 +39,18 @@ system("cat book.bib packages.bib > all.bib")
 
 ## Objectifs {-}
 
-Ce livre contient l'ensemble du matériel (contenus, exemples, exercices...) nécessaire à la réalisation des travaux pratiques de **Biométrie** de l'EC '*Outils pour l'étude et la compréhension du vivant 4*' du semestre 5 de la licence Sciences de la Vie de La Rochelle Université.
+Ce livre contient l'ensemble du matériel (contenus, exemples, exercices...) nécessaire à la réalisation des travaux pratiques de **Biométrie** de l'EC *Outils pour l'étude et la compréhension du vivant 4* du semestre 5 de la licence Sciences de la Vie de La Rochelle Université.
 
 À la fin du semestre, vous devriez être capables de faire les choses suivantes dans le logiciel `RStudio` :
 
-- Explorer des jeux de données en produisant des résumés statistiques de variables de différentes nature (numériques continues ou catégorielles) et en produisant des graphiques appropriés
-- Calculer des statistiques descriptives (moyennes, médianes, quartiles, écart-types, variances, erreurs standard, intervalles de confiance, etc.) pour plusieurs sous-groupes de vos jeux de données, et les représenter sur des graphiques adaptés
+- Mettre en forme des tableaux de données : renommer des variables, en créer de nouvelles, modifier des variables existantes, filtrer des lignes, sélectionner des colonnes, etc. (vu au semestre 3)
+- Explorer des jeux de données en produisant des graphiques appropriés selon la nature des variables disponibles, leur nombre et l'objectif recherché (vu au semestre 3)
+- Explorer des jeux de données en produisant des résumés statistiques de variables de différentes nature (numériques continues ou catégorielles) et pour différentes modalités de facteurs d'intérêt (vu au semestre 4)
+- Calculer des indices de position (moyennes, médianes...), de dispersion (écart-types, variances, IQR...) et d'incertitude (erreurs standard, intervalles de confiance...) pour plusieurs sous-groupes de vos jeux de données, et les représenter sur des graphiques adaptés (vu au semestre 4)
 - Choisir et formuler des hypothèses adaptées à la question scientifique posée (hypothèses bilatérales ou unilatérales)
 - Choisir les tests statistiques permettant de répondre à une question scientifique précise selon la nature de la question posée et la nature des variables à disposition
-- Réaliser les tests usuels de comparaison de proportions et de moyennes ($\chi^2$, $t$ de Student à 1 ou 2 échantillons, appariés ou indépendants, etc.)
-- Vérifier les conditions d'application des tests, et le cas échéant, réaliser des tests non paramétriques équivalents
+- Réaliser les tests usuels de comparaison de moyennes ($t$ de Student à 1 ou 2 échantillons, appariés ou indépendants...)
+- Vérifier les conditions d'application des tests (graphiquement et avec des tests appropriés tels que les test de Shapiro-Wilk et de Levene), et le cas échéant, réaliser des tests non paramétriques équivalents (test de Welch, de Wilcoxon...)
 - Interpréter correctement les résultats des tests pour répondre aux questions scientifiques posées
 - Identifier des cohortes dans une population et en étudier les caractéristiques et l'évolution temporelle
 - Simuler le comportement de populations théoriques simples suivant des modèles démographiques précis (mortalité exponentielle, croissance exponentielle, croissance logistique, système prédateur-proies de Lotka et Volterra, et systèmes de compétition à 2 ou 3 espèces...)
@@ -63,12 +65,17 @@ Pour atteindre les objectifs fixés ici, et compte tenu du volume horaire restre
 2. d'importer des jeux de données issus de tableurs dans `RStudio`
 3. d'effectuer des manipulations de données simples (sélectionner des variables, trier des colonnes, filtrer des lignes, créer de nouvelles variables, etc.)
 4. de produire des graphiques de qualité, adaptés à la fois aux variables dont vous disposez et aux questions auxquelles vous souhaitez répondre.
+5. de réaliser une exploration statistiques de vos données en calculant des indices de position, de dispersion et d'incertitude pour plusieurs sous-groupes de vos données.
 
 :::{.callout-warning}
 ## Si ces pré-requis ne sont pas maîtrisés
 
-- mettez-vous à niveau de toute urgence en lisant attentivement [le livre en ligne de Biométrie du semestre 3](https://besibo.github.io/BiometrieS3/) 
-- mettez-vous en binôme avec un·e collègue qui a suivi l'EC Immersion `R` et `RStudio` en début de semestre. Ça ne vous dispensera pas de lire le livre en ligne de Biométrie S3, mais ça vous fera certainement gagner pas mal de temps.
+Mettez-vous à niveau de toute urgence en lisant attentivement :
+
+- [le livre en ligne de Biométrie du semestre 3](https://besibo.github.io/BiometrieS3/) 
+- [le livre en ligne de Biométrie du semestre 4](https://besibo.github.io/BiometrieS4/)
+
+Vous aurez de toutes façons besoin de vous référer à ces 2 documents régulièrement au cours de ces TP. Donc gardez-les à portée de main et apprenez à naviguez rapidement dans leurs chapitres et sous-chapitres pour retrouver facilement les informations dont vous avez besoin.
 :::
 
 
