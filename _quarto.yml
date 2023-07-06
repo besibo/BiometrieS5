@@ -11,12 +11,11 @@ book:
   repo-url: "https://github.com/besibo/BiometrieS5"
   chapters:
     - index.qmd
-    - 01-EDA.qmd
-    - 02-PropTests.qmd
-    - 03-OneSampleTests.qmd
-    - 04-TwoSampleTests.qmd
-    - 05-Cohortes.qmd
-    - 06-DynamicSystems.qmd
+    - 01-OneSampleTests.qmd
+    - 02-TwoSamplePairedTests.qmd
+    - 03-TwoSampleTests.qmd
+    - 04-Cohortes.qmd
+    - 05-DynamicSystems.qmd
     - references.qmd
 
 bibliography: all.bib

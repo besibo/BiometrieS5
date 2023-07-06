@@ -1,3 +1,0 @@
-# Comparaison de moyennes : un échantillon et deux échantillons appariés {#sec-moy1}
-
-Sera traité au semestre prochain. Passez directement au @sec-cohortes.

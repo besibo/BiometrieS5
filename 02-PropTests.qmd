@@ -1,3 +1,0 @@
-# Principes des tests statistiques et comparaison de proportions {#sec-prop}
-
-Sera traité au semestre prochain. Passez directement au @sec-cohortes.
