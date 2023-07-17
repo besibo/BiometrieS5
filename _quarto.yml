@@ -16,6 +16,7 @@ book:
     - 03-TwoSampleTests.qmd
     - 04-Cohortes.qmd
     - 05-DynamicSystems.qmd
+    - 06-MarkovChains.qmd
     - references.qmd
 
 bibliography: all.bib

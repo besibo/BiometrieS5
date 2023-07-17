@@ -215,6 +215,12 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./06-MarkovChains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Les Chaînes de Markov</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -274,7 +280,7 @@ div.csl-indent {
 <section id="sec-pres" class="level2 page-columns page-full" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-pres"><span class="header-section-number">4.2</span> Présentation de l’étude</h2>
 <p>Le suivi démographique des populations animales est extrêmement fréquent dans le domaine de l’écologie. Le suivi des populations naturelles est particulièrement pertinent dans un contexte de conservation, pour réaliser des études d’impact ou pour mesurer l’évolution de la biodiversité.</p>
-<p>Ici, une population de gastéropodes <em>Nassarius reticulatus</em> (la nasse réticulée) a été suivie pendant 5 ans. Deux sessions d’échantillonnage ont été organisées chaque année depuis 2010 : la première a été réalisée en mars, juste après le recrutement des juvéniles, et la seconde a été réalisée 6 mois plus tard, en septembre. Tous les échantillons ont été collectés au même endroit, selon la même méthode (collecte systématique de tous les individus présents à l’intérieur de 10 quadrats positionnés aléatoirement dans la zone d’étude), lors d’une marée basse de fort coefficient (marées de printemps et d’automne). Les individus échantillonnés ont été mesurés sur place, de la base, à l’apex de la coquille (voir <a href="#fig-nasse">Figure&nbsp;<span class="quarto-unresolved-ref">fig-nasse</span></a>) à l’aide d’un pied à coulisse (précision : centième de millimètre) et relâchés sur place.</p>
+<p>Ici, une population de gastéropodes <em>Nassarius reticulatus</em> (la nasse réticulée) a été suivie pendant 5 ans. Deux sessions d’échantillonnage ont été organisées chaque année depuis 2010 : la première a été réalisée en mars, juste après le recrutement des juvéniles, et la seconde a été réalisée 6 mois plus tard, en septembre. Tous les échantillons ont été collectés au même endroit, selon la même méthode (collecte systématique de tous les individus présents à l’intérieur de 10 quadrats positionnés aléatoirement dans la zone d’étude), lors d’une marée basse de fort coefficient (marées de printemps et d’automne). Les individus échantillonnés ont été mesurés sur place, de la base, à l’apex de la coquille (voir <a href="#fig-nasse">Figure&nbsp;<span>4.1</span></a>) à l’aide d’un pied à coulisse (précision : centième de millimètre) et relâchés sur place.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div id="fig-nasse" class="quarto-figure quarto-figure-center anchored">
@@ -317,8 +323,8 @@ Objectif principal
 </ol>
 <p>Pour cette section, vous aurez besoin des packages suivants :</p>
 <ul>
-<li><code>tidyverse</code> : pour manipuler les données et faire des graphiques <span class="citation" data-cites="tidyverse2019">(<a href="#ref-tidyverse2019" role="doc-biblioref">Wickham et al. 2019</a>)</span></li>
-<li><code>mixdist</code> : pour effectuer les décompositions polymodales <span class="citation" data-cites="R-mixdist">(<a href="#ref-R-mixdist" role="doc-biblioref">Macdonald et Juan Du 2018</a>)</span></li>
+<li><code>tidyverse</code> : pour manipuler les données et faire des graphiques <span class="citation" data-cites="tidyverse2019">(<a href="references.html#ref-tidyverse2019" role="doc-biblioref">Wickham et al. 2019</a>)</span></li>
+<li><code>mixdist</code> : pour effectuer les décompositions polymodales <span class="citation" data-cites="R-mixdist">(<a href="references.html#ref-R-mixdist" role="doc-biblioref">Macdonald et Juan Du 2018</a>)</span></li>
 </ul>
 <p>Si vous ne savez plus comment installer et charger des packages en mémoire, reportez-vous au chapitre correspondant du <a href="https://besibo.github.io/BiometrieS3/01-R-basics.html#sec-packages">livre en ligne de Biométrie du semestre 3</a></p>
 <div class="cell">
@@ -494,7 +500,7 @@ Objectif principal
 </div>
 </div>
 </div>
-<p>Cette structure démographique instantanée (<a href="#fig-histo2">Figure&nbsp;<span class="quarto-unresolved-ref">fig-histo2</span></a>) fait apparaître 5 cohortes, bien que la plus âgée soit à peine visible. Les pics, ou modes, sont situés autour de 4, 9, 17, 30 et 34 millimètres. Ces valeurs approximatives sont importantes car nous les utiliserons pour réaliser la décomposition polymodale.</p>
+<p>Cette structure démographique instantanée (<a href="#fig-histo2">Figure&nbsp;<span>4.3</span></a>) fait apparaître 5 cohortes, bien que la plus âgée soit à peine visible. Les pics, ou modes, sont situés autour de 4, 9, 17, 30 et 34 millimètres. Ces valeurs approximatives sont importantes car nous les utiliserons pour réaliser la décomposition polymodale.</p>
 </section>
 <section id="décomposition-polymodale" class="level2 page-columns page-full" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="décomposition-polymodale"><span class="header-section-number">4.7</span> Décomposition polymodale</h2>
@@ -599,7 +605,7 @@ Objectif principal
 <h3 data-number="4.7.3" class="anchored" data-anchor-id="création-du-deuxième-objet"><span class="header-section-number">4.7.3</span> Création du deuxième objet</h3>
 <p>Pour créer le second <code>data.frame()</code> dont la fonction <code>mix()</code> aura besoin, nous allons utiliser une autre fonction du package <code>mixdist</code> : la fonction <code>mixparam()</code>. Cette fonction prend au minimum 2 arguments :</p>
 <ol type="1">
-<li><code>mu</code> : un vecteur qui contient la position approximative des modes (ou pics) de chaque cohorte. Si nous avons 5 cohortes à identifier, il faudra fournir 5 valeurs pour <code>mu</code>. Pour mars 2010, nous utiliserons les valeurs présentées plus au, au niveau de la <a href="#fig-histo2">Figure&nbsp;<span class="quarto-unresolved-ref">fig-histo2</span></a> (4, 9, 17, 30 et 34 millimètres). Ces valeurs changeront pour chaque date d’échantillonnage et il faudra donc examiner attentivement les structures démographiques instantanées de chaque échantillonnage pour les déterminer. J’insiste sur le fait que la position des pics peut être approximative, mais qu’elle ne doit malgré tout pas être trop éloignée des vraies valeurs.</li>
+<li><code>mu</code> : un vecteur qui contient la position approximative des modes (ou pics) de chaque cohorte. Si nous avons 5 cohortes à identifier, il faudra fournir 5 valeurs pour <code>mu</code>. Pour mars 2010, nous utiliserons les valeurs présentées plus au, au niveau de la <a href="#fig-histo2">Figure&nbsp;<span>4.3</span></a> (4, 9, 17, 30 et 34 millimètres). Ces valeurs changeront pour chaque date d’échantillonnage et il faudra donc examiner attentivement les structures démographiques instantanées de chaque échantillonnage pour les déterminer. J’insiste sur le fait que la position des pics peut être approximative, mais qu’elle ne doit malgré tout pas être trop éloignée des vraies valeurs.</li>
 <li><code>sigma</code> : un vecteur qui contient la valeur approchée de l’écart-type de chaque cohorte. L’écart-type d’une cohorte correspond à l’étalement des tailles de part et d’autres de la moyenne de la cohorte. C’est ce que nous avons appelé “polymorphisme” dans le cours de dynamique des populations, puisque cet étalement représente des performances de croissance variables pour des individus qui sont tous nés approximativement en même temps. Là encore, il faut fournir autant de valeurs que nous avons de cohortes (soit 5 pour mars 2010). Puisque nous n’avons pas d’idée précise d’ordre de grandeur pour ces écarts-types, nous utiliserons la valeur <code>1</code> pour chaque cohorte.</li>
 </ol>
 <p>Ainsi, on obtient le second <code>data.frame</code> ainsi :</p>
@@ -684,7 +690,7 @@ Constraints:
 </div>
 </div>
 </div>
-<p>On observe sur la <a href="#fig-ajustement">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ajustement</span></a> et dans l’objet <code>res_01$parameters</code> que la qualité de l’ajustement (et donc de la décomposition polymodale) est bonne :</p>
+<p>On observe sur la <a href="#fig-ajustement">Figure&nbsp;<span>4.5</span></a> et dans l’objet <code>res_01$parameters</code> que la qualité de l’ajustement (et donc de la décomposition polymodale) est bonne :</p>
 <ul>
 <li>la courbe verte représente bien les données observées : elle est bien ajustée aux contours de l’histogramme.</li>
 <li>l’abondance des cohortes décroit avec l’âge de la cohorte : <code>pi</code> décroit de la cohorte la plus jeune à la cohorte la plus âgée.</li>
@@ -741,7 +747,7 @@ De l’importance du choix des valeurs initiales
 <li>la valeur d’abondance de la cohorte dont on souhaite réaliser le suivi (il s’agit de la cohorte la plus jeune en mars 2010)</li>
 <li>la taille moyenne des individus de la cohorte dont on souhaite réaliser le suivi<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 </ol>
-<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;on sait déjà que cette taille vaut 3.9 millimètres en mars 2010.</p></li></div><p>L’abondance d’une cohorte est obtenue en multipliant la valeur de <code>pi</code> de la cohorte d’intérêt par le nombre total d’individus échantillonnés en mars 2010. En effet, sur la <a href="#fig-ajustement">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ajustement</span></a>, la surface totale comprise entre l’axe des abscisses et la courbe verte vaut 1. Cette surface correspond au nombre total d’individus échantillonnés en mars 2010 :</p>
+<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;on sait déjà que cette taille vaut 3.9 millimètres en mars 2010.</p></li></div><p>L’abondance d’une cohorte est obtenue en multipliant la valeur de <code>pi</code> de la cohorte d’intérêt par le nombre total d’individus échantillonnés en mars 2010. En effet, sur la <a href="#fig-ajustement">Figure&nbsp;<span>4.5</span></a>, la surface totale comprise entre l’axe des abscisses et la courbe verte vaut 1. Cette surface correspond au nombre total d’individus échantillonnés en mars 2010 :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Nas_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -962,7 +968,7 @@ Attention !
 </section>
 <section id="relation-allométrique" class="level2 page-columns page-full" data-number="4.13">
 <h2 data-number="4.13" class="anchored" data-anchor-id="relation-allométrique"><span class="header-section-number">4.13</span> Relation allométrique</h2>
-<p>L’un des objectifs de ce travail était de produire une courbe d’Allen pour étudier les <strong>variations de biomasses</strong>. Pour y parvenir, nous devons faire une courbe d’Allen sur laquelle figure la masse moyenne des individus de la cohorte d’intérêt (en grammes), plutôt que la taille moyenne des individus de cette cohorte (en millimètres). Pour passer des tailles en millimètres aux masses en grammes, il nous suffit d’appliquer la relation allométrique fournie dans la <a href="#sec-pres"><span class="quarto-unresolved-ref">sec-pres</span></a>, et d’ajouter une nouvelle colonne à notre tableau grâce à la fonction <code>mutate()</code> :</p>
+<p>L’un des objectifs de ce travail était de produire une courbe d’Allen pour étudier les <strong>variations de biomasses</strong>. Pour y parvenir, nous devons faire une courbe d’Allen sur laquelle figure la masse moyenne des individus de la cohorte d’intérêt (en grammes), plutôt que la taille moyenne des individus de cette cohorte (en millimètres). Pour passer des tailles en millimètres aux masses en grammes, il nous suffit d’appliquer la relation allométrique fournie dans la <a href="#sec-pres"><span>Section&nbsp;4.2</span></a>, et d’ajouter une nouvelle colonne à notre tableau grâce à la fonction <code>mutate()</code> :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="ot">&lt;-</span> cohort <span class="sc">%&gt;%</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> <span class="fl">0.0013</span> <span class="sc">*</span> size <span class="sc">^</span> <span class="fl">2.3</span>)</span>
@@ -1006,7 +1012,7 @@ Attention !
 <p>Bon courage !</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-R-mixdist" class="csl-entry" role="listitem">
 Macdonald, Peter, et with contributions from Juan Du. 2018. <em>mixdist: Finite Mixture Distribution Models</em>. <a href="https://CRAN.R-project.org/package=mixdist">https://CRAN.R-project.org/package=mixdist</a>.
 </div>

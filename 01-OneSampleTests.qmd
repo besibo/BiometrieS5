@@ -615,7 +615,7 @@ Mais nous avons aussi abordé des notions statistiques essentielles pour la suit
 
 Assurez-vous d'avoir les idées claires sur toutes ces notion car elles sont absolument centrales pour ne pas faire/dire de bêtises lorsque l'on analyse des données.
 
-## Exercice d'application
+## Exercice d'application {#sec-exo1}
 
 [Le fichier `Temperature2.csv`](data/Temperature2.csv) contient les données brutes d'une seconde étude similaire, réalisée à plus grande échelle. Importez ces données et analysez-les afin de vérifier si la température corporelle moyenne des adultes en bonne santé vaut bien 37ºC. Comme toujours, avant de vous lancer dans la réalisation des tests statistiques, prenez le temps d'examiner vos données comme nous l'avons décrit dans la @sec-eda et la @sec-edagraph, afin de savoir où vous allez, et de repérer les éventuelles données manquantes ou aberrantes. Enfin, interprétez les résultats à la lumière des notions que nous avons abordées ici (en particulier la notion de puissance statistique).
 
