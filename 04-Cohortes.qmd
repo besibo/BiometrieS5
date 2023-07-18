@@ -44,7 +44,7 @@ L'objectif principal de cette étude est de produire la courbe d'Allen d'une coh
 
 ## Avant de vous lancer...
 
-Pour travailler dans de bonnes conditions, vous aurez absolument besoin de travailler dans un script et à l'intérieur d'un `Rproject`. Si vous ne savez plus comment faire, reportez-vous aux chapitrex correspondants du livre en ligne de Biométrie du semestre 3 : [au sujet des scripts](https://besibo.github.io/BiometrieS3/01-R-basics.html#sec-script) et [au sujet des `Rprojects`](https://besibo.github.io/BiometrieS3/01-R-basics.html#les-projets-ou-rprojects). Vous devrez notamment (liste non exhaustive !) :
+Pour travailler dans de bonnes conditions, vous aurez absolument besoin de travailler dans un script et à l'intérieur d'un `Rproject`. Si vous ne savez plus comment faire, reportez-vous aux chapitres correspondants du livre en ligne de Biométrie du semestre 3 : [au sujet des scripts](https://besibo.github.io/BiometrieS3/01-R-basics.html#sec-script) et [au sujet des `Rprojects`](https://besibo.github.io/BiometrieS3/01-R-basics.html#les-projets-ou-rprojects). Vous devrez notamment (liste non exhaustive !) :
 
 1. Créer un nouveau script (nommez-le `Nasses.R`)
 1. Télécharger (si besoin) et charger quelques packages (voir plus bas)
