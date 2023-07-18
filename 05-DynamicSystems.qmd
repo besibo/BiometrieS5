@@ -681,7 +681,7 @@ Essayez de coder ce système et de produire une figure telle que la @fig-3spe.
 #| echo: false
 #| message: false
 #| warning: false
-#| fig-cap: "Évolution de l'abondance de 3 espèces : 2 espèces de proies en compétition et une espèce prédatrice."
+#| fig-cap: "Évolution de l'abondance de 2 espèces de proies en compétition et d'une espèce prédatrice. Ici, les 2 espèces de proies ont les mêmes caractéristiques démographiques et sont peu compétitives. Le prédateur a un impact plus important sur l'espèce de proie 2 (abondance Y) et conduit donc à son extinction."
 #| label: fig-3spe
 #| fig-asp: 0.5
 #| cap-location: margin
