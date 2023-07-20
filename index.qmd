@@ -5,7 +5,7 @@
 options(replace.assign = TRUE, width = 80)
 options(repos = "http://cran.r-project.org/")
 
-list.of.packages <- c("readxl", "nycflights13", "gapminder", "knitr", "tidyverse", "gridExtra", "devtools", "extrafont", "kableExtra", "skimr", "bindrcpp", "car", "DescTools", "bookdown", "datasauRus", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic", "confintr", "mixdist")
+list.of.packages <- c("readxl", "nycflights13", "gapminder", "knitr", "tidyverse", "gridExtra", "devtools", "extrafont", "kableExtra", "skimr", "bindrcpp", "car", "DescTools", "bookdown", "datasauRus", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic", "confintr", "mixdist", "scales")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
@@ -28,7 +28,7 @@ opts_chunk$set(fig.path = 'figure/', cache.path = 'cache/', tidy = FALSE,
 knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown', 
                    'quarto', 'tidyverse', 'ggplot2', 'gridExtra', 'skimr', 
                    'bindrcpp', 'tidyr', 'dplyr', 'readr', "car", "readxl",
-                   "broom", "DescTools", "patchwork", "fontawesome", 
+                   "broom", "DescTools", "patchwork", "fontawesome", "scales",
                    "palmerpenguins", "confintr", "ggmosaic", "mixdist", "nycflights13"), 'packages.bib')
 
 system("cat book.bib packages.bib > all.bib")

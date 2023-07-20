@@ -30,7 +30,6 @@ Si vous êtes dans une nouvelle session de travail (ou que vous avez quitté pui
 #| message: false
 
 library(tidyverse)
-library(skimr)
 ```
 
 Nous n'aurons pas besoin ici d'importer de données depuis des fichiers externes : nous allons en effet générer directement des données à partir de différents modèles démographiques vus en cours.
