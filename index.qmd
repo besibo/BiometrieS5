@@ -117,7 +117,7 @@ Je vous laisse donc une grande liberté d'organisation. À vous d'en tirer le ma
 
 ### Utilisation de Slack {-}
 
-Outre les séances de permanence non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un "twitter privé". Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, [cliquez sur ce lien](https://join.slack.com/t/l3sv22-23ecoutil/shared_invite/zt-1hmldkjae-Y9VADlxH~iM5u3PPMUF9_A) pour vous connecter à notre espace de travail commun intitulé `L3 SV 23-24 / EC outils` (ce lien expire régulièrement : faites moi signe s'il n'est plus valide). 
+Outre les séances de permanence non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un "twitter privé". Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, [cliquez sur ce lien](https://join.slack.com/t/slack-po99369/shared_invite/zt-25dfhwcur-zHt2lC0_oYIXkXt272MOgQ) pour vous connecter à notre espace de travail commun intitulé `L3 SV 23-24 / EC outils` (ce lien expire régulièrement : faites moi signe s'il n'est plus valide). 
 
 Vous verrez que 3 "chaînes" sont disponibles :
 
