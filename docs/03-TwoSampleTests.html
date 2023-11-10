@@ -370,9 +370,9 @@ div.csl-indent {
 </ol>
 <p>Nous pouvons facilement réaliser les 3 modifications d’un coup, et stokcer le résultat dans un nouveau tableau <code>Lizard</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="ot">&lt;-</span> Lizard_raw <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Survival =</span> <span class="fu">factor</span>(Survival)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Horn_len =</span> squamosalHornLength) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="ot">&lt;-</span> Lizard_raw <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Survival =</span> <span class="fu">factor</span>(Survival)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Horn_len =</span> squamosalHornLength) <span class="sc">|&gt;</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Horn_len))</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>Lizard</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -405,20 +405,20 @@ div.csl-indent {
 <h2 data-number="3.4" class="anchored" data-anchor-id="exploration-statistique-des-données"><span class="header-section-number">3.4</span> Exploration statistique des données</h2>
 <p>Comme dans le <a href="02-TwoSamplePairedTests.html"><span>Chapitre&nbsp;2</span></a> sur les données appariées, les statistiques descriptives doivent ici être réalisées pour chaque groupe d’individus, et non tous groupes confondus. Ici, le plus simple est d’utiliser la fonction <code>skim()</code> sur les données groupées par niveau du facteur <code>Survival</code> (avec la fonction <code>group_by()</code>) :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Survival) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Survival) <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>── Data Summary ────────────────────────
-                           Values    
-Name                       Piped data
-Number of rows             184       
-Number of columns          2         
-_______________________              
-Column type frequency:               
-  numeric                  1         
-________________________             
-Group variables            Survival  
+                           Values                      
+Name                       group_by(Lizard, Survival...
+Number of rows             184                         
+Number of columns          2                           
+_______________________                                
+Column type frequency:                                 
+  numeric                  1                           
+________________________                               
+Group variables            Survival                    
 
 ── Variable type: numeric ──────────────────────────────────────────────────────
   skim_variable Survival n_missing complete_rate mean   sd   p0  p25  p50  p75
@@ -433,7 +433,7 @@ Group variables            Survival
 <p>Enfin, les histogrammes très simplifiés fournis laissent penser que les données de chaque groupe ne s’écartent pas trop fortement d’une courbe en cloche.</p>
 <p>Outre ces informations sur les ordres de grandeurs observés dans chaque groupe de lézards pour les indices de <strong>position</strong> (moyennes, médianes et quartiles), et de <strong>dispersion</strong> (écarts-types et histogrammes), la fonction <code>skim()</code> ne fournit pas les effectifs observés dans chaque groupe. On sait qu’il y a en tout 184 individus, mais on ne sait pas comment ils se répartissent dans les 2 groupes de lézards. Pour le déterminer, on peut utiliser une fonction décrite plus tôt, la fonction <code>count()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Survival)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
@@ -445,7 +445,7 @@ Group variables            Survival
 </div>
 <p>On peut obtenir la même information avec la fonction <code>summarise()</code> et son argument <code>.by</code>, et la fonction <code>n()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Effectif =</span> <span class="fu">n</span>(), <span class="at">.by =</span> Survival)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
@@ -458,7 +458,7 @@ Group variables            Survival
 <p>On constate ici que les tailles d’échantillons sont très différentes. C’est normal compte tenu de la difficulté de repérer des individus morts dans la nature, et ce n’est pas gênant pour nos analyses puisque la taille des deux échantillons reste élevée.</p>
 <p>Enfin, on peut calculer des indices d’incertitude. C’est d’autant plus important qu’il est difficile de se faire une idée de la signification d’une différence moyenne de longueur de cornes de 2 millimètres. Est-ce important ou négligeable ? Est-ce que ces estimations sont précises ou non ? Comme dans les chapitres précédents, nous allons calculer les intervalles de confiance à 95% de la moyenne de chaque groupe :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="fu">mean_cl_normal</span>(Horn_len), <span class="at">.by =</span> Survival)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
@@ -476,7 +476,7 @@ Group variables            Survival
 <section id="avec-un-stripchart" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="avec-un-stripchart"><span class="header-section-number">3.5.1</span> Avec un stripchart</h3>
 <div class="cell" data-layout-align="center" data-fig.asp="1.5">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Survival, <span class="at">y =</span> Horn_len)) <span class="sc">+</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Groupe de lézards"</span>,</span>
@@ -495,7 +495,7 @@ Group variables            Survival
 <section id="sec-histofacet" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="sec-histofacet"><span class="header-section-number">3.5.2</span> Avec des histogrammes facettés</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Horn_len)) <span class="sc">+</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">15</span>, <span class="at">fill =</span> <span class="st">"firebrick2"</span>, <span class="at">color =</span> <span class="st">"grey20"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>() <span class="sc">+</span></span>
@@ -514,7 +514,7 @@ Group variables            Survival
 <section id="sec-densfacet" class="level3" data-number="3.5.3">
 <h3 data-number="3.5.3" class="anchored" data-anchor-id="sec-densfacet"><span class="header-section-number">3.5.3</span> Avec des diagrammes de densité facettés</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Horn_len)) <span class="sc">+</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"firebrick2"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>() <span class="sc">+</span></span>
@@ -533,7 +533,7 @@ Group variables            Survival
 <section id="avec-des-boites-à-moustaches" class="level3" data-number="3.5.4">
 <h3 data-number="3.5.4" class="anchored" data-anchor-id="avec-des-boites-à-moustaches"><span class="header-section-number">3.5.4</span> Avec des boites à moustaches</h3>
 <div class="cell" data-layout-align="center" data-fig.asp="1.5">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Survival, <span class="at">y =</span> Horn_len)) <span class="sc">+</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Groupe de lézards"</span>,</span>
@@ -551,7 +551,7 @@ Group variables            Survival
 <p>Nous visualisons ici encore plus clairement que sur les histogrammes le fait que les longueurs de cornes des individus vivants sont légèrement plus longues que celles des individus morts. D’ailleurs, puisque les intervalles de confiance à 95% des médianes des 2 groupes (les encoches) ne se chevauchent pas, un test de comparaison des moyennes devrait logiquement conclure à une différence significative en faveur des individus vivants. On peut également noter que la largeur de l’encoche pour les individus morts est plus importante que celle des vivants. Cela traduit une incertitude plus grande autour de la médiane estimée dans le groupe des individus morts. C’est tout à fait logique compte tenu des effectifs plus faibles dans ce groupe.</p>
 <p>Enfin, il est tout à fait possible de représenter sur le même graphique les boîtes à moustaches et les données brutes sous forme de stripchart. On a ainsi à la fois (i) une visualisation simplifiée de la position et de la dispersion des données avec les boîtes à moustache, et (ii) accès à l’ensemble des données brutes, ce qui permet parfois de voir des structures invisibles sur les boîtes à moustaches (regroupement de points par exemples). Afin de ne pas dupliquer les valeurs les plus extrêmes du jeu de données, nous indiquerons à <code>geom_boxplot()</code> de ne pas afficher les outliers sur le graphique : tous les points seront en effet déjà affichés par <code>geom_jitter()</code> :</p>
 <div class="cell" data-layout-align="center" data-fig.asp="1.5">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Survival, <span class="at">y =</span> Horn_len, <span class="at">fill =</span> Survival)) <span class="sc">+</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"grey20"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">outlier.color =</span> <span class="cn">NA</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
@@ -627,15 +627,15 @@ La procédure à suivre
 <li>H<span class="math inline">\(_1\)</span> : la taille des cornes ne suit pas une distribution Normale dans la population des lézards cornus morts.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Survival <span class="sc">==</span> <span class="st">"killed"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Horn_len) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Survival <span class="sc">==</span> <span class="st">"killed"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Horn_len) <span class="sc">|&gt;</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
-data:  .
+data:  pull(filter(Lizard, Survival == "killed"), Horn_len)
 W = 0.93452, p-value = 0.06482</code></pre>
 </div>
 </div>
@@ -648,15 +648,15 @@ W = 0.93452, p-value = 0.06482</code></pre>
 <li>H<span class="math inline">\(_1\)</span> : la taille des cornes ne suit pas une distribution Normale dans la population des lézards cornus vivants.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Survival <span class="sc">==</span> <span class="st">"living"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Horn_len) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Survival <span class="sc">==</span> <span class="st">"living"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Horn_len) <span class="sc">|&gt;</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
-data:  .
+data:  pull(filter(Lizard, Survival == "living"), Horn_len)
 W = 0.96055, p-value = 0.0002234</code></pre>
 </div>
 </div>
@@ -1008,7 +1008,7 @@ Levels: killed living</code></pre>
 </div>
 <p>Faites donc toujours attention à l’ordre des catégories de vos facteurs pour ne pas vous tromper. Une façon simple de vérifier cet ordre et d’observer vos graphiques (par exemple, les boîtes à moustaches). L’ordre dans lequel les catégories apparaissent sur l’axe des <code>x</code> reflète l’ordre des catégorie du facteur porté par cet axe :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>Lizard <span class="sc">|&gt;</span> </span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Survival, <span class="at">y =</span> Horn_len)) <span class="sc">+</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">

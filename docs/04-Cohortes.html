@@ -359,7 +359,7 @@ Objectif principal
 </div>
 <p>Et la commande suivante devrait produire exactement ces résultats :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Nassarius <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Nassarius <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(date)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
@@ -379,7 +379,7 @@ Objectif principal
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><code>%&gt;%</code> : le pipe est un opérateur spécial qui prend l’objet situé à gauche et le transmets à la fonction placée à droite, en guise de premier argument. P. ex. : <code>Nassarius %&gt;% count(date)</code> est équivalent à <code>count(Nassarius, date)</code><br>
+<p><code>|&gt;</code> : le pipe est un opérateur spécial qui prend l’objet situé à gauche et le transmets à la fonction placée à droite, en guise de premier argument. P. ex. : <code>Nassarius |&gt; count(date)</code> est équivalent à <code>count(Nassarius, date)</code><br>
 <br> <code>count()</code> : compte le nombre d’occurrences de chaque valeur possible (ou niveau/modalité) d’une variable catégorielle (ou facteur).</p>
 </div></div></section>
 <section id="les-étapes-de-lanalyse" class="level2" data-number="4.4">
@@ -397,7 +397,7 @@ Objectif principal
 <h2 data-number="4.5" class="anchored" data-anchor-id="sélection-des-données-dune-date-spécifique"><span class="header-section-number">4.5</span> Sélection des données d’une date spécifique</h2>
 <p>Notre jeu de données <code>Nassrisu</code> contient 2 colonnes : la première contient les dates d’échantillonnage et la seconde les tailles individuelles en millimètres. La première étape consiste à créer un nouvel objet (nous le nommerons <code>Nas_01</code>) qui contiendra uniquement les données collectées lors de la toute première session d’échantillonnage de mars 2010. Vous devriez déjà savoir comment utiliser la fonction <code>filter()</code> pour le faire :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="ot">&lt;-</span> Nassarius <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="ot">&lt;-</span> Nassarius <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">==</span> <span class="st">"march-10"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Nas_01</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -440,7 +440,7 @@ Objectif principal
 <h2 data-number="4.6" class="anchored" data-anchor-id="structure-démographique-instantanée"><span class="header-section-number">4.6</span> Structure démographique instantanée</h2>
 <p>Maintenant que nous disposons d’une table <code>Nas_01</code> qui contient uniquement la taille des individus collectés en mars 2010, il nous faut visualiser la structure démographique instantanée afin de déterminer combien de cohortes étaient présentes dans la population à cette date. La structure démographique instantanée est ici simplement un histogramme présentant la distribution des tailles individuelles. Nous allons donc placer la taille des individus sur l’axe des <code>x</code> en guise de descripteur individuel, et sur l’axe des <code>y</code>, <code>RStudio</code> placera automatiquement l’abondance pour chaque classe de taille en guise de descripteur populationel.</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size)) <span class="sc">+</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -488,7 +488,7 @@ Objectif principal
 </div></div><p>L’objet <code>limites</code> contient les limites des classes de tailles que nous utiliserons pour produire les structures démographiques instantanées, pour chaque date d’échantillonnage, et pas seulement pour mars 2010. C’est la raison pour nous avons utilisé <code>max(Nassarius$size) +1</code> : cette syntaxe nous assure que nos classes de tailles recouvrent bien la taille de tous les individus échantillonnés au cours des 5 années d’études. Ainsi, nous pourrons utiliser les mêmes classes de tailles pour toutes les dates.</p>
 <p>Maintenant, on peut utiliser le vecteur <code>limites</code> comme argument de la fonction <code>geom_histogram()</code>. On modifie aussi les couleurs des barres de l’histogramme pour mieux visualiser les classes :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size)) <span class="sc">+</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> limites, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
@@ -873,7 +873,7 @@ Attention !
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ce package fait partie du tidyverse</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Si vous l'avez installé, lubridate est disponible sur votre ordinateur</span></span>
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>cohort <span class="ot">&lt;-</span> cohort <span class="sc">%&gt;%</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>cohort <span class="ot">&lt;-</span> cohort <span class="sc">|&gt;</span></span>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">date</span>(date))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
@@ -896,7 +896,7 @@ Attention !
 <h2 data-number="4.10" class="anchored" data-anchor-id="courbe-de-croissance"><span class="header-section-number">4.10</span> Courbe de croissance</h2>
 <p>On place les dates d’échantillonnage sur l’axe des abscisses, et la taille moyennes des individus de la cohorte d’intérêt sur l’axe des ordonnées :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">|&gt;</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> size, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -926,7 +926,7 @@ Attention !
 <h2 data-number="4.11" class="anchored" data-anchor-id="courbe-de-survie"><span class="header-section-number">4.11</span> Courbe de survie</h2>
 <p>Pour produire la courbe de survie, on procède de la même façon, mais on place les dates d’échantillonnage sur l’axe des abscisses, et l’abondance de la cohorte d’intérêt sur l’axe des ordonnées :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">|&gt;</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -948,7 +948,7 @@ Attention !
 <h2 data-number="4.12" class="anchored" data-anchor-id="courbe-dallen"><span class="header-section-number">4.12</span> Courbe d’Allen</h2>
 <p>Pour produire la courbe de survie, on place la taille moyenne des individus de la cohorte sur l’axe des abscisses, et l’abondance de la cohorte d’intérêt sur l’axe des ordonnées :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">|&gt;</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -970,7 +970,7 @@ Attention !
 <h2 data-number="4.13" class="anchored" data-anchor-id="relation-allométrique"><span class="header-section-number">4.13</span> Relation allométrique</h2>
 <p>L’un des objectifs de ce travail était de produire une courbe d’Allen pour étudier les <strong>variations de biomasses</strong>. Pour y parvenir, nous devons faire une courbe d’Allen sur laquelle figure la masse moyenne des individus de la cohorte d’intérêt (en grammes), plutôt que la taille moyenne des individus de cette cohorte (en millimètres). Pour passer des tailles en millimètres aux masses en grammes, il nous suffit d’appliquer la relation allométrique fournie dans la <a href="#sec-pres"><span>Section&nbsp;4.2</span></a>, et d’ajouter une nouvelle colonne à notre tableau grâce à la fonction <code>mutate()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="ot">&lt;-</span> cohort <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="ot">&lt;-</span> cohort <span class="sc">|&gt;</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> <span class="fl">0.0013</span> <span class="sc">*</span> size <span class="sc">^</span> <span class="fl">2.3</span>)</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>cohort_2</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -983,7 +983,7 @@ Attention !
 </div>
 <p>Il n’y a plus qu’à utiliser cette nouvelle variable sur l’axe des abscisses d’une courbe d’Allen :</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="sc">|&gt;</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>

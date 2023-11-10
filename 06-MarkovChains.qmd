@@ -250,17 +250,17 @@ for (i in 2:(dur + 1)) {
 }
 
 # 7. Transformation de res en tibble
-res_tbl <- as_tibble(res) %>% 
+res_tbl <- as_tibble(res) |> 
   mutate(Temps = 0:dur)
 
 # 8. Transformation de res_tbl au format long
-res_lg <- res_tbl %>% 
+res_lg <- res_tbl |> 
   pivot_longer(cols = -Temps,
                names_to = "Communauté",
                values_to = "Proportion")
 
 # 9. Représentation graphique
-res_lg %>% 
+res_lg |> 
   ggplot(aes(x = Temps, y = Proportion, color = Communauté)) +
   geom_line() +
   geom_point() +

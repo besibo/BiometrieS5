@@ -180,7 +180,7 @@ Visualisez ces données avec `ggplot2`. Votre graphique devrait ressembler à ce
 #| cap-location: margin
 
 # 5. Représentation graphique
-res %>% 
+res |> 
   ggplot(aes(x = Generation, y = N)) +
     geom_line() +
     geom_point() +
@@ -244,7 +244,7 @@ res
 #| cap-location: margin
 
 # 5. Représentation graphique
-res %>% 
+res |> 
   ggplot(aes(x = Generation, y = N)) +
     geom_line() +
     geom_point() +
@@ -316,7 +316,7 @@ res
 #| cap-location: margin
 
 # 5. Représentation graphique
-res %>% 
+res |> 
   ggplot(aes(x = Generation, y = N)) +
     geom_line() +
     geom_point() +
@@ -415,7 +415,7 @@ for (i in 2:(duration + 1)) {
 # 4. Mise en forme des résultats et représentation graphique
 res <- tibble(Generation = 0:duration, X, Y)
 
-res %>% 
+res |> 
   ggplot(aes(x = X, y = Y)) +
   geom_path() +
   geom_point() +
@@ -435,7 +435,7 @@ Pour faire ce graphique, vous aurez besoin d'utiliser la fonction `geom_path()` 
 #| message: false
 #| warning: false
 
-res %>% 
+res |> 
   ggplot(aes(x = X, y = Y)) +
   geom_line() +
   geom_point() +
@@ -458,12 +458,12 @@ Enfin, pour mieux visualiser la dynamique de ces deux populations au cours du te
 #| label: fig-volterra
 #| cap-location: margin
 
-res_long <- res %>%
+res_long <- res |>
   pivot_longer(cols = -Generation,
                names_to = "Espece",
                values_to = "Abondance")
 
-res_long %>%
+res_long |>
   ggplot(aes(x = Generation, y = Abondance, color = Espece)) +
   geom_line() +
   geom_point(size = 0.7) +
@@ -554,7 +554,7 @@ res2a <- compet(c12 = 0.03, c21 = 0.03, duration = 60)
 res2b <- compet(X0 = 4, c12 = 0.03, c21 = 0.03, duration = 60)
 res2c <- compet(X0 = 6, c12 = 0.03, c21 = 0.03, duration = 60)
 
-pl2a <- res2a %>% 
+pl2a <- res2a |> 
   ggplot(aes(X, Y)) +
   geom_path() +
   geom_point() +
@@ -566,7 +566,7 @@ pl2a <- res2a %>%
   scale_x_continuous(breaks = seq(0,10,2), limits = c(0, 10)) +
   scale_y_continuous(breaks = seq(0,10,2), limits = c(0, 10))
 
-pl2b <- res2b %>% 
+pl2b <- res2b |> 
   ggplot(aes(X, Y)) +
   geom_path() +
   geom_point() +
@@ -578,7 +578,7 @@ pl2b <- res2b %>%
   scale_x_continuous(breaks = seq(0,10,2), limits = c(0, 10)) +
   scale_y_continuous(breaks = seq(0,10,2), limits = c(0, 10))
 
-pl2c <- res2c %>% 
+pl2c <- res2c |> 
   ggplot(aes(X, Y)) +
   geom_path() +
   geom_point() +
@@ -611,7 +611,7 @@ res3 <- compet(X0 = 1, c21 = 0.03, duration = 50)
 res4 <- compet(Y0 = 1, c12 = 0.03, duration = 50)
 
 
-pl1 <- res1 %>% 
+pl1 <- res1 |> 
   ggplot(aes(X, Y)) +
   geom_path() +
   geom_point() +
@@ -622,7 +622,7 @@ pl1 <- res1 %>%
        subtitle = "2 Esp peu compétitives")
 
 
-pl3 <- res3 %>% 
+pl3 <- res3 |> 
   ggplot(aes(X, Y)) +
   geom_path() +
   geom_point() +
@@ -632,7 +632,7 @@ pl3 <- res3 %>%
        y = "Abondance E2 (Y)",
        subtitle = "E1 + compétitive que E2")
 
-pl4 <- res4 %>% 
+pl4 <- res4 |> 
   ggplot(aes(X, Y)) +
   geom_path() +
   geom_point() +
@@ -721,12 +721,12 @@ for (i in 2:(duration + 1)) {
 # 4. Mise en forme des résultats et représentation graphique
 res <- tibble(Generation = 0:duration, X, Y, Z)
 
-res_long <- res %>% 
+res_long <- res |> 
   pivot_longer(cols = c(X, Y, Z),
                names_to = "Espece",
                values_to = "Abondance")
 
-res_long %>% 
+res_long |> 
   ggplot(aes(x = Generation, y = Abondance, color = Espece)) +
   geom_line() +
   geom_point(size = 0.5) +

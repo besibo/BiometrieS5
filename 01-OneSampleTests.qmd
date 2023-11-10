@@ -102,8 +102,8 @@ Cette commande ouvre un nouvel onglet présentant les données dans un tableur s
 $$ºC = \frac{ºF - 32}{1.8}$$
 
 ```{r}
-Temp_clean <- Temperature %>%
-  select(-individual) %>%      # Suppression de la colonne `individual`
+Temp_clean <- Temperature |>
+  select(-individual) |>      # Suppression de la colonne `individual`
   mutate(                      # Transformation des températures en ºCelsius
     temperature = (temperature - 32) / 1.8
     )
@@ -147,7 +147,7 @@ La moyenne observée dans l'échantillon vaut `r round(mean(Temp_clean$temperatu
 Une autre fonction utile est la fonction `IQR()`, qui renvoie l'étendue de l'intervalle interquartile (la valeur du troisième quartile moins la valeur de premier quartile) :
 
 ```{r}
-Temp_clean %>%
+Temp_clean |>
   summarise(IQ_range = IQR(temperature))
 ```
 
@@ -174,15 +174,15 @@ Outre ces 3 fonctions (`summary()`, `IQR()`, et `skim()`), il est bien sûr poss
 Toutes ces fonctions prennent seulement un vecteur en guise d'argument. Il faut donc procéder comme avec `IQR()` pour les utiliser, en les intégrant à l'intérieur de la fonction `summarise()`. Par exemple, pour calculer la variance, on peut taper :
 
 ```{r}
-Temp_clean %>% 
+Temp_clean |> 
   summarise(variance = var(temperature))
 ```
 
 ou :
 
 ```{r}
-Temp_clean %>%
-  pull(temperature) %>%
+Temp_clean |>
+  pull(temperature) |>
   var()
 ```
 
@@ -199,7 +199,7 @@ var(Temp_clean$temperature)
 Outre les informations de position et de dispersion, nous avons vu [au semestre 4](https://besibo.github.io/BiometrieS4/02-incertitude.html#la-notion-dincertitude) qu'il était également important d'avoir une idée de l'**incertitude** associée aux estimations de tendance centrale (erreur standard ou intervalle de confiance de la moyenne ou médiane). Ici, nous allons donc calculer l'intervalle de confiance à 95% de la moyenne. Si vous ne savez plus comment faire, ou que vous ne comprenez pas le code ci-dessous, consultez [le livre en ligne du semestre 4](https://besibo.github.io/BiometrieS4/02-incertitude.html#sec-confint) :
 
 ```{r}
-Temp_clean %>% 
+Temp_clean |> 
   reframe(mean_cl_normal(temperature))
 ```
 
@@ -215,7 +215,7 @@ Ici, puisque nous ne disposons que d'une unique variable numérique et que nous 
 Voilà comment produire un histogramme de qualité pour les données de températures :
 
 ```{r}
-Temp_clean %>%
+Temp_clean |>
   ggplot(aes(x = temperature)) +
   geom_histogram(bins = 10, fill = "firebrick2", color = "grey20", 
                  alpha = 0.5) +
@@ -236,7 +236,7 @@ Ici, la forme de ce l'histogramme est assez proche de celle présentée plus tô
 Une autre façon de visualiser la distribution d'une variable numérique est de produire un graphique de densité. Il a l'avantage d'éviter à l'utilisateur d'avoir à choisir une valeur pour l'argument `bin` de la fonction `geom_histogram()`, mais il a l'inconvénient de présenter une échelle plus difficile à comprendre pour l'axe des ordonnées :
 
 ```{r}
-Temp_clean %>%
+Temp_clean |>
   ggplot(aes(x = temperature)) +
   geom_density(fill = "firebrick2", alpha = 0.5) +
   geom_rug() +
@@ -254,7 +254,7 @@ Les informations apportées par ce graphique sont cohérentes avec celle de l'hi
 <!-- 3. Les boîtes à moustaches : -->
 
 <!-- ```{r, fig.asp = 1.5, out.width = '25%', fig.width = 2} -->
-<!-- Temp_clean %>% -->
+<!-- Temp_clean |> -->
 <!--   ggplot(aes(y = temperature)) + -->
 <!--   geom_boxplot(notch = TRUE) -->
 <!-- ``` -->
@@ -262,7 +262,7 @@ Les informations apportées par ce graphique sont cohérentes avec celle de l'hi
 <!-- Comme pour le stripchart présenté plus haut, l'axe des abscisses n'a ici aucun sens. Nous n'avons qu'une unique série de données, l'axe des `x` est donc inutile et nous pouvons donc le retirer : -->
 
 <!-- ```{r, fig.asp = 1.5, out.width = '25%', fig.width = 2} -->
-<!-- Temp_clean %>% -->
+<!-- Temp_clean |> -->
 <!--   ggplot(aes(y = temperature)) + -->
 <!--   geom_boxplot(notch = TRUE) + -->
 <!--   theme(axis.text.x = element_blank(), -->
@@ -277,19 +277,19 @@ Les informations apportées par ce graphique sont cohérentes avec celle de l'hi
 <!-- ```{r compdistr, warning = FALSE, message = FALSE, echo=FALSE, fig.cap="Comparaison de 2 types de représentations graphiques"} -->
 <!-- library(patchwork) -->
 
-<!-- pl1 <- Temp_clean %>% -->
+<!-- pl1 <- Temp_clean |> -->
 <!--   ggplot(aes(y = temperature)) + -->
 <!--     geom_histogram(bins = 10) + -->
 <!--     expand_limits(y = c(36.25, 37.8)) -->
 
-<!-- pl2 <- Temp_clean %>% -->
+<!-- pl2 <- Temp_clean |> -->
 <!--   ggplot(aes(y = temperature)) + -->
 <!--     geom_boxplot(notch = TRUE) + -->
 <!--     expand_limits(y = c(36.08, 37.8)) + -->
 <!--     theme(axis.text.x = element_blank(), -->
 <!--           axis.ticks.x = element_blank()) -->
 
-<!-- pl3 <- Temp_clean %>% -->
+<!-- pl3 <- Temp_clean |> -->
 <!--   ggplot(aes(x = 1, y = temperature)) + -->
 <!--     geom_jitter(width = 0.2, height = 0) + -->
 <!--     expand_limits(y = c(36.08, 37.8)) + -->
@@ -352,8 +352,8 @@ shapiro.test(Temp_clean$temperature)
 ou
 
 ```{r}
-Temp_clean %>%
-  pull(temperature) %>%
+Temp_clean |>
+  pull(temperature) |>
   shapiro.test()
 ```
 
@@ -389,7 +389,7 @@ Dans notre cas, l'écart entre la loi Normale et les données de notre échantil
 ```{r}
 #| echo: false
 
-Temp_clean %>%
+Temp_clean |>
   ggplot(aes(x = temperature)) +
   geom_density(fill = "firebrick2", alpha = 0.5) +
   stat_function(fun = dnorm, 
@@ -412,11 +412,11 @@ Pour bien comprendre cette notion importante, je simule ci-dessous 36 échantill
 #| fig-asp: 1
 
 set.seed(1238)
-tibble(rep = 1:36) %>% 
-  mutate(temperature = map(rep, ~rnorm(25, 98.5, 0.678))) %>% 
-  unnest(cols = temperature) %>%
+tibble(rep = 1:36) |> 
+  mutate(temperature = map(rep, ~rnorm(25, 98.5, 0.678))) |> 
+  unnest(cols = temperature) |>
   mutate(temperature = round(temperature, 1),
-         temperature = (temperature - 32) / 1.8) %>% 
+         temperature = (temperature - 32) / 1.8) |> 
   ggplot(aes(x = temperature)) +
   geom_density(fill = "firebrick2", alpha = 0.5) +
   geom_rug() +
@@ -439,11 +439,11 @@ On voit bien ici que certains échantillons s'écartent fortement de la distribu
 #| fig-asp: 1
 
 set.seed(1238)
-tibble(rep = 1:36) %>% 
-  mutate(temperature = map(rep, ~rnorm(15, 98.5, 0.678))) %>% 
-  unnest(cols = temperature) %>%
+tibble(rep = 1:36) |> 
+  mutate(temperature = map(rep, ~rnorm(15, 98.5, 0.678))) |> 
+  unnest(cols = temperature) |>
   mutate(temperature = round(temperature, 1),
-         temperature = (temperature - 32) / 1.8) %>% 
+         temperature = (temperature - 32) / 1.8) |> 
   ggplot(aes(x = temperature)) +
   geom_density(fill = "firebrick2", alpha = 0.5) +
   geom_rug() +
@@ -499,8 +499,8 @@ t.test(temperature ~ 1, mu = 37, data = Temp_clean)
 ou encore, 
 
 ```{r}
-Temp_clean %>%
-  pull(temperature) %>%
+Temp_clean |>
+  pull(temperature) |>
   t.test(mu = 37)
 ```
 
@@ -536,8 +536,8 @@ wilcox.test(temperature ~ 1, mu = 37, conf.int = TRUE, data = Temp_clean)
 ou encore
 
 ```{r}
-Temp_clean %>%
-  pull(temperature) %>%
+Temp_clean |>
+  pull(temperature) |>
   wilcox.test(mu = 37, conf.int = TRUE)
 ```
 

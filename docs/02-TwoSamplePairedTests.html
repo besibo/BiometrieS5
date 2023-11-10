@@ -287,7 +287,7 @@ div.csl-indent {
 <section id="contexte" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="contexte"><span class="header-section-number">2.2</span> Contexte</h2>
 <p>On s’intéresse ici à la comparaison de 2 séries de données dont les observations sont liées 2 à 2. C’est par exemple le cas lorsque l’on fait subir un traitement à différents sujets et que l’on souhaite comparer les mesures obtenues avant et après le traitement.</p>
-<p>Autrement dit, dans les plans d’expériences appariés, <strong>les deux traitements</strong> ou modalités <strong>sont appliqués à chaque unité d’échantillonnage</strong> : chaque sujet ou unité d’échantillonnage fournit plusieurs valeurs. Ça n’était pas le cas du chapitre précédent (@#sec-moy1) où chaque adulte n’avait fourni qu’une unique valeur de température.</p>
+<p>Autrement dit, dans les plans d’expériences appariés, <strong>les deux traitements</strong> ou modalités <strong>sont appliqués à chaque unité d’échantillonnage</strong> : chaque sujet ou unité d’échantillonnage fournit plusieurs valeurs. Ça n’était pas le cas du chapitre précédent (<a href="01-OneSampleTests.html"><span>Chapitre&nbsp;1</span></a>) où chaque adulte n’avait fourni qu’une unique valeur de température.</p>
 <p>Voici quelques exemples de situations qui devraient être traitées avec des tests sur données appariées :</p>
 <ul>
 <li>Comparaison de la masse de patients avant et après une hospitalisation.</li>
@@ -333,9 +333,9 @@ div.csl-indent {
 </div>
 <p>Visiblement, il n’y a pas de données manquantes mais certaines variables sont inutiles. En effet, nous aurons besoin des variables transformées en logarithmes, mais pas des 2 colonnes <code>beforeImplant</code> et <code>afterImplant</code>. Nous allons donc les retirer avec la fonction <code>select()</code>. Par ailleurs, la variable <code>blackbird</code> est importante puisque chaque individu a fourni 2 valeurs de production d’anticorps : 1 avant et 1 après l’opération chirurgicale. Il sera donc important de conserver cet identifiant individuel. Toutefois, il apparaît ici sous la forme d’une variable numérique alors qu’il s’agit d’un identifiant, d’un code. Il faut donc le transformer en facteur car cela n’aurait pas de sens calculer une moyenne des identifiants par exemple. Pour cela, nous utiliserons la fonction <code>factor()</code> à l’intérieur de <code>mutate()</code>. Enfin, nous renommerons les colonnes avec <code>rename()</code> pour avoir des noms plus courts et plus faciles à utiliser. Si vous ne vous rappelez plus comment utilisez ces fonctions, consulter ces chapitres du livre en ligne de biométrie du semestre 3 : <a href="https://besibo.github.io/BiometrieS3/04-DataWrangling.html#sélectionner-des-variables-avec-select"><code>select()</code> et <code>rename()</code></a>, <a href="https://besibo.github.io/BiometrieS3/04-DataWrangling.html#mutate"><code>mutate()</code> et <code>factor()</code></a>. Enfin, nous donnerons le nom <code>Testo_large</code> au tableau modifié :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="ot">&lt;-</span> Testo <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>beforeImplant, <span class="sc">-</span>afterImplant) <span class="sc">%&gt;%</span>  <span class="co"># Suppression des colonnes inutiles</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">blackbird =</span> <span class="fu">factor</span>(blackbird)) <span class="sc">%&gt;%</span>  <span class="co"># Transformation en facteur </span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="ot">&lt;-</span> Testo <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>beforeImplant, <span class="sc">-</span>afterImplant) <span class="sc">|&gt;</span>  <span class="co"># Suppression des colonnes inutiles</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">blackbird =</span> <span class="fu">factor</span>(blackbird)) <span class="sc">|&gt;</span>  <span class="co"># Transformation en facteur </span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">ID =</span> blackbird,                     <span class="co"># Changement des noms de variables</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Before =</span> logBeforeImplant,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">After =</span> logAfterImplant)</span>
@@ -373,10 +373,10 @@ div.csl-indent {
 </ul>
 <p>Pour effectuer cette transformation, nous utiliserons la fonction <code>pivot_longer()</code> du package <code>tidyr</code> (il est déjà chargé en mémoire si vous avez chargé le <code>tidyverse</code>). Comme son nom l’indique, cette fonction produira un tableau plus “long” (qui aura plus de lignes) que le tableau de départ. Nous l’appellerons donc <code>Testo_long</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="ot">&lt;-</span> Testo_large <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="ot">&lt;-</span> Testo_large <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(Before, After),   <span class="co"># Les colonnes qu'on veut réorganiser</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Moment"</span>,   <span class="co"># Quel nom donner à la variable qui contiendra les noms des anciennes colonnes</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"DO"</span>) <span class="sc">%&gt;%</span>      <span class="co"># Quel nom donner à la variable qui contiendra le contenu des anciennes colonnes</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"DO"</span>) <span class="sc">|&gt;</span>      <span class="co"># Quel nom donner à la variable qui contiendra le contenu des anciennes colonnes</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Moment =</span> <span class="fu">factor</span>(Moment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Before"</span>, <span class="st">"After"</span>)))</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>Testo_long</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -448,20 +448,20 @@ Group variables            None
 </div>
 <p>On arrive toutefois aux mêmes résultats avec le tableau long, à condition de grouper les données par traitement (variable <code>Traitement</code>) avec <code>group_by()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Moment) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Moment) <span class="sc">|&gt;</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>(DO)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>── Data Summary ────────────────────────
-                           Values    
-Name                       Piped data
-Number of rows             26        
-Number of columns          3         
-_______________________              
-Column type frequency:               
-  numeric                  1         
-________________________             
-Group variables            Moment    
+                           Values                      
+Name                       group_by(Testo_long, Mome...
+Number of rows             26                          
+Number of columns          3                           
+_______________________                                
+Column type frequency:                                 
+  numeric                  1                           
+________________________                               
+Group variables            Moment                      
 
 ── Variable type: numeric ──────────────────────────────────────────────────────
   skim_variable Moment n_missing complete_rate mean    sd   p0 p25  p50  p75
@@ -488,7 +488,7 @@ Group variables            Moment
 <section id="avec-un-stripchart" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="avec-un-stripchart"><span class="header-section-number">2.5.1</span> Avec un stripchart</h3>
 <div class="cell" data-layout-align="center" data-fig.asp="1.5">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">|&gt;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Moment, <span class="at">y =</span> DO)) <span class="sc">+</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"immunocompétence (log DO / minute)"</span>,</span>
@@ -507,7 +507,7 @@ Group variables            Moment
 <h3 data-number="2.5.2" class="anchored" data-anchor-id="avec-des-histogrammes-facettés"><span class="header-section-number">2.5.2</span> Avec des histogrammes facettés</h3>
 <p>Nous allons faire un histogramme pour chaque série de données en utilisant des facettes :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> DO)) <span class="sc">+</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"firebrick2"</span>, <span class="at">color =</span> <span class="st">"grey20"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>() <span class="sc">+</span></span>
@@ -524,7 +524,7 @@ Group variables            Moment
 <section id="avec-des-diagrammes-de-densité-facettés" class="level3" data-number="2.5.3">
 <h3 data-number="2.5.3" class="anchored" data-anchor-id="avec-des-diagrammes-de-densité-facettés"><span class="header-section-number">2.5.3</span> Avec des diagrammes de densité facettés</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">|&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> DO)) <span class="sc">+</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"firebrick2"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>() <span class="sc">+</span></span>
@@ -541,7 +541,7 @@ Group variables            Moment
 <section id="avec-des-boîtes-à-moustaches" class="level3" data-number="2.5.4">
 <h3 data-number="2.5.4" class="anchored" data-anchor-id="avec-des-boîtes-à-moustaches"><span class="header-section-number">2.5.4</span> Avec des boîtes à moustaches</h3>
 <div class="cell" data-layout-align="center" data-fig.asp="1.5">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Moment, <span class="at">y =</span> DO)) <span class="sc">+</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">y =</span> <span class="fl">5.2</span>) <span class="sc">+</span></span>
@@ -566,7 +566,7 @@ Group variables            Moment
 <h3 data-number="2.5.5" class="anchored" data-anchor-id="avec-un-nuage-de-points-appariés"><span class="header-section-number">2.5.5</span> Avec un nuage de points appariés</h3>
 <p>Toutes ces représentations graphiques sont certes utiles, mais elles masquent un élément crucial : ce sont les mêmes individus qui sont étudiés avant et après l’opération. Il s’agit de données appariées ! Les graphiques que nous avons faits jusque là ne permettent pas de visualiser ce lien entre les deux séries de données. Pour avoir une bonne vision de ce qui se passe, il nous faut faire apparaître ce lien entre les 2 séries de données :</p>
 <div class="cell" data-layout-align="center" data-fig.asp="1.5">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Testo_long <span class="sc">|&gt;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Moment, <span class="at">y =</span> DO, <span class="at">group =</span> ID, <span class="at">color =</span> ID)) <span class="sc">+</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -586,7 +586,7 @@ Group variables            Moment
 <p>Une façon d’estimer si les changements d’immunocompétence sont majoritairement orientés dans un sens ou non est de calculer l’intervalle de confiance à 95% de la différence d’immunocompétence entre avant et après l’opération. Pour cela, on peut calculer, grâce au tableau large <code>Testo_large</code>, les différences d’immunocompétences (DO après opération moins DO avant opération), pour chacun des 13 individus. puis, grâce à la fonction <code>mean_cl_normal()</code> déjà utilisée à plusieurs reprises, on calcul l’intervalle de confiance à 95% de la moyenne de cette différence :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul de la différence de DO (After - Before)</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="ot">&lt;-</span> Testo_large <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="ot">&lt;-</span> Testo_large <span class="sc">|&gt;</span> </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Difference =</span> After <span class="sc">-</span> Before)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Affichage du tableau</span></span>
@@ -610,7 +610,7 @@ Group variables            Moment
 13 13      4.93  5.01     0.0800</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul de la moyenne des différences et de son IC95%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="sc">|&gt;</span> </span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="fu">mean_cl_normal</span>(Difference))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -677,7 +677,7 @@ Attention
 </div>
 <p>Il nous faut donc tester la Normalité de la nouvelle variable <code>Difference</code>. Commençons par en faire un graphique :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Difference)) <span class="sc">+</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"firebrick2"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>() <span class="sc">+</span></span>
@@ -695,14 +695,14 @@ Attention
 <li>H<span class="math inline">\(_1\)</span> : la différence d’immunocompétence des individus ne suit pas une distribution Normale.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Difference) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Testo_large <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Difference) <span class="sc">|&gt;</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
-data:  .
+data:  pull(Testo_large, Difference)
 W = 0.97949, p-value = 0.977</code></pre>
 </div>
 </div>

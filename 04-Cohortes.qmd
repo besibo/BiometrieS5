@@ -91,12 +91,12 @@ Nassarius
 Et la commande suivante devrait produire exactement ces résultats :
 
 ```{r}
-Nassarius %>%
+Nassarius |>
   count(date)
 ```
 
 :::{.column-margin}
-`%>%` : le pipe est un opérateur spécial qui prend l'objet situé à gauche et le transmets à la fonction placée à droite, en guise de premier argument. P. ex. : `Nassarius %>% count(date)` est équivalent à `count(Nassarius, date)`  
+`|>` : le pipe est un opérateur spécial qui prend l'objet situé à gauche et le transmets à la fonction placée à droite, en guise de premier argument. P. ex. : `Nassarius |> count(date)` est équivalent à `count(Nassarius, date)`  
 <br>
 `count()` : compte le nombre d'occurrences de chaque valeur possible (ou niveau/modalité) d'une variable catégorielle (ou facteur).
 :::
@@ -118,7 +118,7 @@ Je vais présenter ci-dessous les étapes de cette procédure **pour une unique 
 Notre jeu de données `Nassrisu` contient 2 colonnes : la première contient les dates d'échantillonnage et la seconde les tailles individuelles en millimètres. La première étape consiste à créer un nouvel objet (nous le nommerons `Nas_01`) qui contiendra uniquement les données collectées lors de la toute première session d'échantillonnage de mars 2010. Vous devriez déjà savoir comment utiliser la fonction `filter()` pour le faire :
 
 ```{r}
-Nas_01 <- Nassarius %>%
+Nas_01 <- Nassarius |>
   filter(date == "march-10")
 
 Nas_01
@@ -148,7 +148,7 @@ Maintenant que nous disposons d'une table `Nas_01` qui contient uniquement la ta
 #| fig-cap: "Structure démographique instantanée"
 #| cap-location: margin
 
-Nas_01 %>%
+Nas_01 |>
   ggplot(aes(x = size)) +
   geom_histogram()
 ```
@@ -193,7 +193,7 @@ Maintenant, on peut utiliser le vecteur `limites` comme argument de la fonction 
 #| fig-cap: Structure démographique instantanée utilisable pour la décomposition polymodale
 #| cap-location: margin
 
-Nas_01 %>%
+Nas_01 |>
   ggplot(aes(x = size)) +
   geom_histogram(breaks = limites, color = "black", fill = "steelblue")
 ```
@@ -466,7 +466,7 @@ Il nous faut donc la transformer pour que `R` la reconnaisse comme étant une va
 # Ce package fait partie du tidyverse
 # Si vous l'avez installé, lubridate est disponible sur votre ordinateur
 library(lubridate)
-cohort <- cohort %>%
+cohort <- cohort |>
   mutate(date = date(date))
 ```
 
@@ -490,7 +490,7 @@ On place les dates d'échantillonnage sur l'axe des abscisses, et la taille moye
 
 ```{r}
 #| eval: false
-cohort %>%
+cohort |>
   ggplot(aes(x = date, y = size, group = 1)) +
   geom_point() +
   geom_line() +
@@ -515,7 +515,7 @@ cohort %>%
 #| warning: false
 #| cap-location: margin
 #| echo: false
-cohort %>%
+cohort |>
   ggplot(aes(x = date, y = size, group = 1)) +
   geom_point() +
   geom_line() +
@@ -538,7 +538,7 @@ Pour produire la courbe de survie, on procède de la même façon, mais on place
 #| message: false
 #| warning: false
 #| cap-location: margin
-cohort %>%
+cohort |>
   ggplot(aes(x = date, y = abundance, group = 1)) +
   geom_point() +
   geom_line() +
@@ -558,7 +558,7 @@ Pour produire la courbe de survie, on place la taille moyenne des individus de l
 #| message: false
 #| warning: false
 #| cap-location: margin
-cohort %>%
+cohort |>
   ggplot(aes(x = size, y = abundance, group = 1)) +
   geom_point() +
   geom_line() +
@@ -573,7 +573,7 @@ cohort %>%
 L'un des objectifs de ce travail était de produire une courbe d'Allen pour étudier les **variations de biomasses**. Pour y parvenir, nous devons faire une courbe d'Allen sur laquelle figure la masse moyenne des individus de la cohorte d'intérêt (en grammes), plutôt que la taille moyenne des individus de cette cohorte (en millimètres). Pour passer des tailles en millimètres aux masses en grammes, il nous suffit d'appliquer la relation allométrique fournie dans la @sec-pres, et d'ajouter une nouvelle colonne à notre tableau grâce à la fonction `mutate()` :
 
 ```{r}
-cohort_2 <- cohort %>%
+cohort_2 <- cohort |>
   mutate(weight = 0.0013 * size ^ 2.3)
 
 cohort_2
@@ -587,7 +587,7 @@ Il n'y a plus qu'à utiliser cette nouvelle variable sur l'axe des abscisses d'u
 #| message: false
 #| warning: false
 #| cap-location: margin
-cohort_2 %>%
+cohort_2 |>
   ggplot(aes(x = weight, y = abundance, group = 1)) +
   geom_point() +
   geom_line() +
