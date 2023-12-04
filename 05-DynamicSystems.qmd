@@ -328,7 +328,7 @@ res |>
 ::: {.callout-caution collapse="false"}
 ## Pour comprendre ce modèle...
 
-Modifiez les valeurs de $N_0$, $r$ et $K$ l'une après l'autre, pour comprendre comment chaque paramètre affecte la cinétique observée. Que se passe-t-il quand $N_0$ augmente ? Que se passe-t-il que $N_0 > K$ ? Est-ce logique ? Pouvez-vous imaginer des situations réalistes où $N_0 > K$ ? Quelle est l'unité de $K$ ?
+Modifiez les valeurs de $N_0$, $r$ et $K$ l'une après l'autre, pour comprendre comment chaque paramètre affecte la cinétique observée. Que se passe-t-il quand $N_0$ augmente ? Que se passe-t-il quand $N_0 > K$ ? Est-ce logique ? Pouvez-vous imaginer des situations réalistes où $N_0 > K$ ? Quelle est l'unité de $K$ ?
 
 Enfin, que se passe-t-il si le terme d'auto-limitation du milieu est ajouté à la croissance exponentielle au lieu d'être soustrait ? Expliquez.
 :::
