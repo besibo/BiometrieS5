@@ -120,7 +120,7 @@ Plusieurs étapes sont donc nécessaires :
     #| eval: false
 
 
-    #création d'un vecteur numérique qui contiendra les résultats
+    # Création d'un vecteur numérique qui contiendra les résultats
     N <- numeric()
     ```
 
