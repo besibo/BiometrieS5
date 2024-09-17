@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -102,7 +103,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Pas de résultats",
     "search-matching-documents-text": "documents trouvés",
@@ -111,6 +118,7 @@ div.csl-indent {
     "search-more-match-text": "correspondance de plus dans ce document",
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Annuler",
     "search-submit-button-title": "Envoyer",
     "search-label": "Recherche"
@@ -121,20 +129,47 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Cohortes.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Analyse de cohortes</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Cohortes.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Analyse de cohortes</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -160,13 +195,13 @@ div.csl-indent {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">TP de Biométrie<br> Semestre 5<br></a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/besibo/BiometrieS5" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./TP-de-Biométrie-br--Semestre-5-br-.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/besibo/BiometrieS5" title="Code source" class="quarto-navigation-tool px-1" aria-label="Code source"><i class="bi bi-github"></i></a>
+    <a href="./TP-de-Biométrie-br--Semestre-5-br-.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -228,7 +263,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -265,6 +300,7 @@ div.csl-indent {
 
 
 
+
 <section id="objectifs" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="objectifs"><span class="header-section-number">4.1</span> Objectifs</h2>
 <p>Cette section doit permettre d’illustrer la partie du cours de Population Dynamics de l’EC “Fonctionnement des écosystèmes” consacrée à l’analyse des cohortes. Vous utiliserez les tailles corporelles d’individus échantillonnés sur le terrain à plusieurs dates pour :</p>
@@ -280,13 +316,17 @@ div.csl-indent {
 <section id="sec-pres" class="level2 page-columns page-full" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-pres"><span class="header-section-number">4.2</span> Présentation de l’étude</h2>
 <p>Le suivi démographique des populations animales est extrêmement fréquent dans le domaine de l’écologie. Le suivi des populations naturelles est particulièrement pertinent dans un contexte de conservation, pour réaliser des études d’impact ou pour mesurer l’évolution de la biodiversité.</p>
-<p>Ici, une population de gastéropodes <em>Nassarius reticulatus</em> (la nasse réticulée) a été suivie pendant 5 ans. Deux sessions d’échantillonnage ont été organisées chaque année depuis 2010 : la première a été réalisée en mars, juste après le recrutement des juvéniles, et la seconde a été réalisée 6 mois plus tard, en septembre. Tous les échantillons ont été collectés au même endroit, selon la même méthode (collecte systématique de tous les individus présents à l’intérieur de 10 quadrats positionnés aléatoirement dans la zone d’étude), lors d’une marée basse de fort coefficient (marées de printemps et d’automne). Les individus échantillonnés ont été mesurés sur place, de la base, à l’apex de la coquille (voir <a href="#fig-nasse">Figure&nbsp;<span>4.1</span></a>) à l’aide d’un pied à coulisse (précision : centième de millimètre) et relâchés sur place.</p>
+<p>Ici, une population de gastéropodes <em>Nassarius reticulatus</em> (la nasse réticulée) a été suivie pendant 5 ans. Deux sessions d’échantillonnage ont été organisées chaque année depuis 2010 : la première a été réalisée en mars, juste après le recrutement des juvéniles, et la seconde a été réalisée 6 mois plus tard, en septembre. Tous les échantillons ont été collectés au même endroit, selon la même méthode (collecte systématique de tous les individus présents à l’intérieur de 10 quadrats positionnés aléatoirement dans la zone d’étude), lors d’une marée basse de fort coefficient (marées de printemps et d’automne). Les individus échantillonnés ont été mesurés sur place, de la base, à l’apex de la coquille (voir <a href="#fig-nasse" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>) à l’aide d’un pied à coulisse (précision : centième de millimètre) et relâchés sur place.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div id="fig-nasse" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/Nassarius.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4.1: Coquille de nasse réticulée <em>Nassarius reticulatus</em> (Linnaeus, 1758)</figcaption>
+<div id="fig-nasse" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nasse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Nassarius.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nasse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Coquille de nasse réticulée <em>Nassarius reticulatus</em> (Linnaeus, 1758)
+</figcaption>
 </figure>
 </div>
 </div></div><p>L’espèce étudiée présente les caractéristiques suivantes :</p>
@@ -439,18 +479,22 @@ Objectif principal
 <section id="structure-démographique-instantanée" class="level2 page-columns page-full" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="structure-démographique-instantanée"><span class="header-section-number">4.6</span> Structure démographique instantanée</h2>
 <p>Maintenant que nous disposons d’une table <code>Nas_01</code> qui contient uniquement la taille des individus collectés en mars 2010, il nous faut visualiser la structure démographique instantanée afin de déterminer combien de cohortes étaient présentes dans la population à cette date. La structure démographique instantanée est ici simplement un histogramme présentant la distribution des tailles individuelles. Nous allons donc placer la taille des individus sur l’axe des <code>x</code> en guise de descripteur individuel, et sur l’axe des <code>y</code>, <code>RStudio</code> placera automatiquement l’abondance pour chaque classe de taille en guise de descripteur populationel.</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">|&gt;</span></span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb12" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size)) <span class="sc">+</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre data-cap-location="margin"><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-histo1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="04-Cohortes_files/figure-html/fig-histo1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4.2: Structure démographique instantanée</figcaption>
+<div id="fig-histo1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-histo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-Cohortes_files/figure-html/fig-histo1-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-histo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Structure démographique instantanée
+</figcaption>
 </figure>
 </div>
 </div>
@@ -487,20 +531,24 @@ Objectif principal
 <p><code>:</code> : l’opérateur “deux points” permet de créer des suites d’entiers</p>
 </div></div><p>L’objet <code>limites</code> contient les limites des classes de tailles que nous utiliserons pour produire les structures démographiques instantanées, pour chaque date d’échantillonnage, et pas seulement pour mars 2010. C’est la raison pour nous avons utilisé <code>max(Nassarius$size) +1</code> : cette syntaxe nous assure que nos classes de tailles recouvrent bien la taille de tous les individus échantillonnés au cours des 5 années d’études. Ainsi, nous pourrons utiliser les mêmes classes de tailles pour toutes les dates.</p>
 <p>Maintenant, on peut utiliser le vecteur <code>limites</code> comme argument de la fonction <code>geom_histogram()</code>. On modifie aussi les couleurs des barres de l’histogramme pour mieux visualiser les classes :</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">|&gt;</span></span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb18" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Nas_01 <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size)) <span class="sc">+</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> limites, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-histo2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="04-Cohortes_files/figure-html/fig-histo2-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4.3: Structure démographique instantanée utilisable pour la décomposition polymodale</figcaption>
+<div id="fig-histo2" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-histo2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-Cohortes_files/figure-html/fig-histo2-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-histo2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: Structure démographique instantanée utilisable pour la décomposition polymodale
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Cette structure démographique instantanée (<a href="#fig-histo2">Figure&nbsp;<span>4.3</span></a>) fait apparaître 5 cohortes, bien que la plus âgée soit à peine visible. Les pics, ou modes, sont situés autour de 4, 9, 17, 30 et 34 millimètres. Ces valeurs approximatives sont importantes car nous les utiliserons pour réaliser la décomposition polymodale.</p>
+<p>Cette structure démographique instantanée (<a href="#fig-histo2" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>) fait apparaître 5 cohortes, bien que la plus âgée soit à peine visible. Les pics, ou modes, sont situés autour de 4, 9, 17, 30 et 34 millimètres. Ces valeurs approximatives sont importantes car nous les utiliserons pour réaliser la décomposition polymodale.</p>
 </section>
 <section id="décomposition-polymodale" class="level2 page-columns page-full" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="décomposition-polymodale"><span class="header-section-number">4.7</span> Décomposition polymodale</h2>
@@ -585,13 +633,17 @@ Objectif principal
 </div>
 </div>
 <p>Notez que la dernière ligne de <code>mix_01</code> correspond à la catégorie [42 mm ; <span class="math inline">\(+\infty\)</span>[. Pour vérifier que nous n’avons pas fait d’erreur, on peut faire une représentation graphique de cet objet particulier avec la fonction <code>plot()</code> :</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mix_01, <span class="at">xlab =</span> <span class="st">"Size (mm)"</span>, <span class="at">ylab =</span> <span class="st">"Probability"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb24" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mix_01, <span class="at">xlab =</span> <span class="st">"Size (mm)"</span>, <span class="at">ylab =</span> <span class="st">"Probability"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-mixplot" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="04-Cohortes_files/figure-html/fig-mixplot-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4.4: Le contenu de <code>mix_01</code> correspond exactement à la structure démographique instantanée de mars 2010. La ligne bleue est le contour de la structure démographique instantanée, qui devra être approchée par la superposition de 5 courbes Normales correspondant au 5 cohortes qui composent la population en mars 2010</figcaption>
+<div id="fig-mixplot" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-mixplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-Cohortes_files/figure-html/fig-mixplot-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mixplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Le contenu de <code>mix_01</code> correspond exactement à la structure démographique instantanée de mars 2010. La ligne bleue est le contour de la structure démographique instantanée, qui devra être approchée par la superposition de 5 courbes Normales correspondant au 5 cohortes qui composent la population en mars 2010
+</figcaption>
 </figure>
 </div>
 </div>
@@ -605,7 +657,7 @@ Objectif principal
 <h3 data-number="4.7.3" class="anchored" data-anchor-id="création-du-deuxième-objet"><span class="header-section-number">4.7.3</span> Création du deuxième objet</h3>
 <p>Pour créer le second <code>data.frame()</code> dont la fonction <code>mix()</code> aura besoin, nous allons utiliser une autre fonction du package <code>mixdist</code> : la fonction <code>mixparam()</code>. Cette fonction prend au minimum 2 arguments :</p>
 <ol type="1">
-<li><code>mu</code> : un vecteur qui contient la position approximative des modes (ou pics) de chaque cohorte. Si nous avons 5 cohortes à identifier, il faudra fournir 5 valeurs pour <code>mu</code>. Pour mars 2010, nous utiliserons les valeurs présentées plus au, au niveau de la <a href="#fig-histo2">Figure&nbsp;<span>4.3</span></a> (4, 9, 17, 30 et 34 millimètres). Ces valeurs changeront pour chaque date d’échantillonnage et il faudra donc examiner attentivement les structures démographiques instantanées de chaque échantillonnage pour les déterminer. J’insiste sur le fait que la position des pics peut être approximative, mais qu’elle ne doit malgré tout pas être trop éloignée des vraies valeurs.</li>
+<li><code>mu</code> : un vecteur qui contient la position approximative des modes (ou pics) de chaque cohorte. Si nous avons 5 cohortes à identifier, il faudra fournir 5 valeurs pour <code>mu</code>. Pour mars 2010, nous utiliserons les valeurs présentées plus au, au niveau de la <a href="#fig-histo2" class="quarto-xref">Figure&nbsp;<span>4.3</span></a> (4, 9, 17, 30 et 34 millimètres). Ces valeurs changeront pour chaque date d’échantillonnage et il faudra donc examiner attentivement les structures démographiques instantanées de chaque échantillonnage pour les déterminer. J’insiste sur le fait que la position des pics peut être approximative, mais qu’elle ne doit malgré tout pas être trop éloignée des vraies valeurs.</li>
 <li><code>sigma</code> : un vecteur qui contient la valeur approchée de l’écart-type de chaque cohorte. L’écart-type d’une cohorte correspond à l’étalement des tailles de part et d’autres de la moyenne de la cohorte. C’est ce que nous avons appelé “polymorphisme” dans le cours de dynamique des populations, puisque cet étalement représente des performances de croissance variables pour des individus qui sont tous nés approximativement en même temps. Là encore, il faut fournir autant de valeurs que nous avons de cohortes (soit 5 pour mars 2010). Puisque nous n’avons pas d’idée précise d’ordre de grandeur pour ces écarts-types, nous utiliserons la valeur <code>1</code> pour chaque cohorte.</li>
 </ol>
 <p>Ainsi, on obtient le second <code>data.frame</code> ainsi :</p>
@@ -679,18 +731,22 @@ Constraints:
 <li>L’écart-type (ou polymorphisme de taille) de cette cohorte vaut 1.1 millimètres</li>
 </ul>
 <p>Les distributions Normales qui ont été ajustées peuvent être visualisées grâce à la fonction <code>plot()</code> :</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb33" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-ajustement" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="04-Cohortes_files/figure-html/fig-ajustement-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4.5: Distribution observée (histogramme bleu) et cohortes ajustées (courbes rouges). Les triangles indiquent la position du mode des cohortes et la courbe verte est la somme de toutes les distributions Normales. Idéallement, cette courbe devrait être étroitement ajustée aux données observées</figcaption>
+<div id="fig-ajustement" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-ajustement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-Cohortes_files/figure-html/fig-ajustement-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-ajustement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5: Distribution observée (histogramme bleu) et cohortes ajustées (courbes rouges). Les triangles indiquent la position du mode des cohortes et la courbe verte est la somme de toutes les distributions Normales. Idéallement, cette courbe devrait être étroitement ajustée aux données observées
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>On observe sur la <a href="#fig-ajustement">Figure&nbsp;<span>4.5</span></a> et dans l’objet <code>res_01$parameters</code> que la qualité de l’ajustement (et donc de la décomposition polymodale) est bonne :</p>
+<p>On observe sur la <a href="#fig-ajustement" class="quarto-xref">Figure&nbsp;<span>4.5</span></a> et dans l’objet <code>res_01$parameters</code> que la qualité de l’ajustement (et donc de la décomposition polymodale) est bonne :</p>
 <ul>
 <li>la courbe verte représente bien les données observées : elle est bien ajustée aux contours de l’histogramme.</li>
 <li>l’abondance des cohortes décroit avec l’âge de la cohorte : <code>pi</code> décroit de la cohorte la plus jeune à la cohorte la plus âgée.</li>
@@ -737,7 +793,7 @@ De l’importance du choix des valeurs initiales
 <li>déterminer des valeurs plus appropriées<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> pour la fonction <code>mixparam()</code></li>
 <li>ré-exécuter le code depuis la création de l’objet <code>param_01</code> et jusqu’à la décomposition polymodale avec la fonction <code>mix()</code></li>
 </ol>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;ajoutez ou retirez une cohorte si besoin, et choisissez des valeurs plus proches des pics observés</p></li></div></section>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;ajoutez ou retirez une cohorte si besoin, et choisissez des valeurs plus proches des pics observés</p></div></div></section>
 </section>
 <section id="taille-moyenne-et-abondance-des-cohortes" class="level2 page-columns page-full" data-number="4.8">
 <h2 data-number="4.8" class="anchored" data-anchor-id="taille-moyenne-et-abondance-des-cohortes"><span class="header-section-number">4.8</span> Taille moyenne et abondance des cohortes</h2>
@@ -747,7 +803,7 @@ De l’importance du choix des valeurs initiales
 <li>la valeur d’abondance de la cohorte dont on souhaite réaliser le suivi (il s’agit de la cohorte la plus jeune en mars 2010)</li>
 <li>la taille moyenne des individus de la cohorte dont on souhaite réaliser le suivi<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 </ol>
-<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;on sait déjà que cette taille vaut 3.9 millimètres en mars 2010.</p></li></div><p>L’abondance d’une cohorte est obtenue en multipliant la valeur de <code>pi</code> de la cohorte d’intérêt par le nombre total d’individus échantillonnés en mars 2010. En effet, sur la <a href="#fig-ajustement">Figure&nbsp;<span>4.5</span></a>, la surface totale comprise entre l’axe des abscisses et la courbe verte vaut 1. Cette surface correspond au nombre total d’individus échantillonnés en mars 2010 :</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;on sait déjà que cette taille vaut 3.9 millimètres en mars 2010.</p></div></div><p>L’abondance d’une cohorte est obtenue en multipliant la valeur de <code>pi</code> de la cohorte d’intérêt par le nombre total d’individus échantillonnés en mars 2010. En effet, sur la <a href="#fig-ajustement" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>, la surface totale comprise entre l’axe des abscisses et la courbe verte vaut 1. Cette surface correspond au nombre total d’individus échantillonnés en mars 2010 :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Nas_01)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -757,7 +813,7 @@ De l’importance du choix des valeurs initiales
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><code>nrow()</code> : affiche le nombre de lignes d’une matrice ou d’un <code>data.frame</code></p>
-</div></div><div class="page-columns page-full"><p>Puisque la première cohorte représente 46.42% de l’abondance totale<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, tout ce dont on a besoin pour connaitre l’abondance de la cohorte la plus jeune est :</p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;c’est ce que nous dit la valeur de <code>pi</code> de la première cohorte dans le tableau <code>res_01$parameters</code> :</p></li></div></div>
+</div><div id="fn3"><p><sup>3</sup>&nbsp;c’est ce que nous dit la valeur de <code>pi</code> de la première cohorte dans le tableau <code>res_01$parameters</code> :</p></div></div><p>Puisque la première cohorte représente 46.42% de l’abondance totale<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, tout ce dont on a besoin pour connaitre l’abondance de la cohorte la plus jeune est :</p>
 <div class="cell page-columns page-full">
 
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
@@ -910,12 +966,16 @@ Attention !
 <p><code>geom_point()</code> et <code>geom_line()</code> : permettent d’ajouter des points et des lignes (respectivement) sur un graphique<br>
 <br> <code>labs()</code> : permet de spécifier le titre d’un graphique et de ses axes<br>
 <br> <code>theme_bw()</code> : change l’apparence générale du graphique</p>
-</div></div><div class="cell page-columns page-full">
+</div></div><div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-croiss" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="04-Cohortes_files/figure-html/fig-croiss-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4.6: Courbe de croissance d’une cohorte de la population de <em>Nassarius reticulatus</em>, suivie pendant 5 ans. À compléter avec les données des 9 autres dates d’échantillonnage</figcaption>
+<div id="fig-croiss" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-croiss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-Cohortes_files/figure-html/fig-croiss-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-croiss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.6: Courbe de croissance d’une cohorte de la population de <em>Nassarius reticulatus</em>, suivie pendant 5 ans. À compléter avec les données des 9 autres dates d’échantillonnage
+</figcaption>
 </figure>
 </div>
 </div>
@@ -925,8 +985,8 @@ Attention !
 <section id="courbe-de-survie" class="level2 page-columns page-full" data-number="4.11">
 <h2 data-number="4.11" class="anchored" data-anchor-id="courbe-de-survie"><span class="header-section-number">4.11</span> Courbe de survie</h2>
 <p>Pour produire la courbe de survie, on procède de la même façon, mais on place les dates d’échantillonnage sur l’axe des abscisses, et l’abondance de la cohorte d’intérêt sur l’axe des ordonnées :</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">|&gt;</span></span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb48" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">|&gt;</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -935,10 +995,14 @@ Attention !
 <span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe de survie"</span>) <span class="sc">+</span></span>
 <span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-survie" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="04-Cohortes_files/figure-html/fig-survie-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4.7: Courbe de survie d’une cohorte de la population de <em>Nassarius reticulatus</em>, suivie pendant 5 ans. À compléter avec les données des 9 autres dates d’échantillonnage</figcaption>
+<div id="fig-survie" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-survie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-Cohortes_files/figure-html/fig-survie-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-survie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.7: Courbe de survie d’une cohorte de la population de <em>Nassarius reticulatus</em>, suivie pendant 5 ans. À compléter avec les données des 9 autres dates d’échantillonnage
+</figcaption>
 </figure>
 </div>
 </div>
@@ -947,8 +1011,8 @@ Attention !
 <section id="courbe-dallen" class="level2 page-columns page-full" data-number="4.12">
 <h2 data-number="4.12" class="anchored" data-anchor-id="courbe-dallen"><span class="header-section-number">4.12</span> Courbe d’Allen</h2>
 <p>Pour produire la courbe de survie, on place la taille moyenne des individus de la cohorte sur l’axe des abscisses, et l’abondance de la cohorte d’intérêt sur l’axe des ordonnées :</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">|&gt;</span></span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb49" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>cohort <span class="sc">|&gt;</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> size, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -957,10 +1021,14 @@ Attention !
 <span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe d'Allen"</span>) <span class="sc">+</span></span>
 <span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-allen" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="04-Cohortes_files/figure-html/fig-allen-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4.8: Courbe d’Allen d’une cohorte de la population de <em>Nassarius reticulatus</em>, suivie pendant 5 ans. À compléter avec les données des 9 autres dates d’échantillonnage</figcaption>
+<div id="fig-allen" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-allen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-Cohortes_files/figure-html/fig-allen-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-allen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.8: Courbe d’Allen d’une cohorte de la population de <em>Nassarius reticulatus</em>, suivie pendant 5 ans. À compléter avec les données des 9 autres dates d’échantillonnage
+</figcaption>
 </figure>
 </div>
 </div>
@@ -968,7 +1036,7 @@ Attention !
 </section>
 <section id="relation-allométrique" class="level2 page-columns page-full" data-number="4.13">
 <h2 data-number="4.13" class="anchored" data-anchor-id="relation-allométrique"><span class="header-section-number">4.13</span> Relation allométrique</h2>
-<p>L’un des objectifs de ce travail était de produire une courbe d’Allen pour étudier les <strong>variations de biomasses</strong>. Pour y parvenir, nous devons faire une courbe d’Allen sur laquelle figure la masse moyenne des individus de la cohorte d’intérêt (en grammes), plutôt que la taille moyenne des individus de cette cohorte (en millimètres). Pour passer des tailles en millimètres aux masses en grammes, il nous suffit d’appliquer la relation allométrique fournie dans la <a href="#sec-pres"><span>Section&nbsp;4.2</span></a>, et d’ajouter une nouvelle colonne à notre tableau grâce à la fonction <code>mutate()</code> :</p>
+<p>L’un des objectifs de ce travail était de produire une courbe d’Allen pour étudier les <strong>variations de biomasses</strong>. Pour y parvenir, nous devons faire une courbe d’Allen sur laquelle figure la masse moyenne des individus de la cohorte d’intérêt (en grammes), plutôt que la taille moyenne des individus de cette cohorte (en millimètres). Pour passer des tailles en millimètres aux masses en grammes, il nous suffit d’appliquer la relation allométrique fournie dans la <a href="#sec-pres" class="quarto-xref"><span>Section 4.2</span></a>, et d’ajouter une nouvelle colonne à notre tableau grâce à la fonction <code>mutate()</code> :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="ot">&lt;-</span> cohort <span class="sc">|&gt;</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> <span class="fl">0.0013</span> <span class="sc">*</span> size <span class="sc">^</span> <span class="fl">2.3</span>)</span>
@@ -982,8 +1050,8 @@ Attention !
 </div>
 </div>
 <p>Il n’y a plus qu’à utiliser cette nouvelle variable sur l’axe des abscisses d’une courbe d’Allen :</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="sc">|&gt;</span></span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb52" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cohort_2 <span class="sc">|&gt;</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> abundance, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -992,10 +1060,14 @@ Attention !
 <span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Courbe d'Allen"</span>) <span class="sc">+</span></span>
 <span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-biomasse" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="04-Cohortes_files/figure-html/fig-biomasse-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4.9: Courbe d’Allen d’une cohorte de la population de <em>Nassarius reticulatus</em>, suivie pendant 5 ans. À compléter avec les données des 9 autres dates d’échantillonnage</figcaption>
+<div id="fig-biomasse" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-biomasse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-Cohortes_files/figure-html/fig-biomasse-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-biomasse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.9: Courbe d’Allen d’une cohorte de la population de <em>Nassarius reticulatus</em>, suivie pendant 5 ans. À compléter avec les données des 9 autres dates d’échantillonnage
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1012,9 +1084,9 @@ Attention !
 <p>Bon courage !</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-R-mixdist" class="csl-entry" role="listitem">
-Macdonald, Peter, et with contributions from Juan Du. 2018. <em>mixdist: Finite Mixture Distribution Models</em>. <a href="https://CRAN.R-project.org/package=mixdist">https://CRAN.R-project.org/package=mixdist</a>.
+Macdonald, Peter, et with contributions from Juan Du. 2018. <em>mixdist: Finite Mixture Distribution Models</em>. <a href="https://www.r-project.org/">https://www.r-project.org/</a>.
 </div>
 <div id="ref-tidyverse2019" class="csl-entry" role="listitem">
 Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>«&nbsp;Welcome to the <span>tidyverse</span>&nbsp;»</span>. <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
@@ -1103,10 +1175,34 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1116,8 +1212,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1129,7 +1234,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1173,6 +1401,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1198,6 +1427,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1255,37 +1510,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./03-TwoSampleTests.html" class="pagination-link">
+      <a href="./03-TwoSampleTests.html" class="pagination-link" aria-label="Comparaison de moyennes : deux échantillons indépendants">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comparaison de moyennes : deux échantillons indépendants</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./05-DynamicSystems.html" class="pagination-link">
+      <a href="./05-DynamicSystems.html" class="pagination-link" aria-label="Systèmes dynamiques">
         <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systèmes dynamiques</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
