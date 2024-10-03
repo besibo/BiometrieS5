@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.6.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>TP de Biométrie Semestre 5 - 5&nbsp; Systèmes dynamiques</title>
+<title>5&nbsp; Systèmes dynamiques – TP de Biométrie&lt;br&gt; Semestre 5&lt;br&gt;</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37b28c73a5b33615122fb4bc0571bf08.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a68608b9b82df918f31acae73009b375.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -124,7 +124,7 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -162,13 +162,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-DynamicSystems.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systèmes dynamiques</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -424,7 +424,7 @@ Attention
 <p>Visualisez ces données avec <code>ggplot2</code>. Votre graphique devrait ressembler à ceci :</p>
 <div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-mort" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-mort" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-mort-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="05-DynamicSystems_files/figure-html/fig-mort-1.png" class="img-fluid figure-img" width="672">
@@ -481,7 +481,7 @@ Pour comprendre ce modèle…
 </div>
 <div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-crois" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-crois" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-crois-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="05-DynamicSystems_files/figure-html/fig-crois-1.png" class="img-fluid figure-img" width="672">
@@ -543,7 +543,7 @@ Pour comprendre ce modèle…
 </div>
 <div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-logist" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-logist" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-logist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="05-DynamicSystems_files/figure-html/fig-logist-1.png" class="img-fluid figure-img" width="672">
@@ -623,7 +623,7 @@ Calcul simultané
 <p>Avec ce tableau <code>res</code>, vous devriez pouvoir produire le diagramme des phases suivants :</p>
 <div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-lotka" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-lotka" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-lotka-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="05-DynamicSystems_files/figure-html/fig-lotka-1.png" class="img-fluid figure-img" width="672">
@@ -649,7 +649,7 @@ Figure&nbsp;5.4: Modèle de Lotka-Volterra avec <span class="math inline">\(X_0 
 <p>Enfin, pour mieux visualiser la dynamique de ces deux populations au cours du temps, produisez le graphique suivant :</p>
 <div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-volterra" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-volterra" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-volterra-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="05-DynamicSystems_files/figure-html/fig-volterra-1.png" class="img-fluid figure-img" width="672">
@@ -723,9 +723,9 @@ Pour comprendre ce modèle…
 <ol type="1">
 <li>Deux espèces très compétitives (avec différentes abondances initiales). Retrouvez-vous la ligne de catastrophe ?</li>
 </ol>
-<div class="cell page-columns page-full" data-fig.asp="0.4" data-cap-location="margin">
+<div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-compet_strong" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-compet_strong" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-compet_strong-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="05-DynamicSystems_files/figure-html/fig-compet_strong-1.png" class="img-fluid figure-img" width="672">
@@ -742,9 +742,9 @@ Figure&nbsp;5.6: Diagramme des phases de 2 espèces en compétition : 2 espèces
 <li>Première espèce plus compétitive que la seconde</li>
 <li>Seconde espèce plus compétitive que la première</li>
 </ol>
-<div class="cell page-columns page-full" data-fig.asp="0.4" data-cap-location="margin">
+<div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-compet" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-compet" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-compet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="05-DynamicSystems_files/figure-html/fig-compet-1.png" class="img-fluid figure-img" width="672">
@@ -791,9 +791,9 @@ Pour comprendre ce modèle…
 \]</span></p>
 <p>Ce système de 3 équations comprend maintenant 11 paramètres : <span class="math inline">\(r_1\)</span>, <span class="math inline">\(r_2\)</span>, <span class="math inline">\(K_1\)</span>, <span class="math inline">\(K_2\)</span>, <span class="math inline">\(m\)</span>, <span class="math inline">\(c_{12}\)</span>, <span class="math inline">\(c_{21}\)</span>, <span class="math inline">\(c_{13}\)</span>, <span class="math inline">\(c_{23}\)</span>, <span class="math inline">\(c_{31}\)</span> et <span class="math inline">\(c_{32}\)</span>.</p>
 <p>Essayez de coder ce système et de produire une figure telle que la <a href="#fig-3spe" class="quarto-xref">Figure&nbsp;<span>5.8</span></a>.</p>
-<div class="cell page-columns page-full" data-fig.asp="0.5" data-cap-location="margin">
+<div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-3spe" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-3spe" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-3spe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="05-DynamicSystems_files/figure-html/fig-3spe-1.png" class="img-fluid figure-img" width="672">
@@ -878,18 +878,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -921,7 +910,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -929,7 +940,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
