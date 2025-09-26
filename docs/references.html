@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.20">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -55,10 +55,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37b28c73a5b33615122fb4bc0571bf08.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-9ea0a49c779b6fc496fdb60b6bf00fef.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a68608b9b82df918f31acae73009b375.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-29754e15dbacfca2d3d83cea9d48121f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -210,7 +210,7 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-R-car" class="csl-entry" role="listitem">
-Fox, John, Sanford Weisberg, and Brad Price. 2023. <em>Car: Companion to
+Fox, John, Sanford Weisberg, and Brad Price. 2024. <em>Car: Companion to
 Applied Regression</em>. <a href="https://r-forge.r-project.org/projects/car/">https://r-forge.r-project.org/projects/car/</a>.
 </div>
 <div id="ref-Fuller2003" class="csl-entry" role="listitem">
@@ -251,13 +251,13 @@ D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
 <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
 </div>
 <div id="ref-R-readxl" class="csl-entry" role="listitem">
-Wickham, Hadley, and Jennifer Bryan. 2023. <em>Readxl: Read Excel
+Wickham, Hadley, and Jennifer Bryan. 2025. <em>Readxl: Read Excel
 Files</em>. <a href="https://readxl.tidyverse.org">https://readxl.tidyverse.org</a>.
 </div>
 <div id="ref-R-ggplot2" class="csl-entry" role="listitem">
 Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen,
 Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, Dewey
-Dunnington, and Teun van den Brand. 2024. <em>Ggplot2: Create Elegant
+Dunnington, and Teun van den Brand. 2025. <em>Ggplot2: Create Elegant
 Data Visualisations Using the Grammar of Graphics</em>. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
 </div>
 <div id="ref-R-dplyr" class="csl-entry" role="listitem">
@@ -269,7 +269,7 @@ Wickham, Hadley, Jim Hester, and Jennifer Bryan. 2024. <em>Readr: Read
 Rectangular Text Data</em>. <a href="https://readr.tidyverse.org">https://readr.tidyverse.org</a>.
 </div>
 <div id="ref-R-scales" class="csl-entry" role="listitem">
-Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2023. <em>Scales:
+Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025. <em>Scales:
 Scale Functions for Visualization</em>. <a href="https://scales.r-lib.org">https://scales.r-lib.org</a>.
 </div>
 <div id="ref-Young2004" class="csl-entry" role="listitem">
@@ -364,8 +364,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -483,7 +481,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

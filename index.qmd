@@ -5,9 +5,36 @@
 options(replace.assign = TRUE, width = 80)
 options(repos = "http://cran.r-project.org/")
 
-list.of.packages <- c("readxl", "nycflights13", "gapminder", "knitr", "tidyverse", "gridExtra", "devtools", "extrafont", "kableExtra", "skimr", "bindrcpp", "car", "DescTools", "bookdown", "datasauRus", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic", "confintr", "mixdist", "scales")
-new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages)
+list.of.packages <- c(
+  "readxl",
+  "nycflights13",
+  "gapminder",
+  "knitr",
+  "tidyverse",
+  "gridExtra",
+  "devtools",
+  "extrafont",
+  "kableExtra",
+  "skimr",
+  "bindrcpp",
+  "car",
+  "DescTools",
+  "bookdown",
+  "datasauRus",
+  "patchwork",
+  "fontawesome",
+  "palmerpenguins",
+  "ggmosaic",
+  "confintr",
+  "mixdist",
+  "scales"
+)
+new.packages <- list.of.packages[
+  !(list.of.packages %in% installed.packages()[, "Package"])
+]
+if (length(new.packages)) {
+  install.packages(new.packages)
+}
 
 library(remotes)
 library(knitr)
@@ -17,19 +44,53 @@ library(tidyverse)
 #   install_github("rstudio/EDAWR")
 # }
 
-opts_chunk$set(fig.path = 'figure/', cache.path = 'cache/', tidy = FALSE,
-               fig.align = 'center', out.width = '90%', fig.asp = 0.618,
-               fig.show = 'hold', fig.pos = 'htpb', par = TRUE, comment = NA, 
-               cache = TRUE)
+opts_chunk$set(
+  fig.path = 'figure/',
+  cache.path = 'cache/',
+  tidy = FALSE,
+  fig.align = 'center',
+  out.width = '90%',
+  fig.asp = 0.618,
+  fig.show = 'hold',
+  fig.pos = 'htpb',
+  par = TRUE,
+  comment = NA,
+  cache = TRUE
+)
 ```
 
 ```{r package_bibliography, include=FALSE}
 # automatically create a bib database for R packages
-knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown', 
-                   'quarto', 'tidyverse', 'ggplot2', 'gridExtra', 'skimr', 
-                   'bindrcpp', 'tidyr', 'dplyr', 'readr', "car", "readxl",
-                   "broom", "DescTools", "patchwork", "fontawesome", "scales",
-                   "palmerpenguins", "confintr", "ggmosaic", "mixdist", "nycflights13"), 'packages.bib')
+knitr::write_bib(
+  c(
+    .packages(),
+    'bookdown',
+    'knitr',
+    'rmarkdown',
+    'quarto',
+    'tidyverse',
+    'ggplot2',
+    'gridExtra',
+    'skimr',
+    'bindrcpp',
+    'tidyr',
+    'dplyr',
+    'readr',
+    "car",
+    "readxl",
+    "broom",
+    "DescTools",
+    "patchwork",
+    "fontawesome",
+    "scales",
+    "palmerpenguins",
+    "confintr",
+    "ggmosaic",
+    "mixdist",
+    "nycflights13"
+  ),
+  'packages.bib'
+)
 
 system("cat book.bib packages.bib > all.bib")
 ```
@@ -84,7 +145,7 @@ Vous aurez de toutes façons besoin de vous référer à ces 2 documents réguli
 
 ### Volume de travail {-}
 
-Les travaux pratiques et TEA de biométrie auront lieu entre le 4 octobre et le 7 décembre 2024. Durant cette période, un créneau d'1h30 de TP (pour chaque groupe) et un créneau d'1h30 de TEA (pour la promotion entière) sont prévus chaque semaine. Attention, certains TP sont prévus jusqu'à 20 heures, et les TEA ont souvent lieu le samedi matin.
+Les travaux pratiques et TEA de biométrie auront lieu entre le 29 septembre et le 21 novembre 2025. Durant cette période, un créneau d'1h30 de TP (pour chaque groupe) et un créneau d'1h30 de TEA (pour la promotion entière) sont prévus chaque semaine, sauf pendant les vacances de la Toussaint. Attention, certains TP sont prévus jusqu'à 18h15 heures, et les TEA ont souvent lieu le samedi matin.
 
 **Les séances de TP ont lieu soit en salle MSI 217, soit dans les salles du Pôle Communication Multimédia Réseau (PCMR). Tous les TEA sont à distance.**
 
@@ -93,7 +154,7 @@ Au total, chaque groupe aura donc 7 séances de TP et 7 séances de TEA, soit un
 
 ### Modalités d'enseignement {-}
 
-Pour suivre cet enseignement vous pourrez utiliser les ordinateurs de l'université, mais je ne peux que vous encourager à utiliser vos propres ordinateurs, sous Windows, Linux ou MacOS. Lors de vos futurs stages et pour rédiger vos comptes-rendus de TP, vous utiliserez le plus souvent vos propres ordinateurs, autant prendre dès maintenant de bonnes habitudes en installant les logiciels dont vous aurez besoin tout au long de votre licence. Si vous n'avez pas suivi l'EC immersion ou les cours de biométrie de L2 et que les logiciels `R` et `RStudio` ne sont pas encore installés sur vos ordinateurs, suivez [la procédure décrite ici](https://besibo.github.io/BiometrieS3/01-R-basics.html#sec-install). Si vous ne possédez pas d'ordinateur, manifestez vous rapidement auprès de moi car des solutions existent (prêt par l'université, travail sur tablette via [Posit cloud](https://posit.cloud)...).
+Pour suivre cet enseignement vous pourrez utiliser les ordinateurs de l'université, mais je ne peux que vous encourager à utiliser vos propres ordinateurs, sous Windows, Linux ou MacOS. Lors de vos futurs stages et pour rédiger vos comptes-rendus de TP, vous utiliserez le plus souvent vos propres ordinateurs, autant prendre dès maintenant de bonnes habitudes en installant les logiciels dont vous aurez besoin tout au long de votre licence. Si vous n'avez pas suivi les cours de biométrie de L2 et que les logiciels `R` et `RStudio` ne sont pas encore installés sur vos ordinateurs, suivez [la procédure décrite ici](https://besibo.github.io/BiometrieS3/01-R-basics.html#sec-install). Si vous ne possédez pas d'ordinateur, manifestez vous rapidement auprès de moi car des solutions existent (prêt par l'université, travail sur tablette ou chromebook via [Posit cloud](https://posit.cloud)...).
 
 :::{.callout-important}
 L'essentiel du contenu de cet enseignement peut être abordé en autonomie, à distance, grâce à ce livre en ligne, aux ressources mises à disposition sur Moodle et à votre ordinateur personnel. Cela signifie que **la présence physique lors desTP n'est pas obligatoire pour toutes les séances**. 
@@ -115,9 +176,15 @@ Toutefois, pour que cette organisation fonctionne, cela demande de la rigueur de
 
 Je vous laisse donc une grande liberté d'organisation. À vous d'en tirer le maximum et de faire preuve du sérieux nécessaire. Le rythme auquel vous devriez avancer est présenté dans la partie suivante intitulée "Progression conseillée".
 
+:::{.callout-important}
+Attention ! 
+
+Le mode "permanance non obligatoire" n'est valable que pour les 4 premières séances de TP, qui portent sur les tests de comparaison de moyennes. Pour les 3 dernières séances, qui portent sur le cours de fonctionnement des écosystèmes, qui seront assurées par Florian Orgeret, et qui sont plus éloignées de ce que vous avez déjà vu dans vos précédents enseignements de biométrie, votre présence en salle de TP sera **obligatoire**, comme pour un TP classique.
+:::
+
 ### Utilisation de Slack {-}
 
-Outre les séances de permanence non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un "twitter privé". Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, [cliquez sur ce lien](https://join.slack.com/t/l3sv24-25ecoutils/shared_invite/zt-2rtj3aeed-3NWSwJlUIJob8WN0vsKe3A) pour vous connecter à notre espace de travail commun intitulé `L3 SV 24-25 / EC outils` (ce lien expire régulièrement : faites moi signe s'il n'est plus valide). 
+Outre les séances de permanence non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un "twitter privé". Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, [cliquez sur ce lien](https://join.slack.com/t/l3sv25-26/shared_invite/zt-3e5w5venb-ksvbjpQfhF9h~yBUFKBlBg) pour vous connecter à notre espace de travail commun intitulé `L3 SV 25-26` (ce lien expire régulièrement : faites moi signe s'il n'est plus valide). 
 
 Vous verrez que 3 "chaînes" sont disponibles :
 
@@ -132,7 +199,7 @@ Ce document est fait pour vous permettre d'avancer en autonomie et vous ne devri
 
 ## Progression conseillée {-}
 
-Si vous avez suivi le document de prise en main de `R` et `RStudio` lors de l'immersion ou en suivant l'EC de biométrie du semestre 3 de la licence SV de La Rochelle, vous savez que pour apprendre à utiliser ces logiciels, il faut faire les choses soi-même, ne pas avoir peur des messages d'erreurs (il faut d'ailleurs apprendre à les déchiffrer pour comprendre d'où viennent les problèmes), essayer maintes fois, se tromper beaucoup, recommencer, et surtout, ne pas se décourager. J'utilise ce logiciel presque quotidiennement depuis plus de 15 ans et à chaque session de travail, je rencontre des messages d'erreur. Avec suffisamment d'habitude, on apprend à les déchiffrer et on corrige les problèmes en quelques secondes. Ce livre est conçu pour vous faciliter la tâche, mais ne vous y trompez pas, vous rencontrerez des difficultés, et c'est normal. C'est le prix à payer pour profiter de la puissance du meilleur logiciel permettant d'analyser des données, de produire des graphiques de qualité et de réaliser toutes les statistiques dont vous aurez besoin d'ici la fin de vos études et au-delà.
+Si vous avez suivi le document de prise en main de `R` et `RStudio` lors de l'EC de biométrie du semestre 3 de la licence SV de La Rochelle, vous savez que pour apprendre à utiliser ces logiciels, il faut faire les choses soi-même, ne pas avoir peur des messages d'erreurs (il faut d'ailleurs apprendre à les déchiffrer pour comprendre d'où viennent les problèmes), essayer maintes fois, se tromper beaucoup, recommencer, et surtout, ne pas se décourager. J'utilise ce logiciel presque quotidiennement depuis plus de 15 ans et à chaque session de travail, je rencontre des messages d'erreur. Avec suffisamment d'habitude, on apprend à les déchiffrer et on corrige les problèmes en quelques secondes. Ce livre est conçu pour vous faciliter la tâche, mais ne vous y trompez pas, vous rencontrerez des difficultés, et c'est normal. C'est le prix à payer pour profiter de la puissance du meilleur logiciel permettant d'analyser des données, de produire des graphiques de qualité et de réaliser toutes les statistiques dont vous aurez besoin d'ici la fin de vos études et au-delà.
 
 Pour que cet apprentissage soit le moins problématique possible, il convient de prendre les choses dans l'ordre. C'est la raison pour laquelle les chapitres de ce livre doivent être lus dans l'ordre, et les exercices d'application faits au fur et à mesure de la lecture.
 
@@ -144,13 +211,32 @@ Idéalement, voilà les étapes que vous devriez avoir franchi chaque semaine :
 
 Avant votre cinquième séance de TP, vous devriez donc être capable de choisir la procédure adaptée afin de comparer la moyenne d'une population à une valeur théorique, ou de comparer la moyenne de 2 populations, dans le cas où vous disposez d'échantillons appariés et dans le cas où les échantillons sont indépendants. Dans toutes ces situations, vous devrez être capable de vérifier les conditions d'application des tests paramétriques, et de choisir des tests non-paramétriques équivalents si les conditions d'application ne sont pas vérifiées. Vous devrez évidemment aussi être capables d'interpréter les résultats de ces tests. Et bien sûr, avant de faire chaque type de test, vous devrez aussi toujours penser au préalable à examiner les données graphiquement (à l'aide de graphiques adaptés), et par le biais des statistiques descriptives décrites au semestre 4 et rappelées plus haut (indices de position, de dispersion et d'incertitude).
 
-Les 3 séances suivantes sont consacrées à la mise en pratique des notions vues dans le cours magistral de Population Dynamics (EC "Fonctionnement des Écosystèmes).
+C'est moi (Benoit Simon-Bouhet) qui assurerai ces 4 séances de TP. Les 3 séances suivantes, assurées par Florian Orgeret, sont consacrées à la mise en pratique des notions vues dans le cours magistral de Population Dynamics (EC "Fonctionnement des Écosystèmes).
 
 3. La cinquième séance est consacrée à l'analyse de cohortes (@sec-cohortes). Avant votre sixième séance de TP, vous devriez être en mesure de réaliser l'analyse de cohorte d'une population étudiée pendant plusieurs années afin de produire les courbes de croissance, de survie et d'Allen d'une cohorte d'intérêt. Vous devrez en particulier importer et mettre en forme des données issues d'un suivi de terrain, produire les structures démographiques instantanées à chaque date d'échantillonnage, faire les décompositions polymodales afin de récupérer les informations utiles au sujet de la cohorte dont on souhaite assurer le suivi et enfin, produire, pour cette cohorte, les courbes de croissance, de mortalité et d'Allen.
 
 4. La sixième séance est consacrée à l'étude des systèmes dynamiques (@sec-dynam). Vous devrez coder différents modèles d'évolution d'une populations (mortalité exponentielle, croissance exponentielle, croissance logistique) ou de plusieurs populations ou espèces (modèle prédateurs-proies, modèle de compétition). Ces modèles généreront des données que vous devrez représenter graphiquement. Vous devrez enfin modifier la valeur de certains paramètres de ces modèles pour comprendre leur influence sur le comportement des systèmes dynamiques étudiés. Pour la première fois, vous utiliserez donc `RStudio` pour produire des données qui suivent un modèle que vous spécifierez, au lieu d'importer des données déjà disponibles. L'objectif est ici de vous montrer comment utiliser le logiciel pour étudier le comportement de modèles théoriques de dynamique des populations, et de vous permettre d'évaluer l'importance et la sensibilité des conditions initiales et des valeurs des paramètres des modèles.
 
 5. La septième et dernière séance est consacrée à l'utilisation des chaînes de Markov dans un contexte d'écologie des communautés (@sec-markov). Vous verrez comment utiliser `RStudio` pour coder une chaîne de Markov permettant d'étudier les successions écologiques et l'atteinte de l'état d'équilibre d'un écosystème abritant plusieurs communautés végétales. Comme pour la semaine précédente, vous devrez coder le système, représenter graphiquement les résultats de simulation, et examiner les conséquences de changements des conditions initiales ou des probabilités de transitions entre communautés. Comme toujours, l'objectif est donc double : vous permettre de découvrir de nouvelles possibilités d'analyses réalisables avec `R` et `RStudio`, et vous permettre de mieux comprendre les notions fondamentales abordées dans les cours magistraux.
+
+
+## Quelques mots sur les IA génératives
+
+J'attire votre attention sur l'utilisation des IA génératives. La plupart des modèles conversationnels (Large Language Models, LLMs) tels que ChatGPT, Gemini, Claude... sont très bons pour générer du code. Je vous mets néanmoins en garde : si vous ne comprenez pas ce qui est expliqué dans ces pages, vous ne pourrez pas juger de la pertinence du code que les IA pourraient vous fournir. Vous pouvez donc vous faire aider par l'IA pour corriger votre code par exemple, ou pour obtenir des suggestions, mais **il est de votre responsabilité de comprendre ce que vous faites et ce que l'IA fait pour vous** ! Non seulement c'est ce qui vous fera gagner du temps à terme (acceptez de passer du temps maintenant, pour comprendre les notions et concepts, afin de gagner beaucoup de temps plus tard), mais surtout, c'est ce qui vous évitera de faire beaucoup d'erreurs ! Encore cette année, la plupart de nos étudiants de M1 ont utilisé l'IA pour calculer un indice statistique un peu exotique. Presque aucun ne s'est rendu compte que le code produit par l'IA ne faisait pas ce qui était demandé. Par conséquent, toute une partie de leur compte-rendu de TP n'avait aucun sens et ils ont donc été lourdement pénalisés à cause de leur confiance aveugle en l'IA. Produire soi-même un code, et demander l'aide de l'IA pour corriger un bug ou demander des améliorations précises, c'est très différents de ne produire aucun code et de demander à l'IA de tout faire. Dans un cas, on fait travailler son cerveau, et l'IA joue le rôle d'un partenaire qui fournit des suggestions souvent pertinentes. Dans l'autre, le cerveau reste au repos, on n'apprend rien, et donc, on perd son temps...
+
+Vous devez donc faire preuve d'esprit critique vis-à-vis de ces outils, qui peuvent êtres très utiles, mais qui demandent la plus grande vigilence et qui se trompent régulièrement. Or, pour faire preuve d'esprit critique, vous devez être en mesure de comprendre le code fourni par ces IA. Si ça n'est pas le cas, reprennez les explications de ce livre en ligne : tout ce dont vous avez besoin s'y trouve noir sur blanc.
+
+Par ailleurs, **si vous utilisez l'IA pour générer du code, vous devez l'indiquer clairement**, et ça doit rester relativement rare. Quelle(s) partie(s) de vos scripts sont réellement de vous, et quelles parties ont été générées par une IA ? À votre niveau, je vous assure qu'il m'est très facile de savoir si du code a été produit par une IA ou par vous. Si vous n'indiquez pas que du code que vous intégrez à vos scripts n'est pas de vous, c'est de la fraude qui peut faire l'objet de sanctions importantes (passage devant le conseil de discipline de l'établissement par exemple). Donc encore une fois, vous pouvez utiliser ces outils, mais à la double condition que (i) ça soit fait à bon escient (assurez-vous que ce qui est produit par l'IA est pertinent, que ça a du sens, et que ça reste rare), et (ii), vous indiquiez clairement dans vos scripts quelles lignes ont été produite à l'aide d'une IA (et laquelle).
+
+Enfin, je me permets une dernière mise en garde. De plus en plus d'études démontrent un effet négatif de l'utilisation excessive des LLMs sur la qualité des apprentissages chez les étudiant·es. Par exemple, [cet article (Stadler et al. 2024)](https://www.sciencedirect.com/science/article/pii/S0747563224002541) montre que
+
+> Bien que les LLM puissent réduire la charge cognitive associée à la collecte d’informations au cours d’une tâche d’apprentissage, ils ne favorisent pas un engagement profond avec le contenu étudié, pourtant nécessaire à un apprentissage durable et de qualité.
+
+De même, [Kosmyna et al. (2025)](https://arxiv.org/abs/2506.08872) ont étudié, par électro-encéphalogramme, les performances cognitives de 3 groupes de participants lors d'exercices de productions écrites (rédaction de synthèses scientifiques). Un groupe avait le droit d'utiliser les AI, un groupe était limité à l'utilisation de Google, un autre groupe n'avait aucun accès à ces outils numériques. Globalement, les participants du groupe LLM sont de loin ceux qui obtiennent les moins bons résultats, qui comprennent et retiennent le moins bien ce qu'ils ont fait. Ceux qui n'avaient droit à aucun outils sont ceux qui ont le plus appris car ils ont dû s'investir pleinement dans l'exercice. En particulier, les auteurs soulignent ceci :
+
+> Les utilisateur d'un LLM ont eu du mal à citer correctement leurs propres travaux. Si les LLM offrent une facilité immédiate, nos résultats mettent en évidence des coûts cognitifs potentiels. Sur une période de quatre mois, les utilisateurs d'un LLM ont systématiquement enregistré des résultats inférieurs aux niveaux neuronal, linguistique et comportemental.
+
+Bref, ces outils sont puissants, ils sont parfois très utiles (et ils vont continuer de s'améliorer), mais ils doivent être utilisés intelligemment pour éviter des conséquences très contre-productives pour vos apprentissages. Là encore, c'est à vous de faire preuve de maturité pour en tirer le meilleur !
 
 
 ## Évaluation(s) {-}
