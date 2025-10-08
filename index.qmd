@@ -102,7 +102,7 @@ system("cat book.bib packages.bib > all.bib")
 
 Ce livre contient l'ensemble du matériel (contenus, exemples, exercices...) nécessaire à la réalisation des travaux pratiques de **Biométrie** de l'EC *Outils pour l'étude et la compréhension du vivant 4* du semestre 5 de la licence Sciences de la Vie de La Rochelle Université.
 
-À la fin du semestre, vous devriez être capables de faire les choses suivantes dans le logiciel `RStudio` :
+À la fin du semestre, vous devriez être capables de faire les choses suivantes dans `RStudio` :
 
 - Mettre en forme des tableaux de données : renommer des variables, en créer de nouvelles, modifier des variables existantes, filtrer des lignes, sélectionner des colonnes, etc. (vu au semestre 3)
 - Explorer des jeux de données en produisant des graphiques appropriés selon la nature des variables disponibles, leur nombre et l'objectif recherché (vu au semestre 3)

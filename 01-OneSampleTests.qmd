@@ -496,7 +496,7 @@ ou
 t.test(temperature ~ 1, mu = 37, data = Temp_clean)
 ```
 
-ou encore, 
+ou encore,
 
 ```{r}
 Temp_clean |>
