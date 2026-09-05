@@ -304,7 +304,7 @@
 
 \title{TP de Biométrie Semestre 5}
 \author{Benoît Simon-Bouhet}
-\date{vendredi 4 septembre 2026}
+\date{samedi 5 septembre 2026}
 \begin{document}
 \maketitle
 
@@ -4780,7 +4780,6 @@ explorer les deux facettes fondamentales de l'écologie quantitative :
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   \textbf{L'approche du détective (Modèle statistique) :} Comment
   estimer la vraie survie d'une population quand on rate des individus
@@ -4791,25 +4790,34 @@ explorer les deux facettes fondamentales de l'écologie quantitative :
   et tester des stratégies de conservation ?
 \end{enumerate}
 
-À l'issue de cette séance, vous serez capables de : * Lire et
-interpréter un historique de Capture-Marquage-Recapture (CMR). * Ajuster
-un modèle simple pour séparer la survie (\(\phi\)) de la probabilité de
-détection (\(p\)). * Construire une matrice de Leslie et simuler la
-dynamique d'une population structurée en stades (cinétique). * Évaluer
-la sensibilité d'une espèce longévive, en lien avec la ``spirale de
-l'extinction'' vue en cours.
+À l'issue de cette séance, vous serez capables de :
+
+\begin{itemize}
+\item
+  Lire et interpréter un historique de Capture-Marquage-Recapture (CMR).
+\item
+  Ajuster un modèle simple pour séparer la survie (\(\phi\)) de la
+  probabilité de détection (\(p\)).
+\item
+  Construire une matrice de Leslie et simuler la dynamique d'une
+  population structurée en stades (cinétique).
+\item
+  Évaluer la sensibilité d'une espèce longévive, en lien avec la
+  ``spirale de l'extinction'' vue en cours.
+\end{itemize}
 
 \section{Avant de vous lancer\ldots{}}\label{avant-de-vous-lancer}
 
 Pour travailler sereinement, créez un nouveau script (nommez-le par
 exemple \texttt{TP1\_Systemes\_Dynamiques.R}) à l'intérieur de votre
-projet sous Positron.
+projet sous RStudio.
 
 Bonne nouvelle : \textbf{vous n'aurez aucun fichier externe à
 télécharger ou à importer pour ce TP !} Les données sont déjà intégrées
-dans les packages R que nous allons utiliser. Vous avez juste besoin de
-charger trois bibliothèques (installez-les via la console de Positron si
-ce n'est pas encore fait avec
+dans les packages R que nous allons utiliser.
+
+Vous avez juste besoin de charger trois bibliothèques (installez-les via
+la console de RStudio si ce n'est pas encore fait avec
 \texttt{install.packages(c("marked",\ "popbio",\ "tidyverse"))}) :
 
 \begin{Shaded}
@@ -4820,14 +4828,12 @@ ce n'est pas encore fait avec
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \section{Le Détective : Inférence et Probabilité de Détection
 (CMR)}\label{le-duxe9tective-infuxe9rence-et-probabilituxe9-de-duxe9tection-cmr}
 
-Sur le terrain, la réalité est cruelle : un animal vivant n'est pas
-toujours observé. Comme vu en CM avec la mésange sur le bonnet de
-l'ornithologue, la probabilité de détection (\(p\)) est presque toujours
+Sur le terrain, la réalité est complexe : un animal vivant n'est pas
+toujours observé. Comme vu en CM avec les comptages de mésanges en
+fôret, la probabilité de détection (\(p\)) est presque toujours
 inférieure à 1.
 
 Nous allons utiliser le jeu de données \texttt{dipper} (inclus dans le
@@ -4923,23 +4929,129 @@ $p
 
 \begin{quote}
 \textbf{Point R :} Ne vous laissez pas impressionner par les lignes de
-calcul de l'algorithme d'optimisation dans la console de Positron.
-Regardez le tableau final produit par \texttt{predict()}. * La
-probabilité de survie moyenne d'une année sur l'autre (\(\Phi\)) est
-d'environ \textbf{0.56 (56\%)}. * La probabilité de détection (\(p\))
-est d'environ \textbf{0.90 (90\%)}. Cela signifie que les chercheurs ont
-raté en moyenne 10\% des oiseaux vivants à chaque sortie.
+calcul de l'algorithme d'optimisation dans la console de RStudio.
+Regardez le tableau final produit par \texttt{predict()}.
+
+\begin{itemize}
+\item
+  La probabilité de survie moyenne d'une année sur l'autre (\(\Phi\))
+  est d'environ \textbf{0.56 (56\%)}.
+\item
+  La probabilité de détection (\(p\)) est d'environ \textbf{0.90
+  (90\%)}. Cela signifie que les chercheurs ont raté en moyenne 10\% des
+  oiseaux vivants à chaque sortie.
+\end{itemize}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+Une valeur moyenne globale masque parfois des disparités biologiques
+fondamentales. En écologie des populations, les rôles écologiques,
+l'effort reproducteur ou les comportements territoriaux diffèrent
+souvent entre mâles et femelles. Vérifions si la survie (\(\Phi\)) est
+équivalente entre les sexes en intégrant la covariable \texttt{sex} dans
+les formules du modèle :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod\_sexe }\OtherTok{\textless{}{-}} \FunctionTok{crm}\NormalTok{(dipper, }\AttributeTok{model =} \StringTok{"cjs"}\NormalTok{, }
+                \AttributeTok{model.parameters =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Phi =} \FunctionTok{list}\NormalTok{(}\AttributeTok{formula =} \SpecialCharTok{\textasciitilde{}}\NormalTok{sex), }
+                                        \AttributeTok{p   =} \FunctionTok{list}\NormalTok{(}\AttributeTok{formula =} \SpecialCharTok{\textasciitilde{}}\DecValTok{1}\NormalTok{)))                                   }
+\end{Highlighting}
+\end{Shaded}
+
+Utilisez ensuite la fonction \texttt{predict} pour afficher l'estimation
+des paramètres du modèle :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{predict}\NormalTok{(mod\_sexe)   }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$Phi
+     sex occ  estimate
+1 Female   6 0.5507352
+2   Male   6 0.5702637
+
+$p
+  occ  estimate
+1   7 0.9026907
+\end{verbatim}
+
+\textbf{Questions d'interprétation :}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Survie différentielle et probabilités cumulées :}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Quelle est la différence annuelle brute de survie entre mâles et
+    femelles ?
+  \item
+    Calculez la probabilité pour un individu d'être encore vivant au
+    bout de 5 ans dans chaque sexe (\(\Phi^5\)). Que constatez-vous sur
+    l'écart relatif entre mâles et femelles après quelques années ?
+  \end{itemize}
+\item
+  \textbf{Biais de détection (\(p\)) :}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si un écologue de terrain n'utilisait pas de modèle CJS et calculait
+    simplement le ratio des oiseaux revus d'une année sur l'autre,
+    quelle valeur approchée de survie obtiendrait-il (\(\Phi \times p\))
+    ? Pourquoi confondre « non-détecté » et « mort » est-il risqué ?
+  \item
+    Comparez la probabilité de détection (\(p\)) estimée pour les
+    femelles et pour les mâles (changer le code pour vous-même).
+    Constatez-vous une différence notable ? En vous renseignant
+    brièvement sur l'aspect visuel (plumage) et les comportements
+    territoriaux du Cincle plongeur (\emph{Cinclus cinclus}), quelles
+    caractéristiques biologiques de cette espèce expliquent logiquement
+    cette divergence (ou similitude) de détectabilité pour l'observateur
+    ?
+  \end{itemize}
+\end{enumerate}
 
 \section{L'Architecte : Le Modèle Matriciel
 Structuré}\label{larchitecte-le-moduxe8le-matriciel-structuruxe9}
 
-Le détective a fait son travail. Maintenant, nous changeons d'espèce et
-d'échelle pour devenir l'architecte. Pour les populations où la survie
-et la reproduction changent avec l'âge, on utilise un \textbf{modèle
-structuré} (Matrice de Leslie / Lefkovitch).
+Le détective vient d'estimer la survie (\(\Phi\)) et la détection
+(\(p\)). Mais la survie n'est qu'une pièce du puzzle.
+
+Sur le terrain, les écologues déploient une vaste panoplie de modèles
+statistiques (que nous ne verrons pas dans ce TP) pour estimer
+l'ensemble des traits d'histoire de vie d'une population, par exemple :
+
+\begin{itemize}
+\item
+  \textbf{La fécondité (\(F\)) :} estimée par le suivi des pontes, des
+  nichées ou par des modèles de comptage (ex. modèles de Poisson ou
+  binomial négatif).
+\item
+  \textbf{L'âge à la première reproduction (\(E\)) :} estimé via des
+  modèles multi-états ou des suivis longitudinaux d'individus d'âge
+  connu.
+\item
+  \textbf{Les probabilités de transition / maturation (\(\psi\)) :}
+  estimées via des modèles de Capture-Marquage-Recapture multi-sites ou
+  multi-états (ex. passage du statut ``juvénile'' à ``adulte'').
+\end{itemize}
+
+Une fois ces paramètres estimés par les « détectives », ils ne restent
+pas de simples chiffres isolés dans un tableau : \textbf{l'architecte
+s'en empare pour construire la matrice de projection}.
+
+Chaque case d'une matrice démographique (Matrice de Leslie ou de
+Lefkovitch) correspond précisément à l'un de ces paramètres vitaux
+estimés sur le terrain. Nous changeons maintenant d'espèce et d'échelle
+: nous allons assembler ces briques pour simuler le devenir de la
+population et orienter les décisions de gestion.
 
 Nous allons analyser la population d'Orques (\emph{Orcinus orca}), avec
 le jeu de données \texttt{whale} du package \texttt{popbio}.
@@ -4980,12 +5092,20 @@ postreprod   0.0000   0.0000 0.0452     0.9804
 \begin{quote}
 \textbf{Observation :} Cette matrice carrée \(4 \times 4\) répartit les
 individus en 4 stades de développement : \emph{yearling} (1 an),
-juvénile, adulte mature, et post-reproductive (ménopause){[}cite: 4{]}.
-* Les colonnes représentent le temps \(t\). * Les lignes représentent le
-temps \(t+1\). * La \textbf{première ligne} contient la fécondité
-(seules les adultes matures se reproduisent, avec un taux de
-0.04){[}cite: 4{]}. * Les \textbf{autres lignes} contiennent les
-probabilités de survie et de passage d'un stade à l'autre{[}cite: 4{]}.
+juvénile, adulte mature, et post-reproductive (ménopause).
+
+\begin{itemize}
+\item
+  Les colonnes représentent le temps \(t\).
+\item
+  Les lignes représentent le temps \(t+1\).
+\item
+  La \textbf{première ligne} contient la fécondité (seules les adultes
+  matures se reproduisent, avec un taux de 0.04).
+\item
+  Les \textbf{autres lignes} contiennent les probabilités de survie et
+  de passage d'un stade à l'autre.
+\end{itemize}
 \end{quote}
 
 \subsection{Étape 2 : Cinétique et Projection
@@ -5015,10 +5135,10 @@ toute petite population de 40 orques (10 dans chaque stade).
 \begin{quote}
 \textbf{Observation :} Regardez les 10 premières années sur le
 graphique. Les courbes zigzaguent ! C'est ce qu'on appelle
-\textbf{l'inertie démographique} vue en CM{[}cite: 6{]}. La population
-met du temps à se ``rééquilibrer'' par rapport à notre structure de
-départ artificielle. Ensuite, les courbes deviennent parallèles : la
-population a atteint sa distribution stable.
+\textbf{l'inertie démographique} vue en CM. La population met du temps à
+se ``rééquilibrer'' par rapport à notre structure de départ
+artificielle. Ensuite, les courbes deviennent parallèles : la population
+a atteint sa distribution stable.
 \end{quote}
 
 La population va-t-elle s'éteindre ou croître ? Pour le savoir, on
@@ -5050,23 +5170,98 @@ adultes. Vérifions-le avec la fonction \texttt{sensitivity()}.
 \CommentTok{\# Calcul de la matrice de sensibilité}
 \NormalTok{sensibilite\_orque }\OtherTok{\textless{}{-}} \FunctionTok{sensitivity}\NormalTok{(whale)}
 
-\CommentTok{\# Représentation graphique avec un code couleur}
-\FunctionTok{image2}\NormalTok{(sensibilite\_orque, }\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{box.offset =} \FloatTok{0.1}\NormalTok{)}
-\FunctionTok{title}\NormalTok{(}\StringTok{"Quels paramètres influencent le plus la croissance ?"}\NormalTok{, }\AttributeTok{line =} \FloatTok{2.5}\NormalTok{)}
+\CommentTok{\# Représentation graphique :}
+\FunctionTok{image2}\NormalTok{(sensibilite\_orque, }
+       \AttributeTok{log =} \ConstantTok{FALSE}\NormalTok{, }
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\FunctionTok{rev}\NormalTok{(}\FunctionTok{heat.colors}\NormalTok{(}\DecValTok{23}\NormalTok{))),}
+       \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+       \AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\FloatTok{4.5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+       \AttributeTok{box.offset =} \FloatTok{0.1}\NormalTok{)}
+
+\CommentTok{\# Le haut étant dégagé, le titre se place sans conflit}
+\FunctionTok{title}\NormalTok{(}\StringTok{"Quels paramètres influencent le plus la croissance ?"}\NormalTok{, }\AttributeTok{line =} \FloatTok{1.8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \pandocbounded{\includegraphics[keepaspectratio]{04-Structure_files/figure-pdf/sens-whale-1.pdf}}
 
 \begin{quote}
-\textbf{Observation :} Le carré le plus rouge (la plus forte
-sensibilité) se situe à l'intersection de la colonne \texttt{mature} et
-de la ligne \texttt{mature}. Cela confirme mathématiquement que la
-survie des adultes est le pilier de cette population. Une surmortalité
-adulte (pollution, braconnage) entraînera une spirale de l'extinction.
+\textbf{Règle de lecture d'une matrice démographique :}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\begin{quote}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{En colonne (\(X\), temps \(t\)) :} le stade de \textbf{départ}
+  de l'individu.
+\item
+  \textbf{En ligne (\(Y\), temps \(t+1\)) :} le stade d'\textbf{arrivée}
+  l'année suivante.
+\end{itemize}
+
+\emph{Chaque cellule se lit donc : « De la colonne vers la ligne ».}
+\end{quote}
+
+\begin{quote}
+\begin{itemize}
+\tightlist
+\item
+  La \textbf{première ligne} correspond aux naissances (vers le stade
+  \emph{yearling}). Seules les femelles matures s'y projettent
+  (fécondité de 0.04).
+\item
+  La \textbf{diagonale} correspond aux individus qui survivent et
+  restent dans le même stade d'une année sur l'autre (ex. adulte restant
+  adulte : 0.95).
+\item
+  La \textbf{sous-diagonale} correspond aux transitions de croissance
+  (ex. juvénile devenant mature : 0.07).
+\end{itemize}
+\end{quote}
+
+\begin{quote}
+\textbf{Guide d'interprétation du graphique :}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Comment lire la grille :}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Choisissez un stade de départ sur l'axe du bas (\(t\)).
+  \item
+    Remontez verticalement vers le stade d'arrivée sur l'axe de gauche
+    (\(t+1\)).
+  \end{enumerate}
+\item
+  \textbf{Distinction essentielle : Réalité biologique vs Sensibilité
+  mathématique :}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Transition réelle {[}juvenile \(\to\) mature = 0.567{]} :}
+    Forte sensibilité. Elle représente la maturation (le passage des
+    grands jeunes vers le stock reproducteur).
+  \item
+    \textbf{Transition réelle {[}mature \(\to\) mature = 0.579{]} :}
+    Très forte sensibilité. C'est le maintien des adultes reproducteurs
+    déjà en place, pilier de la population.
+  \item
+    \textbf{Cas mathématiques théoriques {[}postreprod \(\to\) mature =
+    0.581{]} ou {[}mature \(\to\) juvenile = 0.387{]} :} La sensibilité
+    brute calcule la dérivée mathématique même pour des cases nulles
+    dans la nature. Une orque ménopausée ne redevient jamais mature, et
+    un adulte ne rajeunit jamais en juvénile (\(A_{ij} = 0\)). En
+    biologie de la conservation, \textbf{on ne prend en compte que les
+    cases correspondant à des transitions réelles}.
+  \end{itemize}
+\end{itemize}
+\end{quote}
 
 \section{À vous de jouer ! (Exercice
 autonome)}\label{uxe0-vous-de-jouer-exercice-autonome}
@@ -5087,13 +5282,38 @@ menacée dont la viabilité dépend fortement des taux de survie adulte
 
 \end{figure}%
 
-Le jeu de données \texttt{tortoise} (déjà dans le package
-\texttt{popbio}) est une ``liste''. Elle contient 4 matrices de
-projection différentes, correspondant à 4 scénarios de fécondité :
-basse, moyenne-basse, moyenne-haute, et haute.
+\textbf{Contexte historique et gestionnaire (Doak et al., 1994) :} Dans
+les années 1990, l'armée américaine souhaitait agrandir la base
+militaire de Fort Irwin, menaçant de détruire jusqu'à 13\% de la
+population restante de Tortues du désert en Californie. Pour évaluer la
+viabilité de l'espèce, les écologues Doak, Kareiva et Klepetka (1994)
+ont construit des matrices structurées en 8 stades de taille.
+
+Sur le terrain, la survie des adultes était connue, mais \textbf{le
+recrutement des jeunes tortues était quasi impossible à mesurer} car les
+nouveau-nés sont minuscules et passent inaperçus sous les buissons. Les
+auteurs ont donc testé 4 scénarios de fécondité (production annuelle de
+jeunes femelles par adulte) :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{low} :} Comptage brut des jeunes observés (très
+  fortement sous-estimé par la détection imparfaite).
+\item
+  \textbf{\texttt{med.low} :} Estimation corrigée (multipliée
+  arbitrairement par 10 pour compenser le biais d'observation).
+\item
+  \textbf{\texttt{med.high} et \texttt{high} :} Estimations basées sur
+  une population témoin particulièrement saine et féconde (site de
+  Goffs), représentatives d'années humides exceptionnelles.
+\end{itemize}
+
+Ces matrices sont stockées dans la liste \texttt{tortoise} du package
+\texttt{popbio}.
 
 \textbf{Votre mission :} Exécutez le code ci-dessous étape par étape
-dans Positron et répondez aux questions sur votre brouillon.
+dans RStudio et répondez aux questions sur votre brouillon.
 
 \textbf{1. Découverte des données}
 
@@ -5117,9 +5337,15 @@ adult1      0.000 0.000 0.000 0.000 0.000    0.249  0.851   0.00
 adult2      0.000 0.000 0.000 0.000 0.000    0.000  0.016   0.86
 \end{verbatim}
 
+\textbf{Lecture biologique} 8 stades de développement : de l'éclosion
+(yearling) aux très grands individus (adult2). La reproduction ne débute
+qu'au stade subadulte (subadult, carapace \(>180\) mm), ce qui prend
+entre 15 et 20 ans dans le désert !
+
 \textbf{2. Viabilité de la population} Calculez le taux de croissance
 (\(\lambda\)) du scénario \texttt{med.high}. \emph{Question : Cette
-population est-elle en croissance ou en déclin ?}
+population est-elle en croissance ou en déclin dans le cadre de ce
+scénario?}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5137,8 +5363,10 @@ coup. C'est magique !
 \end{Highlighting}
 \end{Shaded}
 
-\emph{Question : Quel est le seul scénario (parmi les 4) qui provoque un
-déclin démographique (la spirale de l'extinction) ?}
+\emph{Question : Que remarquez-vous sur la valeur de \(\lambda\), même
+sous le scénario le plus optimiste (high) ? Si une réserve finance des
+couveuses artificielles ou des programmes de reproduction en captivité,
+cela suffira-t-il à sauver l'espèce ?}
 
 \textbf{4. Quelle action de conservation privilégier ?} Générez le
 graphique de sensibilité pour la population avec une ``haute''
@@ -5146,17 +5374,148 @@ fécondité.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Astuce : remplacez "???" par le nom de la matrice "haute" (regardez le résultat de la question 3 pour trouver son nom exact)}
+\CommentTok{\# Astuce : remplacez "???" par le nom de la matrice "haute" ("high")}
 \NormalTok{sens\_tortue }\OtherTok{\textless{}{-}} \FunctionTok{sensitivity}\NormalTok{(tortoise[[}\StringTok{"???"}\NormalTok{]])}
-\FunctionTok{image2}\NormalTok{(sens\_tortue, }\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{box.offset =} \FloatTok{0.1}\NormalTok{)}
+
+\FunctionTok{image2}\NormalTok{(sens\_tortue, }
+       \AttributeTok{log =} \ConstantTok{FALSE}\NormalTok{, }
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\FunctionTok{rev}\NormalTok{(}\FunctionTok{heat.colors}\NormalTok{(}\DecValTok{23}\NormalTok{))),}
+       \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+       \AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\FloatTok{4.5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+       \AttributeTok{box.offset =} \FloatTok{0.1}\NormalTok{)}
+
+\FunctionTok{title}\NormalTok{(}\StringTok{"Sensibilité {-} Tortue du désert"}\NormalTok{, }\AttributeTok{line =} \FloatTok{1.8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\emph{Question : Sur la base de ce graphique (le carré le plus rouge),
-si vous étiez gestionnaire de réserve, concentreriez-vous votre budget
-pour protéger les nids (fécondité, ligne 1) ou pour empêcher la
-mortalité des adultes reproducteurs ? Le constat est-il le même que pour
-l'Orque ?}
+\emph{Question : Comparez la sensibilité de la reproduction (ligne 1) à
+celle de la survie des adultes (diagonale adult1). À l'époque, les
+gestionnaires voulaient abattre les corbeaux qui mangeaient les jeunes
+tortues. À la lumière de cette matrice, était-ce la stratégie la plus
+efficace ?}
+
+\textbf{5. Boucler la boucle : Du terrain au modèle de projection}
+
+Vous êtes chargé de diagnostiquer la viabilité de la population de
+Cincles plongeurs que vous avez analysée au début du TP :
+
+\begin{itemize}
+\item
+  Les suivis de nids indiquent un recrutement de \textbf{1.3 jeune
+  femelle par adulte} et une survie juvénile en première année de
+  \textbf{0.35}.
+\item
+  Vous disposez de la survie adulte réelle estimée par votre modèle CMR
+  (\textbf{\(\Phi = 0.56\)}).
+\end{itemize}
+
+Construisez la matrice de Leslie correspondante (\(2 \times 2\) :
+Juvéniles, Adultes) :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. Matrice avec la survie estimée par le modèle CJS (Phi = 0.56)}
+\NormalTok{mat\_cincle }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(???,    ???, }
+\NormalTok{                       ???,  ???), }
+                     \AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(mat\_cincle) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(mat\_cincle) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Juvénile"}\NormalTok{, }\StringTok{"Adulte"}\NormalTok{)}
+
+\CommentTok{\# Taux de croissance asymptotique}
+\FunctionTok{lambda}\NormalTok{(mat\_cincle)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Question 1 : La population de cincle est-elle viable avec cette
+survie estimée (𝜆 \textgreater1)?}
+
+\emph{Question 2 : Si un observateur débutant n'avait pas corrigé la
+détection imparfaite (𝑝 =0.90) et avait estimé la survie brute apparente
+à 0.50 au lieu de 0.56, quelle aurait été sa conclusion sur l'avenir de
+la population ?}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Défi : Modéliser le décrochage des trajectoires temporelles {[}Optionnel
+- Niveau Avancé{]}}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Un écart de \(\lambda\) abstrait (1.010 vs 0.969) ne parle pas toujours
+aux décideurs. Pour convaincre un gestionnaire, rien ne vaut une courbe
+de projection comparée.
+
+\textbf{Votre défi :}\\
+À l'aide des fonctions vues plus haut pour l'Orque
+(\texttt{pop.projection}), construisez un script simulant l'évolution
+des deux populations sur 30 ans à partir d'un stock de départ identique
+de 100 oiseaux (50 juvéniles et 50 adultes).
+
+\textbf{Cahier des charges :}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Définissez la durée (\texttt{duree\ \textless{}-\ 30}) et le vecteur
+  initial \texttt{n\_depart}.
+\item
+  Projetez les deux matrices (\texttt{mat\_cincle\_reelle} et
+  \texttt{mat\_cincle\_naif}) sur cette période. \emph{(Indice : pour
+  couvrir les pas de temps de 0 à 30, demandez
+  \texttt{iterations\ =\ duree\ +\ 1})}.
+\item
+  Extrayez l'abondance totale à chaque pas de temps via
+  \texttt{colSums(proj\$stage.vectors)} et assemblez-les dans un tableau
+  (\texttt{tibble}) contenant une colonne \texttt{Annee} (de 0 à 30),
+  une colonne \texttt{Reel} et une colonne \texttt{Naif}.
+\item
+  Passez ce tableau au format long avec \texttt{pivot\_longer()} pour
+  tracer les deux trajectoires sur un même graphique \texttt{ggplot2}.
+\end{enumerate}
+
+\emph{(Besoin d'un coup de pouce ? Complétez le canevas ci-dessous en
+remplaçant les \texttt{???})} :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. Paramètres initiaux}
+\NormalTok{n\_depart }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{)}
+\NormalTok{duree    }\OtherTok{\textless{}{-}} \DecValTok{30}
+
+\CommentTok{\# 2. Projections matricielles}
+\NormalTok{proj\_reel }\OtherTok{\textless{}{-}} \FunctionTok{pop.projection}\NormalTok{(}\AttributeTok{A =}\NormalTok{ mat\_cincle\_reelle, }\AttributeTok{n =}\NormalTok{ n\_depart, }\AttributeTok{iterations =}\NormalTok{ ???)}
+\NormalTok{proj\_naif }\OtherTok{\textless{}{-}} \FunctionTok{pop.projection}\NormalTok{(}\AttributeTok{A =}\NormalTok{ mat\_cincle\_naif,   }\AttributeTok{n =}\NormalTok{ n\_depart, }\AttributeTok{iterations =}\NormalTok{ ???)}
+
+\CommentTok{\# 3. Structuration des résultats}
+\NormalTok{df\_comparaison }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{Annee =} \DecValTok{0}\SpecialCharTok{:}\NormalTok{duree,}
+  \AttributeTok{Reel  =} \FunctionTok{colSums}\NormalTok{(proj\_reel}\SpecialCharTok{$}\NormalTok{???),}
+  \AttributeTok{Naif  =} \FunctionTok{colSums}\NormalTok{(proj\_naif}\SpecialCharTok{$}\NormalTok{???)}
+\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(Reel, Naif), }\AttributeTok{names\_to =} \StringTok{"Scenario"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Effectif\_Total"}\NormalTok{)}
+
+\CommentTok{\# 4. Tracé ggplot2}
+\FunctionTok{ggplot}\NormalTok{(df\_comparaison, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Annee, }\AttributeTok{y =}\NormalTok{ Effectif\_Total, }\AttributeTok{color =}\NormalTok{ Scenario, }\AttributeTok{linetype =}\NormalTok{ Scenario)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{linewidth =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \FunctionTok{sum}\NormalTok{(n\_depart), }\AttributeTok{linetype =} \StringTok{"dotted"}\NormalTok{, }\AttributeTok{color =} \StringTok{"grey40"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Reel"} \OtherTok{=} \StringTok{"forestgreen"}\NormalTok{, }\StringTok{"Naif"} \OtherTok{=} \StringTok{"firebrick"}\NormalTok{),}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Comptage brut naïf (Phi = 0.50, faux déclin)"}\NormalTok{, }\StringTok{"Modèle CJS corrigé (Phi = 0.56, viable)"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_linetype\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Reel"} \OtherTok{=} \StringTok{"solid"}\NormalTok{, }\StringTok{"Naif"} \OtherTok{=} \StringTok{"dashed"}\NormalTok{),}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Comptage brut naïf (Phi = 0.50, faux déclin)"}\NormalTok{, }\StringTok{"Modèle CJS corrigé (Phi = 0.56, viable)"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, duree, }\AttributeTok{by =} \DecValTok{5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Impact de la correction CMR sur la trajectoire projetée du Cincle"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"Divergence exponentielle entre une population viable et un faux déclin"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Années de projection"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Effectif total d\textquotesingle{}oiseaux"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Approche"}\NormalTok{,}
+    \AttributeTok{linetype =} \StringTok{"Approche"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \bookmarksetup{startatroot}
 
@@ -5250,15 +5609,15 @@ allométrique suivante :
 avec \(w\), la masse en grammes et \(l\) la longueur des coquilles en
 millimètres.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Objectif principal}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Objectif principal}
 
 L'objectif principal de cette étude est de produire la courbe d'Allen
 d'une cohorte de cette populations. Cette courbe sera utilisée pour
 déterminer des gains et des pertes de biomasses au sein de l'écosystème
 étudié. Les étapes nécessaires à la production de cette courbe sont
 présentées ci-dessous.
-
-\end{tcolorbox}
+\end{quote}
 
 \section{Avant de vous lancer\ldots{}}\label{avant-de-vous-lancer-1}
 
@@ -5339,18 +5698,18 @@ disposer de l'objet nommé \texttt{Nassarius} suivant :
 
 \begin{verbatim}
 # A tibble: 3,710 x 2
-    size date    
-   <dbl> <chr>   
- 1  4.8  march-10
- 2  3    march-10
- 3  5.56 march-10
- 4  3.74 march-10
- 5  4.1  march-10
- 6  2.21 march-10
- 7  2.75 march-10
- 8  3.18 march-10
- 9  2.56 march-10
-10  4.36 march-10
+    size date   
+   <dbl> <chr>  
+ 1  4.8  2010-03
+ 2  3    2010-03
+ 3  5.56 2010-03
+ 4  3.74 2010-03
+ 5  4.1  2010-03
+ 6  2.21 2010-03
+ 7  2.75 2010-03
+ 8  3.18 2010-03
+ 9  2.56 2010-03
+10  4.36 2010-03
 # i 3,700 more rows
 \end{verbatim}
 
@@ -5365,18 +5724,18 @@ Et la commande suivante devrait produire exactement ces résultats :
 
 \begin{verbatim}
 # A tibble: 10 x 2
-   date         n
-   <chr>    <int>
- 1 march-10   468
- 2 march-11   481
- 3 march-12   460
- 4 march-13   468
- 5 march-14   487
- 6 sept-10    268
- 7 sept-11    276
- 8 sept-12    265
- 9 sept-13    258
-10 sept-14    279
+   date        n
+   <chr>   <int>
+ 1 2010-03   468
+ 2 2010-09   268
+ 3 2011-03   481
+ 4 2011-09   276
+ 5 2012-03   460
+ 6 2012-09   265
+ 7 2013-03   468
+ 8 2013-09   258
+ 9 2014-03   487
+10 2014-09   279
 \end{verbatim}
 
 \marginnote{\begin{footnotesize}
@@ -5432,7 +5791,7 @@ utiliser la fonction \texttt{filter()} pour le faire :
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{Nas\_01 }\OtherTok{\textless{}{-}}\NormalTok{ Nassarius }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{==} \StringTok{"march{-}10"}\NormalTok{)}
+  \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{==} \StringTok{"2010{-}03"}\NormalTok{)}
 
 \NormalTok{Nas\_01}
 \end{Highlighting}
@@ -5440,18 +5799,18 @@ utiliser la fonction \texttt{filter()} pour le faire :
 
 \begin{verbatim}
 # A tibble: 468 x 2
-    size date    
-   <dbl> <chr>   
- 1  4.8  march-10
- 2  3    march-10
- 3  5.56 march-10
- 4  3.74 march-10
- 5  4.1  march-10
- 6  2.21 march-10
- 7  2.75 march-10
- 8  3.18 march-10
- 9  2.56 march-10
-10  4.36 march-10
+    size date   
+   <dbl> <chr>  
+ 1  4.8  2010-03
+ 2  3    2010-03
+ 3  5.56 2010-03
+ 4  3.74 2010-03
+ 5  4.1  2010-03
+ 6  2.21 2010-03
+ 7  2.75 2010-03
+ 8  3.18 2010-03
+ 9  2.56 2010-03
+10  4.36 2010-03
 # i 458 more rows
 \end{verbatim}
 
@@ -5839,7 +6198,7 @@ particulier avec la fonction \texttt{plot()} :
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-mixplot}Le contenu de \texttt{mix\_01}
 correspond exactement à la structure démographique instantanée de mars
@@ -6073,7 +6432,7 @@ grâce à la fonction \texttt{plot()} :
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-ajustement}Distribution observée (histogramme
 bleu) et cohortes ajustées (courbes rouges). Les triangles indiquent la
@@ -6114,7 +6473,8 @@ la décomposition polymodale) est bonne :
   cohorte la plus jeune à la cohorte la plus âgée.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{De l'importance du choix des valeurs initiales}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{De l'importance du choix des valeurs initiales}
 
 Si nous avions choisi d'autres valeurs approchée lors de la création de
 l'objet \texttt{param\_01} avec la fonction \texttt{mixparam()},
@@ -6142,8 +6502,7 @@ période de reproduction et de recrutement, nombre de cohorte supposées
 selon la date, etc.), et de ce qu'on connait du comportement ``normal''
 des cohortes (baisse de l'abondance avec l'âge, augmentation de la
 taille moyenne avec l'âge, augmentation du polymorphisme avec l'âge).
-
-\end{tcolorbox}
+\end{quote}
 
 \subsection{Et en cas de message d'erreur
 ?}\label{et-en-cas-de-message-derreur}
@@ -6191,9 +6550,8 @@ Dans les deux cas, vous devez
   revenir à votre structure démographique instantanée et l'observer plus
   attentivement
 \item
-  déterminer des valeurs plus appropriées\sidenote{\footnotesize ajoutez ou retirez
-    une cohorte si besoin, et choisissez des valeurs plus proches des
-    pics observés} pour la fonction \texttt{mixparam()}
+  déterminer des valeurs plus appropriées\footnotemark{} pour la
+  fonction \texttt{mixparam()}
 \item
   ré-exécuter le code depuis la création de l'objet \texttt{param\_01}
   et jusqu'à la décomposition polymodale avec la fonction \texttt{mix()}
@@ -6216,8 +6574,7 @@ chaque cohorte. Nous devrons ensuite stocker dans un nouveau tableau :
   (il s'agit de la cohorte la plus jeune en mars 2010)
 \item
   la taille moyenne des individus de la cohorte dont on souhaite
-  réaliser le suivi\sidenote{\footnotesize on sait déjà que cette taille vaut 3.9
-    millimètres en mars 2010.}
+  réaliser le suivi\footnotemark{}
 \end{enumerate}
 
 L'abondance d'une cohorte est obtenue en multipliant la valeur de
@@ -6245,24 +6602,26 @@ total d'individus échantillonnés en mars 2010 :
 \end{footnotesize}}
 
 Puisque la première cohorte représente 46.42\% de l'abondance
-totale\sidenote{\footnotesize c'est ce que nous dit la valeur de \texttt{pi} de la
-  première cohorte dans le tableau \texttt{res\_01\$parameters} :}, tout
-ce dont on a besoin pour connaitre l'abondance de la cohorte la plus
-jeune est :
+totale\footnotemark{}, tout ce dont on a besoin pour connaitre
+l'abondance de la cohorte la plus jeune est :
 
 \begin{margintable}
 
-\begin{tabular}{rrr}
-\toprule
-pi & mu & sigma\\
-\midrule
-0.4642 & 3.9032 & 1.0860\\
-0.2706 & 8.7953 & 1.5550\\
-0.1435 & 18.1149 & 2.1018\\
-0.0910 & 28.2305 & 2.8612\\
-0.0307 & 35.0210 & 2.3435\\
-\bottomrule
-\end{tabular}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}rrr@{}}
+\toprule\noalign{}
+pi & mu & sigma \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0.4642 & 3.9032 & 1.0860 \\
+0.2706 & 8.7953 & 1.5550 \\
+0.1435 & 18.1149 & 2.1018 \\
+0.0910 & 28.2305 & 2.8612 \\
+0.0307 & 35.0210 & 2.3435 \\
+\end{longtable}
+}
 
 \end{margintable}%
 
@@ -6365,7 +6724,8 @@ Pour chaque nouvelle date d'échantillonnage, vous devrez compléter ce
 tableau en ajoutant une nouvelle ligne à l'intérieur de cette fonction
 \texttt{tribble()}.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Attention !}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Attention !}
 
 Une erreur fréquente est de saisir les données obtenues à chaque date
 d'échantillonnage dans un tableau différent à chaque fois. Ça n'est pas
@@ -6382,8 +6742,7 @@ la façon suivante :
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\end{tcolorbox}
+\end{quote}
 
 Nous devons spécifier une dernière chose afin de produire les graphiques
 : à ce stade, la colonne \texttt{date} du nouveau tableau
@@ -6492,7 +6851,7 @@ axes\\
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-croiss}Courbe de croissance d'une cohorte de la
 population de \emph{Nassarius reticulatus}, suivie pendant 5 ans. À
@@ -6895,7 +7254,8 @@ l'équation de récurrence suivante :
 Vous savez maintenant comment fonctionnent les boucles \texttt{for} et
 vous devriez donc pouvoir construire votre premier modèle dynamique.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Attention}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Attention}
 
 Dans \texttt{R}, le premier élément d'un objet occupe la position
 \texttt{{[}1{]}}. L'indice \texttt{{[}0{]}} n'existe pas. Il faut donc
@@ -6903,8 +7263,7 @@ faire attention à ce que les indices choisis pour \texttt{i} dans
 l'expression \texttt{for\ (i\ in\ ...)} soient cohérents avec d'une part
 la position dans l'objet qui stockera les résultats, et d'autre part
 l'équation du système que l'on simule.
-
-\end{tcolorbox}
+\end{quote}
 
 \section{Modèle de mortalité exponentielle}\label{sec-mort}
 
@@ -7008,7 +7367,7 @@ ressembler à ceci :
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-mort}Modèle de mortalité exponentielle avec
 \(N_0 = 10\) et \(m = 0.05\).}
@@ -7023,7 +7382,8 @@ ressembler à ceci :
 
 }
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Pour comprendre ce modèle\ldots{}}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Pour comprendre ce modèle\ldots{}}
 
 Essayez d'utiliser plusieurs valeurs différentes pour \(N_0\) et
 relancez tout le script. Que se passe-t-il quand \(N_0\) est très grand
@@ -7034,8 +7394,7 @@ Faites des essais avec plusieurs valeurs. Qu'observe-t-on quand la
 valeur de \(m\) se rapproche de 1 ? Est-ce normal ? Et que se passe-t-il
 si \(m > 1\) ? Est-ce réaliste ? Pourquoi ? Mêmes questions avec
 \(m = 2\) et \(m = 3\) ?
-
-\end{tcolorbox}
+\end{quote}
 
 \section{Modèle de croissance exponentielle}\label{sec-crois}
 
@@ -7099,7 +7458,7 @@ pour 100 pas de temps. Vous devriez ainsi obtenir les résultats suivants
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-crois}Modèle de croissance exponentielle avec
 \(N_0 = 5\) et \(r = 0.03\).}
@@ -7114,7 +7473,8 @@ pour 100 pas de temps. Vous devriez ainsi obtenir les résultats suivants
 
 }
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Pour comprendre ce modèle\ldots{}}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Pour comprendre ce modèle\ldots{}}
 
 Comme pour le modèle de mortalité exponentielle, essayez plusieurs
 valeurs pour la condition initiale \(N_0\) et pour le paramètre du
@@ -7122,8 +7482,7 @@ modèle \(r\). Que se passe-t-il quand \(r = 1\) ? Examinez les première
 valeurs d'abondance dans le tableau \texttt{res} pour vous faire une
 meilleure idée. Est-ce réaliste ? Que se passe-t-il quand \(r > 1\) ?
 Est-ce possible dans la nature ?
-
-\end{tcolorbox}
+\end{quote}
 
 \section{Modèle de croissance logistique}\label{sec-logist}
 
@@ -7190,7 +7549,7 @@ Vous devriez ainsi obtenir les résultats suivants :
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-logist}Modèle de croissance logistique avec
 \(N_0 = 1\), \(r = 0.05\) et \(K = 80\).}
@@ -7205,7 +7564,8 @@ Vous devriez ainsi obtenir les résultats suivants :
 
 }
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Pour comprendre ce modèle\ldots{}}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Pour comprendre ce modèle\ldots{}}
 
 Modifiez les valeurs de \(N_0\), \(r\) et \(K\) l'une après l'autre,
 pour comprendre comment chaque paramètre affecte la cinétique observée.
@@ -7216,8 +7576,7 @@ réalistes où \(N_0 > K\) ? Quelle est l'unité de \(K\) ?
 Enfin, que se passe-t-il si le terme d'auto-limitation du milieu est
 ajouté à la croissance exponentielle au lieu d'être soustrait ?
 Expliquez.
-
-\end{tcolorbox}
+\end{quote}
 
 \section{Modèle prédateur-proie de Lotka-Volterra}\label{sec-lotka}
 
@@ -7268,7 +7627,8 @@ Lotka-Volterra avec les valeurs suivantes :
 Avec ce modèle, il vous faut calculer en parallèle l'abondance de 2
 populations : celle des proies et celle des prédateurs.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Calcul simultané}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Calcul simultané}
 
 Attention : il est impossible de calculer d'abord toutes les abondances
 des proies, puis ensuite toutes les abondances des prédateurs, dans 2
@@ -7285,8 +7645,7 @@ d'une unique boucle \texttt{for}, il faut :
   calculer la nouvelle abondance des prédateurs à partir de l'abondance
   des proies et des prédateurs au temps précédent
 \end{enumerate}
-
-\end{tcolorbox}
+\end{quote}
 
 Au final, l'objet \texttt{res} qui contiendra les résultats de vos
 simulation devra donc posséder 3 colonnes :
@@ -7319,7 +7678,7 @@ des phases suivants :
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-lotka}Modèle de Lotka-Volterra avec \(X_0 = 1\),
 \(Y_0 = 10\), \(r = 0.05\), \(m = 0.05\), \(K = 80\) et
@@ -7361,7 +7720,7 @@ cours du temps, produisez le graphique suivant :
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-volterra}Modèle de Lotka-Volterra avec
 \(X_0 = 1\), \(Y_0 = 10\), \(r = 0.05\), \(m = 0.05\), \(K = 80\) et
@@ -7409,7 +7768,8 @@ ressembler les premières lignes de votre tableau :
 # i 1,992 more rows
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Pour comprendre ce modèle\ldots{}}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Pour comprendre ce modèle\ldots{}}
 
 Expérimentez et tentez de répondre aux questions suivantes :
 
@@ -7437,8 +7797,7 @@ Expérimentez et tentez de répondre aux questions suivantes :
   Est-ce que certaines combinaisons de paramètres produisent des
   résultats irréalistes ?
 \end{itemize}
-
-\end{tcolorbox}
+\end{quote}
 
 \section{Modèle de compétition interspécifique}\label{sec-compet}
 
@@ -7487,7 +7846,7 @@ cours :
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-compet_strong}Diagramme des phases de 2 espèces
 en compétition : 2 espèces très compétitives avec des conditions
@@ -7526,7 +7885,7 @@ initiales différentes.}
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-compet}Diagramme des phases de 2 espèces en
 compétition : 3 situations distinctes.}
@@ -7541,7 +7900,8 @@ compétition : 3 situations distinctes.}
 
 }
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Pour comprendre ce modèle\ldots{}}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Pour comprendre ce modèle\ldots{}}
 
 Attention à l'échelle des axes de vos graphiques. Pour bien comprendre
 ce qui se passe et retrouver les figures schématiques vues en cours,
@@ -7552,8 +7912,7 @@ Notez aussi que contrairement au modèle prédateur-proie, les modèles de
 compétition ne font pas apparaître de cycles sur les diagrammes des
 phases. L'évolution des abondances au cours du temps ne fait donc jamais
 apparaître d'oscillations.
-
-\end{tcolorbox}
+\end{quote}
 
 \section{Modèles à 3 espèces}\label{sec-multispe}
 
@@ -7600,7 +7959,7 @@ Figure~\ref{fig-3spe}.
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-3spe}Évolution de l'abondance de 2 espèces de
 proies en compétition et d'une espèce prédatrice. Ici, les 2 espèces de
@@ -7618,7 +7977,8 @@ proie 2 (abondance Y) et conduit donc à son extinction.}
 
 }
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Pour comprendre ce modèle\ldots{}}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Pour comprendre ce modèle\ldots{}}
 
 Expérimentez et tentez de répondre aux questions suivantes :
 
@@ -7640,8 +8000,7 @@ Expérimentez et tentez de répondre aux questions suivantes :
   rendent comptent de la compétition ? Quels sont les termes qui rendent
   compte de la prédation ?
 \end{itemize}
-
-\end{tcolorbox}
+\end{quote}
 
 \bookmarksetup{startatroot}
 
@@ -7910,15 +8269,15 @@ entre elles, ou de multiplier une matrice par un vecteur. Comme nous
 l'avons vu en cours, les dimension des objets que l'on multiplie sont
 importantes.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Produit matriciel}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Produit matriciel}
 
 Si \(A\) et \(B\) sont deux matrices, le produit matriciel \(A\times B\)
 n'est possible que si le nombre de colonnes de \(A\) est égal au nombre
 de lignes de \(B\).
 
 Par ailleurs, sauf cas particulier, \(A\times B \neq B\times A\)
-
-\end{tcolorbox}
+\end{quote}
 
 Dans \texttt{R}, l'opérateur qui permet d'effectuer un produit matriciel
 est \texttt{\%*\%}.
@@ -8294,7 +8653,7 @@ Le graphique que vous devriez être en mesure de produire est le suivant
     }
 \makeatother
 
-\begin{figure}
+\begin{figure}[H]
 
 \sidecaption{\label{fig-markov}Évolution des proportions de 5 types de
 communautés végétales au sein d'un écosystème méditerranéen (50 pas de
@@ -8310,7 +8669,8 @@ temps)}
 
 }
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Pour comprendre ce système\ldots{}}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+\begin{quote}
+\textbf{Pour comprendre ce système\ldots{}}
 
 \begin{itemize}
 \tightlist
@@ -8341,8 +8701,7 @@ temps)}
   reflètent ces changements ? À l'équilibre, cela se traduit-il par une
   dominance des forêts de chênes ?
 \end{itemize}
-
-\end{tcolorbox}
+\end{quote}
 
 \bookmarksetup{startatroot}
 
@@ -8424,6 +8783,17 @@ Horned Lizard Got Its Horns~»}. \emph{Science} 304 (5667): 65‑65.
 \url{https://doi.org/10.1126/science.1094790}.
 
 \end{CSLReferences}
+
+\end{tcolorbox}
+
+\footnotetext{ajoutez ou retirez une cohorte si besoin, et choisissez
+des valeurs plus proches des pics observés}
+
+\footnotetext{on sait déjà que cette taille vaut 3.9 millimètres en mars
+2010.}
+
+\footnotetext{c'est ce que nous dit la valeur de \texttt{pi} de la
+première cohorte dans le tableau \texttt{res\_01\$parameters} :}
 
 
 

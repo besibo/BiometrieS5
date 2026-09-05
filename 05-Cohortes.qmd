@@ -78,10 +78,7 @@ Vous devrez donc spécifier correctement ces éléments pour pouvoir importer le
 ```{r}
 #| include: false
 
-Nassarius <- read_delim("data/Nassarius.csv", 
-    delim = "\t", escape_double = FALSE, 
-    locale = locale(decimal_mark = ","), 
-    trim_ws = TRUE)
+Nassarius <- readr::read_csv("Data/Nassarius.csv")
 ```
 
 Si l'importation s'est déroulée normalement, vous devriez maintenant disposer de l'objet nommé `Nassarius` suivant :
@@ -122,7 +119,7 @@ Notre jeu de données `Nassrisu` contient 2 colonnes : la première contient les
 
 ```{r}
 Nas_01 <- Nassarius |>
-  filter(date == "march-10")
+  filter(date == "2010-03")
 
 Nas_01
 ```
