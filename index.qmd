@@ -27,7 +27,9 @@ list.of.packages <- c(
   "ggmosaic",
   "confintr",
   "mixdist",
-  "scales"
+  "scales",
+  "marked",
+  "popbio"
 )
 new.packages <- list.of.packages[
   !(list.of.packages %in% installed.packages()[, "Package"])
@@ -87,7 +89,9 @@ knitr::write_bib(
     "confintr",
     "ggmosaic",
     "mixdist",
-    "nycflights13"
+    "nycflights13",
+    "marked",
+    "popbio"
   ),
   'packages.bib'
 )
