@@ -15,9 +15,10 @@ book:
     - 01-OneSampleTests.qmd
     - 02-TwoSamplePairedTests.qmd
     - 03-TwoSampleTests.qmd
-    - 04-Cohortes.qmd
-    - 05-DynamicSystems.qmd
-    - 06-MarkovChains.qmd
+    - 04-Structure.qmd
+    - 05-Cohortes.qmd
+    - 06-DynamicSystems.qmd
+    - 07-MarkovChains.qmd
     - references.qmd
 
 bibliography: all.bib

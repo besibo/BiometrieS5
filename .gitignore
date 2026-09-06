@@ -5,3 +5,4 @@
 
 /.quarto/
 Corrections/
+**/*.quarto_ipynb
